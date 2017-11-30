@@ -1,4 +1,5 @@
 " setting
+set nocompatible
 set encoding=utf-8  "set encoding when opening file
 scriptencoding utf-8  "use multi-byte in VimScript
 set nobackup  "don't make backup file
