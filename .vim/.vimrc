@@ -135,6 +135,7 @@ call dein#add('Shougo/vimproc.vim',{'build':'make'})
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく
   let g:rc_dir    = expand('~/.vim/rc')
+  "let g:rc_dir = expand('~/dotfies/.vim/rc)'
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
@@ -162,13 +163,15 @@ syntax on
 "プラグインの設定
 "----------------------------
 
-"NERDTree
+"-----NERDTree-----
+
 autocmd VimEnter * execute 'NERDTree'
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
 
-"neocomplete,neosnippet
+"-----neocomplete,neosnippet-----
+
 "Vim起動時にneocomplete有効化
 let g:neocomplete#enable_at_startup = 1
 "smartcase有効化　大文字が入力されるまで大小を区別しない
@@ -187,7 +190,7 @@ imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : 
 imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 
-"lightline
+"-----lightline-----
 let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
@@ -248,19 +251,23 @@ function! LightlineMode()
 endfunction
 
 
-"caw.vim
+"-----caw.vim-----
+
 "行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 
-"unite.vim
+"-----unite.vim-----
+
 "バッファ一覧
 noremap <C-P> :Unite buffer<CR>
 "ファイル一覧
 noremap <C-N> :Unite -buffer-name=file<CR>
 "最近使ったファイル一覧
 noremap <C-Z> :Unite file_mru<CR>
+"最近開いたファイルの履歴数
+let g:unite_source_file_mru_limit = 50
 "ESCキーを２回で終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>

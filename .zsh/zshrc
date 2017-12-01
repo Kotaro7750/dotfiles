@@ -8,7 +8,7 @@ colors
 export PATH=/usr/local/bin:/usr/bin:$PATH
 
 #プロンプトのカスタム
-PROMPT='%F{green}[%W %T:%/]%f'$'\n''%m@%n '
+PROMPT='%F{green}[%W %T:%/]%f'$'\n''%n@%m >'
 
 
 #-------------------
