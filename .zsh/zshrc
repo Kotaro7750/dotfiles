@@ -1,0 +1,38 @@
+#補完機能
+autoload -U compinit
+compinit
+
+autoload -Uz colors
+colors
+
+export PATH=/usr/local/bin:/usr/bin:$PATH
+
+#プロンプトのカスタム
+PROMPT='%F{green}[%W %T:%/]%f'$'\n''%m@%n '
+
+
+#-------------------
+#プラグイン
+#-------------------
+
+#-----zplug-----
+source ~/.zplug/init.zsh
+
+#プラグイン定義
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+alias ls='ls -G'
+export LSCOLORS=fxgxcxdxbxegedabagacad
+
+zplug "zsh-users/zsh-completions"
+
+
+#インストール
+if ! zplug check --verbose; then
+  printf 'Install? [y/N]: '
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+
+zplug load --verbose

@@ -153,7 +153,8 @@ if dein#check_install()
 endif
 
 "set background=dark
-colorscheme molokai
+colorscheme molokai 
+"colorscheme solarized
 " シンタックスハイライト
 syntax on
 
