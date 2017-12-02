@@ -22,7 +22,10 @@ source ~/.zplug/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 alias ls='ls -G'
+
+#OSによってコメントアウトを変える
 export LSCOLORS=fxgxcxdxbxegedabagacad
+#export LS_COLORS=fxgxcxdxbxegedabagacad
 
 zplug "zsh-users/zsh-completions"
 
