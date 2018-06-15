@@ -39,3 +39,9 @@ repo = 'Shougo/neomru.vim'
  
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'vim-jp/vim-cpp'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'

@@ -153,9 +153,12 @@ if dein#check_install()
   call dein#install()
 endif
 
+let g:solarized_termcolors=256
 "set background=dark
-colorscheme molokai 
+"colorscheme molokai 
 "colorscheme solarized
+"colorscheme wombat256
+colorscheme iceberg
 " シンタックスハイライト
 syntax on
 
