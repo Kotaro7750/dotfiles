@@ -41,7 +41,17 @@ repo = 'Shougo/neomru.vim'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+<<<<<<< HEAD
 repo = 'vim-jp/vim-cpp'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+=======
+repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'kannokanno/previm'
+
+[[plugins]]
+repo ='tyru/open-browser.vim'
+>>>>>>> 34c09d728133f2b5b3ddbf23df1542f2013aed23
