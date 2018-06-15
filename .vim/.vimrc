@@ -276,4 +276,4 @@ au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
-
+"----
