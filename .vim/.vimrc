@@ -271,3 +271,9 @@ let g:unite_source_file_mru_limit = 50
 "ESCキーを２回で終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>
+
+"-----マークダウン関連------
+autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
+nnoremap <silent> <C-p> :PrevimOpen<CR>
+let g:vim_markdown_fonlding_disabled=1
+
