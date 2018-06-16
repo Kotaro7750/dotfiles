@@ -45,7 +45,8 @@ repo = 'vim-jp/vim-cpp'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-[[p;igins]]
+
+[[plugins]]
 repo = 'plasticboy/vim-markdown'
 
 [[plugins]]
