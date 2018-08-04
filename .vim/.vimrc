@@ -1,3 +1,19 @@
+"----------------------------
+" How to write .vimrc
+" !! Write in English !!
+"----------------------------
+
+"----------------------------
+" write index here
+"----------------------------
+
+"---write sub-index here---
+
+
+"----------------------------
+" general configuration 
+"----------------------------
+
 " setting
 set nocompatible
 set encoding=utf-8  "set encoding when opening file
@@ -112,7 +128,21 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+"--- binary-relatred configuration ---
+augroup BinaryXXD
+  autocmd!
+  autocmd BufReadPre  *.bin let &binary =1
+  autocmd BufReadPost * if &binary | silent %!xxd -g 1
+  autocmd BufReadPost * set ft=xxd | endif
+  autocmd BufWritePre * if &binary | %!xxd -r | endif
+  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+  autocmd BufWritePost * set nomod | endif
+augroup END
 
+
+"----------------------------
+" dein related configuration
+"----------------------------
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -153,6 +183,9 @@ if dein#check_install()
   call dein#install()
 endif
 
+"----------------------------
+" カラースキーム関連
+"----------------------------
 let g:solarized_termcolors=256
 "set background=dark
 colorscheme molokai 
