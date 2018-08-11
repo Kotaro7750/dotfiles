@@ -51,3 +51,6 @@ repo ='tyru/open-browser.vim'
 
 [[plugins]]
 repo ='cohama/lexima.vim'
+
+[[plugins]]
+repo = 'miyakogi/seiya.vim'

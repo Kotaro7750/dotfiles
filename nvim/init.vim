@@ -268,5 +268,8 @@ nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
 let g:previm_enable_realtime =1
 
+"---Seiya.vim(make vim transparent)---
+let g:seiya_auto_enable=1
+
 let g:deoplete#enable_at_startup = 1
 

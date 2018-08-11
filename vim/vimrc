@@ -313,3 +313,8 @@ autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
 let g:previm_enable_realtime =1
+
+"---Seiya.vim(make vim transparent)---
+if has("unix")
+  let g:seiya_auto_enable=1
+endif
