@@ -11,13 +11,7 @@ repo = 'scrooloose/nerdtree'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-
-[[plugins]]
-repo = "Shougo/neosnippet"
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
+repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
@@ -54,3 +48,6 @@ repo = 'kannokanno/previm'
 
 [[plugins]]
 repo ='tyru/open-browser.vim'
+
+[[plugins]]
+repo ='cohama/lexima.vim'

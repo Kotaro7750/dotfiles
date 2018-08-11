@@ -10,7 +10,7 @@ export PATH=/usr/local/bin:/usr/bin:$PATH
 #プロンプトのカスタム
 PROMPT='%F{green}[%W %T:%/]%f'$'\n''%n@%m >'
 
-
+XDG_CONFIG_HOME=~/.config/
 #-------------------
 #プラグイン
 #-------------------
