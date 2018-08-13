@@ -128,7 +128,7 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-"--- binary-relatred configuration ---
+"---binary-relatred configuration---
 augroup BinaryXXD
   autocmd!
   autocmd BufReadPre  *.bin let &binary =1
@@ -199,14 +199,14 @@ syntax on
 "プラグインの設定
 "----------------------------
 
-"-----NERDTree-----
+"---NERDTree---
 
 autocmd VimEnter * execute 'NERDTree'
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
 
-"-----neocomplete,neosnippet-----
+"---neocomplete,neosnippet---
 
 "Vim起動時にneocomplete有効化
 let g:neocomplete#enable_at_startup = 1
@@ -226,7 +226,7 @@ imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : 
 imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 
-"-----lightline-----
+"---lightline---
 let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
@@ -287,14 +287,14 @@ function! LightlineMode()
 endfunction
 
 
-"-----caw.vim-----
+"---caw.vim---
 
 "行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 
-"-----unite.vim-----
+"---unite.vim---
 
 "バッファ一覧
 noremap <C-P> :Unite buffer<CR>
@@ -308,7 +308,7 @@ let g:unite_source_file_mru_limit = 50
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>
 
-"-----マークダウン関連------
+"---マークダウン関連---
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
