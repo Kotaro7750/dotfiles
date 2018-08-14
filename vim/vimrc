@@ -14,7 +14,7 @@
 " general configuration 
 "----------------------------
 
-" setting
+"---setting---
 set nocompatible
 set encoding=utf-8  "set encoding when opening file
 scriptencoding utf-8  "use multi-byte in VimScript
@@ -28,8 +28,9 @@ set autoread  "auto-read when editting file is changed
 set hidden  "can open other files when buffer is being editting. 
 set showcmd  "show command typing now on status area.
 let mapleader = "\<Space>"
+set visualbell "ビープ音を可視化
 
-" カーソル系
+"---カーソル系---
 " 行番号を表示
 set number
 " 現在の行を強調表示
@@ -49,7 +50,7 @@ nnoremap <up> gk
 set backspace=indent,eol,start
 
 
-"マウス系
+"---マウス系---
 "マウス有効化
 if has('mouse')
   set mouse=a
@@ -62,7 +63,7 @@ if has('mouse')
   endif
 endif
 
-"ペースト系
+"---ペースト系---
 "ペースト時のインデント無効
 if &term =~ "xterm"
   let &t_SI .= "\e[?2004h"
@@ -78,18 +79,17 @@ if &term =~ "xterm"
 endif
 
 
-" ビープ音を可視化
-set visualbell
 
 
-"括弧・タグジャンプ
+"---括弧系---
 " 括弧入力時の対応する括弧を表示
 set showmatch
 " Vimの%を拡張する
 source $VIMRUNTIME/macros/matchit.vim  
+inoremap {<ENTER> {}<LEFT><CR><ESC><S-o>
+inoremap (<ENTER> ()LEFT><CR><ESC><S-o>
 
-
-"表示系
+"---表示系---
 " ステータスラインを常に表示
 set laststatus=2
 "タイトル名を表示
@@ -294,19 +294,6 @@ nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 
-"---unite.vim---
-
-"バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-"ファイル一覧
-noremap <C-N> :Unite -buffer-name=file<CR>
-"最近使ったファイル一覧
-noremap <C-Z> :Unite file_mru<CR>
-"最近開いたファイルの履歴数
-let g:unite_source_file_mru_limit = 50
-"ESCキーを２回で終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>
 
 "---マークダウン関連---
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown

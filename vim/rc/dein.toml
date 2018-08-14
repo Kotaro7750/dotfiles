@@ -26,15 +26,6 @@ repo = 'Yggdroot/indentLine'
 repo = 'tyru/caw.vim'
 
 [[plugins]]
-repo = 'Shougo/vimproc'
-
-[[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
-repo = 'Shougo/vimshell.vim'
-
-[[plugins]]
 repo = 'Shougo/neomru.vim'
  
 [[plugins]]
