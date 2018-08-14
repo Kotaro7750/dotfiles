@@ -1,3 +1,5 @@
+
+#colorschemes
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
 
@@ -5,11 +7,17 @@ repo = 'altercation/vim-colors-solarized'
 repo = 'flazz/vim-colorschemes'
 
 [[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+#file tree
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 
+#status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
+#auto completion
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 
@@ -19,24 +27,11 @@ repo = "Shougo/neosnippet"
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
+#show indent
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 
-[[plugins]]
-repo = 'tyru/caw.vim'
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
- 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
-repo = 'vim-jp/vim-cpp'
-
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
-
+#markdown
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
 
@@ -46,5 +41,6 @@ repo = 'kannokanno/previm'
 [[plugins]]
 repo ='tyru/open-browser.vim'
 
+#make vim transparent
 [[plugins]]
 repo = 'miyakogi/seiya.vim'

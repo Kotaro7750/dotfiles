@@ -273,3 +273,9 @@ let g:seiya_auto_enable=1
 
 let g:deoplete#enable_at_startup = 1
 
+"---lexima---
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#)', 'leave': 1})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#"', 'leave': 1})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#''', 'leave': 1})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#]', 'leave': 1})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#}', 'leave': 1})
