@@ -175,9 +175,9 @@ let NERDTreeShowHidden = 1
 
 "-----neosnippet-----
 "エンターキーで補完候補の確定、スニペットの展開もエンターキーで確定
-"imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
 "タブキーで補完候補の選択、スニペット内のジャンプもタブキー
-"imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
+imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 
 "-----lightline-----
@@ -279,3 +279,19 @@ call lexima#add_rule({'char': '<TAB>', 'at': '\%#"', 'leave': 1})
 call lexima#add_rule({'char': '<TAB>', 'at': '\%#''', 'leave': 1})
 call lexima#add_rule({'char': '<TAB>', 'at': '\%#]', 'leave': 1})
 call lexima#add_rule({'char': '<TAB>', 'at': '\%#}', 'leave': 1})
+
+"---deoplete---
+if has('macunix')
+  let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+  let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/'
+  
+  let g:deoplete#sources#jedi#python_path='/usr/local/bin/python3.6'
+endif
+
+set completeopt-=preview  "don't show preview window
+
+"---ale---
+let g:ale_sign_column_always=1  "show error column always
+let g:ale_sign_error='X'
+let g:ale_sign_warning='!'
+

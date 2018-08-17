@@ -12,12 +12,23 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 
+#status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-#auto completion
 [[plugins]]
 repo ='cohama/lexima.vim'
+
+#asynchronous syntax check
+[[plugins]]
+repo='w0rp/ale'
+
+#auto completion
+[[plugins]]
+repo='zchee/deoplete-clang'
+
+[[plugins]]
+repo='zchee/deoplete-jedi'
 
 #snippet
 [[plugins]]
@@ -38,7 +49,6 @@ repo = 'kannokanno/previm'
 
 [[plugins]]
 repo ='tyru/open-browser.vim'
-
 
 #make vim transparent
 [[plugins]]
