@@ -12,6 +12,10 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 
+#united interface
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
 #status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -30,15 +34,15 @@ repo='zchee/deoplete-clang'
 [[plugins]]
 repo='zchee/deoplete-jedi'
 
+[[plugins]]
+repo = 'vim-jp/vim-cpp'
+
 #snippet
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
-
-[[plugins]]
-repo = 'vim-jp/vim-cpp'
 
 #markdown
 [[plugins]]

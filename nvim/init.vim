@@ -241,26 +241,10 @@ function! LightlineMode()
 endfunction
 
 
-"-----caw.vim-----
-
-"行の最初の文字の前にコメント文字をトグル
-nmap <Leader>c <Plug>(caw:hatpos:toggle)
-vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
 
-"-----unite.vim-----
+"-----denite.vim-----
 
-"バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-"ファイル一覧
-noremap <C-N> :Unite -buffer-name=file<CR>
-"最近使ったファイル一覧
-noremap <C-Z> :Unite file_mru<CR>
-"最近開いたファイルの履歴数
-let g:unite_source_file_mru_limit = 50
-"ESCキーを２回で終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <silent> <ESC><ESC> <ESC> :q<CR>
 
 "-----マークダウン関連------
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
@@ -274,11 +258,6 @@ let g:seiya_auto_enable=1
 let g:deoplete#enable_at_startup = 1
 
 "---lexima---
-call lexima#add_rule({'char': '<TAB>', 'at': '\%#)', 'leave': 1})
-call lexima#add_rule({'char': '<TAB>', 'at': '\%#"', 'leave': 1})
-call lexima#add_rule({'char': '<TAB>', 'at': '\%#''', 'leave': 1})
-call lexima#add_rule({'char': '<TAB>', 'at': '\%#]', 'leave': 1})
-call lexima#add_rule({'char': '<TAB>', 'at': '\%#}', 'leave': 1})
 
 "---deoplete---
 if has('macunix')
