@@ -185,7 +185,7 @@ let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ],['ale'] ]
         \ },
         \ 'component_function': {
         \   'modified': 'LightlineModified',
@@ -195,7 +195,13 @@ let g:lightline = {
         \   'fileformat': 'LightlineFileformat',
         \   'filetype': 'LightlineFiletype',
         \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
+        \   'mode': 'LightlineMode',
+        \ },
+        \ 'component_expand':{
+        \   'ale': 'Ale',
+        \ },
+        \ 'component_type':{
+        \   'ale': 'error',
         \ }
         \ }
 
@@ -240,7 +246,17 @@ function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
+function! Ale()
+      let l:count = ale#statusline#Count(bufnr(''))
+      let l:errors = l:count.error + l:count.style_error
+      let l:warnings = l:count.warning + l:count.style_warning
+      return l:count.total == 0 ? '' : 'Error:' . l:errors . ' Warning:' . l:warnings
+endfunction
 
+augroup MyAutoGroup
+  autocmd!
+  autocmd User ALELintPost call lightline#update()
+augroup END
 
 
 "-----denite.vim-----
@@ -265,9 +281,7 @@ if has('macunix')
   let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/'
   
   let g:deoplete#sources#jedi#python_path='/usr/local/bin/python3.6'
-endif
-
-if has('unix')
+else
   let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
   let g:deoplete#sources#clang#clang_header='/usr/include/clang'
   
@@ -281,3 +295,5 @@ let g:ale_sign_column_always=1  "show error column always
 let g:ale_sign_error='X'
 let g:ale_sign_warning='!'
 
+let g:ale_lint_on_text_changed=0
+let g:ale_lint_on_insert_leave=1
