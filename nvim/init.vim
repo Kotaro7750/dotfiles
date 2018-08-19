@@ -185,6 +185,7 @@ let g:lightline = {
         \ 'component_function': {
         \   'modified': 'LightlineModified',
         \   'readonly': 'LightlineReadonly',
+        \   'gitgutter': 'Lightlinegitgutter',
         \   'fugitive': 'LightlineFugitive',
         \   'filename': 'LightlineFilename',
         \   'fileformat': 'LightlineFileformat',
@@ -218,11 +219,14 @@ function! LightlineFilename()
 endfunction
 
 function! LightlineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return fugitive#head()
-  else
-    return ''
-  endif
+  try
+    if exists('*fugitive#head')
+      let _ = fugitive#head()
+      return strlen(_) ? ''._ : ''
+    endif
+  catch
+  endtry
+  return ''
 endfunction
 
 function! LightlineFileformat()
@@ -239,6 +243,27 @@ endfunction
 
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! Lightlinegitgutter()
+  if ! exists('*GitGutterGetHunkSummary')
+        \ || ! get(g:, 'gitgutter_enabled', 0)
+        \ || winwidth('.') <= 90
+    return ''
+  endif
+  let symbols = [
+        \ g:gitgutter_sign_added . ' ',
+        \ g:gitgutter_sign_modified . ' ',
+        \ g:gitgutter_sign_removed . ' '
+        \ ]
+  let hunks = GitGutterGetHunkSummary()
+  let ret = []
+  for i in [0, 1, 2]
+    if hunks[i] > 0
+      call add(ret, symbols[i] . hunks[i])
+    endif
+  endfor
+  return join(ret, ' ')
 endfunction
 
 function! Ale()
@@ -292,3 +317,6 @@ let g:ale_sign_warning='!'
 
 let g:ale_lint_on_text_changed=0
 let g:ale_lint_on_insert_leave=1
+
+"---vim-devicons---
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon

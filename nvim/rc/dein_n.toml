@@ -12,6 +12,13 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
+#git
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
 #file tree
 [[plugins]]
 repo = 'scrooloose/nerdtree'
