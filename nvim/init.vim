@@ -312,7 +312,7 @@ set completeopt-=preview  "don't show preview window
 
 "---ale---
 let g:ale_sign_column_always=1  "show error column always
-let g:ale_sign_error='⚠'
+let g:ale_sign_error='X'
 let g:ale_sign_warning='!'
 
 let g:ale_lint_on_text_changed=0
