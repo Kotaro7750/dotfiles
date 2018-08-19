@@ -8,6 +8,10 @@ repo = 'flazz/vim-colorschemes'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 
+#font
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
 #file tree
 [[plugins]]
 repo = 'scrooloose/nerdtree'
