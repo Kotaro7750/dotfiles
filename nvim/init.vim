@@ -1,6 +1,21 @@
-" setting
-set nocompatible
-set encoding=utf-8  "set encoding when opening file
+"----------------------------
+" How to write .vimrc
+" !! Write in English !!
+"----------------------------
+
+"----------------------------
+"write index here
+"----------------------------
+
+"---write sub-index here---
+
+"----------------------------
+"general configuration 
+"----------------------------
+"
+"---general setting---
+set nocompatible  "not compatible with vi
+set encoding=utf-8  "set encoding utf-8 when opening file
 scriptencoding utf-8  "use multi-byte in VimScript
 set nobackup  "don't make backup file
 set noswapfile  "dont' make swap file
@@ -11,30 +26,25 @@ set ambiwidth=double  "resolve the problems of full size text. ex.◯
 set autoread  "auto-read when editting file is changed
 set hidden  "can open other files when buffer is being editting. 
 set showcmd  "show command typing now on status area.
-let mapleader = "\<Space>"
+let mapleader = "\<Space>"  "map Space to Leader
 
-" カーソル系
-" 行番号を表示
-set number
-" 現在の行を強調表示
-set cursorline
-" 現在の行を強調表示（縦）
-set cursorcolumn
-" 行末の1文字先までカーソルを移動できるように
-set virtualedit=onemore
-"左右移動で行末から次の行へ移動可能
-set whichwrap=b,s,h,l,<,>,[,],~  
-" 折り返し時に表示行単位での移動できるようにする
+"---cursor---
+set number  "show line number
+set cursorline  "highlight present line
+set cursorcolumn  "highlight present column
+set virtualedit=onemore  "cursor can move 1 char after EOL
+set whichwrap=b,s,h,l,<,>,[,],~   "move L or R at EOL can move next line 
+
+"can move across apparent line even if it is logicaly single line
 nnoremap j gj
 nnoremap k gk
 nnoremap <down> gj
 nnoremap <up> gk
-"バックスペースの有効化
-set backspace=indent,eol,start
 
+set backspace=indent,eol,start  "backspace available
 
-"マウス系
-"マウス有効化
+"---mouse---
+"mouse available
 if has('mouse')
   set mouse=a
   if has('mouse_sgr')
@@ -46,8 +56,8 @@ if has('mouse')
   endif
 endif
 
-"ペースト系
-"ペースト時のインデント無効
+"---paste---
+"indent when paste disable
 if &term =~ "xterm"
   let &t_SI .= "\e[?2004h"
   let &t_EI .= "\e[?2004l"
@@ -61,63 +71,47 @@ if &term =~ "xterm"
   inoremap <special> <expr> <Esc.[200~ XTermPasteBegin("")
 endif
 
+"---bracket---
+set showmatch  "show matching bracket when input bracket
+source $VIMRUNTIME/macros/matchit.vim  "extend '%'
 
-" ビープ音を可視化
-set visualbell
+"---layout---
+set laststatus=2  "show status line always
+set title  "show title-name 
+set visualbell  "beep sound visualization
 
+"---completion---
+set wildmode=list:longest  "file name completion in command line mode
+set history=5000  "set command history  
 
-"括弧・タグジャンプ
-" 括弧入力時の対応する括弧を表示
-set showmatch
-" Vimの%を拡張する
-source $VIMRUNTIME/macros/matchit.vim  
-
-
-"表示系
-" ステータスラインを常に表示
-set laststatus=2
-"タイトル名を表示
-set title
-
-
-"コマンド補完
-" コマンドラインの補完
-set wildmode=list:longest
-"保存するコマンドの数
-set history=5000  
-
-
-" Tab,Indent
-set tabstop=2  "indent = 2 spaces.
-set softtabstop=2  "連続した空白に対してタブやバックスペースで動く距離
+"---Tab,Indent---
+set expandtab  "chane TAB to Space  
+set tabstop=2  "TAB is 2 Spaces
+set softtabstop=2  "TAB or Backspace move 2 on series spaces
 set shiftwidth=2  "width when new line
-" 不可視文字を可視化(タブが「▸-」と表示される)
+"TAB seems ▸-
 set list listchars=tab:\▸\-
-set expandtab  "Tab = space
-set autoindent  "改行時に前のインデントを継続
+set autoindent  "continue same indent when new line
 set smartindent  "enable smartindent
 
+"---search---
+set ignorecase  "ignore upper and lower case when search string is lower case
+set smartcase  "distinct upper and lower case when search string contains upper case
+set incsearch  "realtime searching
+set wrapscan  "next result when hit bottom move back to top
+set hlsearch  "highlight hit words
+""cancel highlight words when 2 ESC
+nmap <Esc><Esc> :nohlsearch<CR><Esc>  
 
-" 検索系
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
-set ignorecase
-" 検索文字列に大文字が含まれている場合は区別して検索する
-set smartcase
-" 検索文字列入力時に順次対象文字列にヒットさせる
-set incsearch
-" 検索時に最後まで行ったら最初に戻る
-set wrapscan
-" 検索語をハイライト表示
-set hlsearch
-" ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
+"----------------------------
+"dein setting
+"----------------------------
 
 let s:dein_dir = expand('~/.cache/dein')
-" dein.vim 本体
+"repository of dein
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" dein.vim がなければ github から落としてくる
+"download dein when dein does not exist
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
@@ -125,62 +119,63 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-" 設定開始
+"start configuration
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  "vimprocの設定
+"configuration of vimproc
 call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
-  " プラグインリストを収めた TOML ファイル
-  " 予め TOML ファイル（後述）を用意しておく
+  "configuration of TOML file
   let g:rc_dir    = expand('~/.nvim/rc')
-  "let g:rc_dir = expand('~/dotfies/.vim/rc)'
   let s:toml      = g:rc_dir . '/dein_n.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy_n.toml'
 
-  " TOML を読み込み、キャッシュしておく
+  "load TOML and cash
   call dein#load_toml(s:toml,      {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " 設定終了
   call dein#end()
   call dein#save_state()
 endif
 
-" もし、未インストールものものがあったらインストール
+"install pulugins which has not installed yes
 if dein#check_install()
   call dein#install()
 endif
 
+"----------------------------
+"colorscheme
+"----------------------------
 let g:solarized_termcolors=256
+
 "set background=dark
 colorscheme molokai 
 "colorscheme solarized
 "colorscheme wombat256
 "colorscheme iceberg
-" シンタックスハイライト
-syntax on
+
+syntax on  "enable syntax highlighting
 
 "----------------------------
-"プラグインの設定
+"configuration of each pulugins
 "----------------------------
 
-"-----NERDTree-----
+"---NERDTree---
 
 autocmd VimEnter * execute 'NERDTree'
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
 
-"-----neosnippet-----
-"エンターキーで補完候補の確定、スニペットの展開もエンターキーで確定
+"---neosnippet---
+"press Enter key to decide completion or snippet-deploy
 imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-"タブキーで補完候補の選択、スニペット内のジャンプもタブキー
+"press TAB key to select completion-option and jamp in snippet
 imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 
-"-----lightline-----
+"---lightline---
 let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
@@ -259,16 +254,16 @@ augroup MyAutoGroup
 augroup END
 
 
-"-----denite.vim-----
+"---denite.vim---
 
 
-"-----マークダウン関連------
+"---markdown(previm)---
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
 nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
 let g:previm_enable_realtime =1
 
-"---Seiya.vim(make vim transparent)---
+"---Seiya.vim---
 let g:seiya_auto_enable=1
 
 let g:deoplete#enable_at_startup = 1
