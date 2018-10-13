@@ -17,5 +17,7 @@ pip3 install neovim
 pip install neovim
 sudo apt -y install clang
 sudo apt -y install libclang-dev
-
 ln -s ~/dotfiles/nvim ~/.nvim
+
+git clone https://github.com/longld/peda.git ~/peda
+ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
