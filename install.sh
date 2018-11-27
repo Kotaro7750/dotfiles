@@ -21,3 +21,10 @@ ln -s ~/dotfiles/nvim ~/.nvim
 
 git clone https://github.com/longld/peda.git ~/peda
 ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
+
+git clone https://github.com/slimm609/checksec.sh ~/checksec
+
+sudo apt-get -y install exiftool
+sudo apt-get -y install strings
+
+sudo apt -y install wireshark
