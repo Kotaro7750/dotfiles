@@ -48,6 +48,18 @@ repo='zchee/deoplete-jedi'
 [[plugins]]
 repo = 'vim-jp/vim-cpp'
 
+[[plugins]]
+repo = 'zchee/deoplete-go'
+on_ft = 'go'
+
+hook_source = '''
+  let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+'''
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
 #snippet
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'

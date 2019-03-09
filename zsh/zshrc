@@ -67,3 +67,15 @@ if ! zplug check --verbose; then
 fi
 
 zplug load --verbose
+
+#-------------------
+#環境変数
+#-------------------
+#Golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+export PATH=$HOME/.goenv/bin:$PATH
+eval "$(goenv init -)"
