@@ -158,6 +158,12 @@ colorscheme molokai
 syntax on  "enable syntax highlighting
 
 "----------------------------
+"languege specific config
+"----------------------------
+autocmd FileType Makefile setlocal noexpandtab
+
+
+"----------------------------
 "configuration of each pulugins
 "----------------------------
 
@@ -320,3 +326,6 @@ let g:ale_lint_on_insert_leave=1
 
 "---vim-devicons---
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
+
+"---gim-go---
+let g:go_template_autocreate = 0
