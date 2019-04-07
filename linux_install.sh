@@ -35,8 +35,6 @@ sudo groupadd docker
 sudo gpasswd -a $USER docker
 sudo systemctl restart docker
 
-#フォントの設定
-
 
 git clone https://github.com/longld/peda.git ~/peda
 ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
