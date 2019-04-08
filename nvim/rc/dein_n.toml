@@ -60,6 +60,12 @@ hook_source = '''
 repo = 'fatih/vim-go'
 on_ft = 'go'
 
+[[plugins]]
+repo = 'posva/vim-vue'
+
+[[pligins]]
+repo = 'leafgarland/typescript-vim'
+
 #snippet
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
