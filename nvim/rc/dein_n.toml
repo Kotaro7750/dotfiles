@@ -63,7 +63,7 @@ on_ft = 'go'
 [[plugins]]
 repo = 'posva/vim-vue'
 
-[[pligins]]
+[[plugins]]
 repo = 'leafgarland/typescript-vim'
 
 #snippet
