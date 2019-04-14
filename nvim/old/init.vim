@@ -128,8 +128,8 @@ call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
   "configuration of TOML file
   let g:rc_dir    = expand('~/.nvim/rc')
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  let s:toml      = g:rc_dir . '/dein_n.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy_n.toml'
 
   "load TOML and cash
   call dein#load_toml(s:toml,      {'lazy': 0})
@@ -174,6 +174,13 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
 
+"---neosnippet---
+"press Enter key to decide completion or snippet-deploy
+imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+"press TAB key to select completion-option and jamp in snippet
+imap <expr><TAB>  pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
+
+
 "---lightline---
 let g:lightline = {
         \ 'colorscheme': 'wombat' ,
@@ -199,18 +206,6 @@ let g:lightline = {
         \   'ale': 'error',
         \ }
         \ }
-
-function! Ale()
-      let l:count = ale#statusline#Count(bufnr(''))
-      let l:errors = l:count.error + l:count.style_error
-      let l:warnings = l:count.warning + l:count.style_warning
-      return l:count.total == 0 ? '' : 'Error:' . l:errors . ' Warning:' . l:warnings
-endfunction
-
-augroup MyAutoGroup
-  autocmd!
-  autocmd User ALELintPost call lightline#update()
-augroup END
 
 function! LightlineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -277,6 +272,12 @@ function! Lightlinegitgutter()
   return join(ret, ' ')
 endfunction
 
+function! Ale()
+      let l:count = ale#statusline#Count(bufnr(''))
+      let l:errors = l:count.error + l:count.style_error
+      let l:warnings = l:count.warning + l:count.style_warning
+      return l:count.total == 0 ? '' : 'Error:' . l:errors . ' Warning:' . l:warnings
+endfunction
 
 augroup MyAutoGroup
   autocmd!
@@ -296,6 +297,24 @@ let g:previm_enable_realtime =1
 "---Seiya.vim---
 let g:seiya_auto_enable=1
 
+let g:deoplete#enable_at_startup = 1
+
+"---lexima---
+
+"---deoplete---
+if has('macunix')
+  let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+  let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/'
+  
+  let g:deoplete#sources#jedi#python_path='/usr/local/bin/python3.6'
+else
+  let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
+  let g:deoplete#sources#clang#clang_header='/usr/include/clang'
+  
+  let g:deoplete#sources#jedi#python_path='/usr/bin/python3'
+endif
+
+set completeopt-=preview  "don't show preview window
 
 "---ale---
 let g:ale_sign_column_always=1  "show error column always
@@ -307,35 +326,6 @@ let g:ale_lint_on_insert_leave=1
 
 "---vim-devicons---
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
-let g:lsp_diagnostics_enabled = 0
 
-
-"---vim-lsp---
-let g:lsp_async_completion = 1
-
-nmap <S-k> :LspRename<CR>
-
-if executable('go-langserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver','-mode','stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
-
-if executable('typescript-langage-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->['typescript-language-server']},
-        \ 'whitelist': ['typescript,javascript'],
-        \ })
-endif
-
-if executable('pyls')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
+"---gim-go---
+let g:go_template_autocreate = 0

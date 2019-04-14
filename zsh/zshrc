@@ -82,3 +82,6 @@ eval "$(goenv init -)"
 
 #node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+#latex
+export PATH=/Library/TeX/texbin:$PATH
