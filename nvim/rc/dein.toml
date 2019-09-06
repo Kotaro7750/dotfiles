@@ -53,7 +53,7 @@ repo = 'lervag/vim-latex'
 hook_add = '''
   source ~/dotfiles/nvim/rc/plugins/vim-latex.vim
 '''
-on_ft =['tex']
+on_ft =['tex','plaintex']
 
 #make vim transparent
 [[plugins]]
