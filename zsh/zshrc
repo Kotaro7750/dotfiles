@@ -9,10 +9,10 @@ bindkey -v
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
     vicmd)
-    PROMPT="%F{green}[%W %T]%/ %f"${vcs_info_msg_0_}$'\n'"%n@%m/%F{blue}NOR%f> "
+    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{blue}NOR%f> "
     ;;
     main|viins)
-    PROMPT="%F{green}[%W %T]%/ %f"${vcs_info_msg_0_}$'\n'"%n@%m/%F{green}INS%f> "
+    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{green}INS%f> "
     ;;
   esac
   zle reset-prompt
@@ -27,8 +27,8 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{blue}+"
 zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}*"
-zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
-zstyle ':vcs_info:*' actionformats '%b|%a'
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # execute before prompt appear
 precmd(){ vcs_info }
