@@ -1,3 +1,7 @@
+
+#-------------------
+#general
+#-------------------
 #Vim mode
 bindkey -v
 
@@ -5,16 +9,29 @@ bindkey -v
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
     vicmd)
-    PROMPT="%F{green}[%W %T:%/]%f"$'\n'"%n@%m/%F{blue}NOR%f> "
+    PROMPT="%F{green}[%W %T]%/ %f"${vcs_info_msg_0_}$'\n'"%n@%m/%F{blue}NOR%f> "
     ;;
     main|viins)
-    PROMPT="%F{green}[%W %T:%/]%f"$'\n'"%n@%m/%F{green}INS%f> "
+    PROMPT="%F{green}[%W %T]%/ %f"${vcs_info_msg_0_}$'\n'"%n@%m/%F{green}INS%f> "
     ;;
   esac
   zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# show branch name
+autoload -Uz vcs_info
+setopt prompt_subst 
+
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{blue}+"
+zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}*"
+zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
+zstyle ':vcs_info:*' actionformats '%b|%a'
+
+# execute before prompt appear
+precmd(){ vcs_info }
 
 #補完機能
 autoload -U compinit
@@ -24,9 +41,6 @@ autoload -Uz colors
 colors
 
 export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
-
-#プロンプトのカスタム
-PROMPT='%F{green}[%W %T:%/]%f'$'\n''%n@%m >'
 
 XDG_CONFIG_HOME=~/.config/
 
