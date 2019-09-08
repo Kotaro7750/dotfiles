@@ -37,6 +37,10 @@ precmd(){ vcs_info }
 autoload -U compinit
 compinit
 
+#history mode by ctrl r
+bindkey '\e[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
 autoload -Uz colors
 colors
 
