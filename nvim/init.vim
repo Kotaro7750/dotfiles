@@ -57,6 +57,8 @@ if has('mouse')
 endif
 
 "---paste---
+"sync to clipboard
+set clipboard=unnamed
 "indent when paste disable
 if &term =~ "xterm"
   let &t_SI .= "\e[?2004h"
@@ -170,10 +172,11 @@ autocmd FileType Makefile setlocal noexpandtab
 "----------------------------
 
 "---NERDTree---
-autocmd VimEnter * execute 'NERDTree'
-autocmd VimEnter * if !argc() | NERDTree | endif
+"autocmd VimEnter * execute 'NERDTree'
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
+map <C-n> :NERDTreeToggle<CR>
 
 "---lightline---
 let g:lightline = {
