@@ -73,36 +73,36 @@ depends = ['neosnippet-snippets']
 repo = 'Shougo/neosnippet-snippets'
 
 #LSP
-[[plugins]]
-repo='w0rp/ale'
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/rc/plugins/asyncomplete.vim
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
-hook_add='''
-  source ~/dotfiles/nvim/rc/plugins/asyncomplete-neosnippet.vim
-'''
-
-#language 
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-
-[[plugins]]
-repo = 'posva/vim-vue'
-
-[[plugins]]
-repo = 'ryanolsonx/vim-lsp-python'
+#[[plugins]]
+#repo='w0rp/ale'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/async.vim'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/vim-lsp'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete.vim'
+#hook_add = '''
+#  source ~/dotfiles/nvim/rc/plugins/asyncomplete.vim
+#'''
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-lsp.vim'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+#hook_add='''
+#  source ~/dotfiles/nvim/rc/plugins/asyncomplete-neosnippet.vim
+#'''
+#
+##language 
+#[[plugins]]
+#repo = 'leafgarland/typescript-vim'
+#
+#[[plugins]]
+#repo = 'posva/vim-vue'
+#
+#[[plugins]]
+#repo = 'ryanolsonx/vim-lsp-python'

@@ -3,7 +3,7 @@
 " !! Write in English !!
 "----------------------------
 
-"----------------------------
+ "----------------------------
 "write index here
 "----------------------------
 
@@ -85,7 +85,7 @@ set wildmode=list:longest  "file name completion in command line mode
 set history=5000  "set command history  
 
 "---Tab,Indent---
-set expandtab  "chane TAB to Space  
+set expandtab  "chang TAB to Space  
 set tabstop=2  "TAB is 2 Spaces
 set softtabstop=2  "TAB or Backspace move 2 on series spaces
 set shiftwidth=2  "width when new line
@@ -100,7 +100,7 @@ set smartcase  "distinct upper and lower case when search string contains upper 
 set incsearch  "realtime searching
 set wrapscan  "next result when hit bottom move back to top
 set hlsearch  "highlight hit words
-""cancel highlight words when 2 ESC
+"cancel highlight words when 2 ESC
 nmap <Esc><Esc> :nohlsearch<CR><Esc>  
 
 "----------------------------
@@ -127,7 +127,7 @@ if dein#load_state(s:dein_dir)
 call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
   "configuration of TOML file
-  let g:rc_dir    = expand('~/.nvim/rc')
+  let g:rc_dir    = expand('~/.config/nvim/rc')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
@@ -143,6 +143,8 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+"auto recache
+let g:dein#auto_recache = 1
 
 "----------------------------
 "colorscheme
@@ -150,10 +152,10 @@ endif
 let g:solarized_termcolors=256
 
 "set background=dark
-colorscheme molokai 
+"colorscheme molokai 
 "colorscheme solarized
 "colorscheme wombat256
-"colorscheme iceberg
+colorscheme iceberg
 
 syntax on  "enable syntax highlighting
 
@@ -168,7 +170,6 @@ autocmd FileType Makefile setlocal noexpandtab
 "----------------------------
 
 "---NERDTree---
-
 autocmd VimEnter * execute 'NERDTree'
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -293,49 +294,53 @@ nnoremap <silent> <C-p> :PrevimOpen<CR>
 let g:vim_markdown_fonlding_disabled=1
 let g:previm_enable_realtime =1
 
+"---open-browser.vim---
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
 "---Seiya.vim---
-let g:seiya_auto_enable=1
+"let g:seiya_auto_enable=1
 
 
 "---ale---
-let g:ale_sign_column_always=1  "show error column always
-let g:ale_sign_error='X'
-let g:ale_sign_warning='!'
-
-let g:ale_lint_on_text_changed=0
-let g:ale_lint_on_insert_leave=1
+"let g:ale_sign_column_always=1  "show error column always
+"let g:ale_sign_error='X'
+"let g:ale_sign_warning='!'
+"
+"let g:ale_lint_on_text_changed=0
+"let g:ale_lint_on_insert_leave=1
 
 "---vim-devicons---
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
-let g:lsp_diagnostics_enabled = 0
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
 
 
 "---vim-lsp---
-let g:lsp_async_completion = 1
-
-nmap <S-k> :LspRename<CR>
-
-if executable('go-langserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver','-mode','stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
-
-if executable('typescript-langage-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->['typescript-language-server']},
-        \ 'whitelist': ['typescript,javascript'],
-        \ })
-endif
-
-if executable('pyls')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+"let g:lsp_async_completion = 1
+"let g:lsp_diagnostics_enabled = 0
+"
+"nmap <S-k> :LspRename<CR>
+"
+"if executable('go-langserver')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-langserver',
+"        \ 'cmd': {server_info->['go-langserver','-mode','stdio']},
+"        \ 'whitelist': ['go'],
+"        \ })
+"endif
+"
+"if executable('typescript-langage-server')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'typescript-language-server',
+"        \ 'cmd': {server_info->['typescript-language-server']},
+"        \ 'whitelist': ['typescript,javascript'],
+"        \ })
+"endif
+"
+"if executable('pyls')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyls',
+"        \ 'cmd': {server_info->['pyls']},
+"        \ 'whitelist': ['python'],
+"        \ })
+"endif
 
