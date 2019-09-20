@@ -129,7 +129,7 @@ if dein#load_state(s:dein_dir)
 call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
   "configuration of TOML file
-  let g:rc_dir    = expand('~/.config/nvim/rc')
+  let g:rc_dir    = expand('~/dotfiles/nvim/rc')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
