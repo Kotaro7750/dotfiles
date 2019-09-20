@@ -98,8 +98,8 @@ repo = 'Shougo/neosnippet-snippets'
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
-build = 'bash install.sh'
-hook_source = '''
+build = './install.sh'
+hook_add = '''
 source ~/dotfiles/nvim/rc/plugins/LanguageClient.vim
 '''
 
