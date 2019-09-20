@@ -168,6 +168,7 @@ syntax on  "enable syntax highlighting
 "----------------------------
 "languege specific config
 "----------------------------
+filetype on
 autocmd FileType Makefile setlocal noexpandtab
 
 
@@ -351,22 +352,3 @@ vmap gx <Plug>(openbrowser-smart-search)
 "---vim-devicons---
 "let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
 
-"
-"nmap <S-k> :LspRename<CR>
-"
-"if executable('go-langserver')
-"  au User lsp_setup call lsp#register_server({
-"        \ 'name': 'go-langserver',
-"        \ 'cmd': {server_info->['go-langserver','-mode','stdio']},
-"        \ 'whitelist': ['go'],
-"        \ })
-"endif
-"
-"if executable('typescript-langage-server')
-"  au User lsp_setup call lsp#register_server({
-"        \ 'name': 'typescript-language-server',
-"        \ 'cmd': {server_info->['typescript-language-server']},
-"        \ 'whitelist': ['typescript,javascript'],
-"        \ })
-"endif
-"

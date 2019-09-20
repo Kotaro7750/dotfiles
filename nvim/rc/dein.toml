@@ -59,6 +59,14 @@ on_ft =['tex','plaintex']
 [[plugins]]
 repo = 'miyakogi/seiya.vim'
 
+#complettion
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+
+hook_add = '''
+  source ~/dotfiles/nvim/rc/plugins/deoplete.vim
+'''
 #snippet
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -71,6 +79,8 @@ depends = ['neosnippet-snippets']
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+
 
 #LSP
 #[[plugins]]
