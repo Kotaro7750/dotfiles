@@ -105,6 +105,10 @@ set hlsearch  "highlight hit words
 "cancel highlight words when 2 ESC
 nmap <Esc><Esc> :nohlsearch<CR><Esc>  
 
+"---log---
+set verbosefile=/tmp/nvim.log
+set verbose=0
+
 "----------------------------
 "dein setting
 "----------------------------
@@ -347,10 +351,6 @@ vmap gx <Plug>(openbrowser-smart-search)
 "---vim-devicons---
 "let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
 
-
-"---vim-lsp---
-let g:lsp_async_completion = 1
-let g:lsp_diagnostics_enabled = 1
 "
 "nmap <S-k> :LspRename<CR>
 "
@@ -370,11 +370,3 @@ let g:lsp_diagnostics_enabled = 1
 "        \ })
 "endif
 "
-if executable('pyls')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
