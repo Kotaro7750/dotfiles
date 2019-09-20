@@ -349,8 +349,8 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 
 "---vim-lsp---
-"let g:lsp_async_completion = 1
-"let g:lsp_diagnostics_enabled = 0
+let g:lsp_async_completion = 1
+let g:lsp_diagnostics_enabled = 1
 "
 "nmap <S-k> :LspRename<CR>
 "
@@ -370,11 +370,11 @@ vmap gx <Plug>(openbrowser-smart-search)
 "        \ })
 "endif
 "
-"if executable('pyls')
-"  au User lsp_setup call lsp#register_server({
-"        \ 'name': 'pyls',
-"        \ 'cmd': {server_info->['pyls']},
-"        \ 'whitelist': ['python'],
-"        \ })
-"endif
+if executable('pyls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
 
