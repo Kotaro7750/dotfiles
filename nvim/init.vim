@@ -109,6 +109,9 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set verbosefile=/tmp/nvim.log
 set verbose=0
 
+"---terminal---
+tnoremap <silent> <ESC><ESC> <C-\><C-n>
+
 "----------------------------
 "dein setting
 "----------------------------
@@ -294,8 +297,8 @@ augroup END
 
 
 "---denite.vim---
-"nnoremap :Denite <Nop>
-nmap <C-c> :Denite
+nnoremap [denite] <Nop>
+nmap <C-c> [denite]
 
 let s:denite_win_width_percent = 0.85
 let s:denite_win_height_percent = 0.7

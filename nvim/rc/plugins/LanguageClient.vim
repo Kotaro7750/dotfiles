@@ -6,6 +6,8 @@ filetype on
 
 let g:LanguageClient_serverCommands = {
 \ 'python': ['pyls'],
+\ 'c': ['clangd-8'],
+\ 'cpp': ['clangd-8'],
 \ }
 
 let g:LanguageClient_autoStart = 1
