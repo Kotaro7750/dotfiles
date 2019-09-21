@@ -297,8 +297,8 @@ augroup END
 
 
 "---denite.vim---
-nnoremap [denite] <Nop>
-nmap <C-c> [denite]
+"nnoremap [denite] <Nop>
+nmap <C-c> :Denite 
 
 let s:denite_win_width_percent = 0.85
 let s:denite_win_height_percent = 0.7

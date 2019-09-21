@@ -105,3 +105,7 @@ source ~/dotfiles/nvim/rc/plugins/LanguageClient.vim
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
+
+#test
+[[plugins]]
+repo = 'Kotaro7750/changememo'
