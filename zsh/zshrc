@@ -115,3 +115,6 @@ if [ -f '/Users/koutarou/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 #nvim
 export XDG_CONFIG_HOME=$HOME/dotfiles
+
+#llvm
+export PATH="/usr/local/opt/llvm/bin:$PATH"
