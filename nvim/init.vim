@@ -26,7 +26,7 @@ set ambiwidth=double  "resolve the problems of full size text. ex.◯
 set autoread  "auto-read when editting file is changed
 set hidden  "can open other files when buffer is being editting. 
 set showcmd  "show command typing now on status area.
-let mapleader = "\<Space>"  "map Space to Leader
+let mapleader="\<Space>"  "map Space to Leader
 
 "---cursor---
 set number  "show line number
@@ -111,6 +111,11 @@ set verbose=0
 
 "---terminal---
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
+
+"---gdb---
+packadd termdebug
+let g:termdebug_wide=163
+
 
 "----------------------------
 "dein setting
