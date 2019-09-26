@@ -58,7 +58,7 @@ endif
 
 "---paste---
 "sync to clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 "indent when paste disable
 if &term =~ "xterm"
   let &t_SI .= "\e[?2004h"
