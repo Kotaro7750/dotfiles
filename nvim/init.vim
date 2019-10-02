@@ -111,6 +111,17 @@ set verbose=0
 
 "---terminal---
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
+"nnoremap <silent> <Leader>t :Denite buffer -input=term:// -immediately<CR>
+nnoremap <silent> <Leader>t :call OpenTerminal()<CR>
+
+function! OpenTerminal() abort
+  let l:buf_count = bufname("term://")
+  if buf_count == ""
+    :terminal
+  else
+    :Denite buffer -input=term:// -immediately
+  endif
+endfunction
 
 "---gdb---
 packadd termdebug
@@ -141,7 +152,7 @@ if dein#load_state(s:dein_dir)
 call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
   "configuration of TOML file
-  let g:rc_dir    = expand('~/dotfiles/nvim/rc')
+  let g:rc_dir    = expand('~/dotfiles/nvim')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
@@ -294,72 +305,7 @@ function! Lightlinegitgutter()
   return join(ret, ' ')
 endfunction
 
-
 augroup MyAutoGroup
   autocmd!
   autocmd User ALELintPost call lightline#update()
 augroup END
-
-
-"---denite.vim---
-"nnoremap [denite] <Nop>
-"nmap <Leader>d [denite] 
-"nnoremap [denite] <Nop>
-
-nnoremap <silent> <Leader>db   :Denite buffer<CR>
-
-let s:denite_win_width_percent = 0.85
-let s:denite_win_height_percent = 0.7
-
-" Change denite default options
-call denite#custom#option('default', {
-    \ 'split': 'floating',
-    \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
-    \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
-    \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
-    \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
-    \ })
-
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
-
-
-"---markdown(previm)---
-autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
-nnoremap <silent> <C-p> :PrevimOpen<CR>
-let g:vim_markdown_fonlding_disabled=1
-let g:previm_enable_realtime =1
-
-"---open-browser.vim---
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-
-"---Seiya.vim---
-"let g:seiya_auto_enable=1
-
-
-"---ale---
-"let g:ale_sign_column_always=1  "show error column always
-"let g:ale_sign_error='X'
-"let g:ale_sign_warning='!'
-"
-"let g:ale_lint_on_text_changed=0
-"let g:ale_lint_on_insert_leave=1
-
-"---vim-devicons---
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1  "show file icon
-
