@@ -193,6 +193,7 @@ let g:solarized_termcolors=256
 "colorscheme solarized
 "colorscheme wombat256
 colorscheme iceberg
+"colorscheme elflord
 
 syntax on  "enable syntax highlighting
 
