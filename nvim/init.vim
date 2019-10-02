@@ -112,10 +112,9 @@ set verbose=0
 "---terminal---
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
 "nnoremap <silent> <Leader>t :Denite buffer -input=term:// -immediately<CR>
-nnoremap <silent> <Leader>t :call OpenTerminal()<CR>
-nnoremap <silent> <Leader>e :call RestoreEditor()<CR>
+nnoremap <silent> <Leader>t :call ToggleTerminal()<CR>
 
-function! OpenTerminal() abort
+function! ToggleTerminal() abort
   let l:cur_buf = bufnr()
   let l:buf_term = bufnr("term://")
   if cur_buf == buf_term
@@ -133,18 +132,6 @@ function! OpenTerminal() abort
       let l:command = 'buffer '.l:buf_term
       execute(l:command)
     endif
-  endif
-endfunction
-
-function! RestoreEditor() abort
-  let l:buf_count = bufnr(!"term://")
-  if buf_count == -1
-    echo "does'nt exist restorable editor"
-  else
-    ":Denite buffer -expand(l:buf_count) -max-candidate-width=1
-    let l:command = 'buffer '.l:buf_count
-    execute(l:command)
-    ":buffer {buf_count}
   endif
 endfunction
 
