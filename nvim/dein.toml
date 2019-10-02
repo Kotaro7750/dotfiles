@@ -1,4 +1,4 @@
-#colorschemes
+#olorschemes
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
 
