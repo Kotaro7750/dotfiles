@@ -19,6 +19,13 @@ repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+#surround
+[[plugins]]
+repo = 'tpope/vim-surround'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vim-surround.vim
+'''
+
 #file tree
 [[plugins]]
 repo = 'scrooloose/nerdtree'
