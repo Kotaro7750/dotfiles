@@ -108,11 +108,43 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "---log---
 set verbosefile=/tmp/nvim.log
 set verbose=0
-
 "---terminal---
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
 "nnoremap <silent> <Leader>t :Denite buffer -input=term:// -immediately<CR>
-nnoremap <silent> <Leader>t :call ToggleTerminal()<CR>
+nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
+
+let g:mru_buffer = 1
+let g:mru_buffer_tmp = mru_buffer
+let g:prev_buffer_mine = 1
+"autocmd bufleave * if buflisted(bufnr()) == 1 | let g:mru_buffer_tmp = bufnr()
+autocmd bufleave * let g:prev_buffer_mine = bufnr()
+"autocmd bufenter * if (buflisted(bufnr()) == 1) && (IsTerminal() == 0) | let g:mru_buffer = mru_buffer_tmp
+"autocmd bufenter * if (buflisted(bufnr()) == 1) && (IsTerminal() == 0) | let g:mru_buffer_tmp = mru_buffer
+autocmd bufenter *  call SaveMRUBuffer()
+
+
+
+"exec when enter
+function! SaveMRUBuffer() abort
+  if IsNormal(g:prev_buffer_mine)
+    let g:mru_buffer = g:prev_buffer_mine
+  endif
+endfunction
+
+function! IsNormal(buf_num) abort
+  if (buflisted(a:buf_num) == 1) && (IsTerminal(a:buf_num) == 0)
+    return 1
+  endif
+  return 0
+endfunction
+
+function! IsTerminal(buf_num) abort
+  let l:term_buf = bufnr("terminal.buffer")
+  if a:buf_num == term_buf
+    return 1
+  endif
+  return 0
+endfunction
 
 function! ToggleTerminal() abort
   let l:cur_buf = bufnr()
@@ -124,7 +156,7 @@ function! ToggleTerminal() abort
     else
       let l:command = 'buffer '.l:buf_other
       execute(l:command)
-  endif
+    endif
   else
     if buf_term == -1
       :terminal
@@ -133,6 +165,26 @@ function! ToggleTerminal() abort
       execute(l:command)
     endif
   endif
+endfunction
+
+function! ToggleTerminalMRU() abort
+  let l:cur_buf = bufnr()
+  let l:term_buf = bufnr("terminal.buffer")
+  if cur_buf == term_buf
+    if bufexists(g:mru_buffer) == 1
+      execute('buffer '.g:mru_buffer)
+    else
+      :echo "does'nt exist restorable editor"
+    endif
+  else
+    if term_buf == -1
+      execute("terminal")
+      execute("f terminal.buffer")
+    else
+      execute('buffer '.l:term_buf)
+    endif
+  endif
+  
 endfunction
 
 "---gdb---
