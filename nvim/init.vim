@@ -114,16 +114,16 @@ tnoremap <silent> <ESC><ESC> <C-\><C-n>
 nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 
 let g:mru_buffer = 1
-let g:prev_buffer_mine = 1
-autocmd bufleave * let g:prev_buffer_mine = bufnr()
+let g:mru_buffer_prev = 1
+autocmd bufleave * let g:mru_buffer_prev = bufnr()
 autocmd bufenter *  call SaveMRUBuffer()
 
 
 
 "exec when enter
 function! SaveMRUBuffer() abort
-  if IsNormal(g:prev_buffer_mine)
-    let g:mru_buffer = g:prev_buffer_mine
+  if IsNormal(g:mru_buffer_prev)
+    let g:mru_buffer = g:mru_buffer_prev
   endif
 endfunction
 
