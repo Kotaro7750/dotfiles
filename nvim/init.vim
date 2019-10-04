@@ -114,12 +114,8 @@ tnoremap <silent> <ESC><ESC> <C-\><C-n>
 nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 
 let g:mru_buffer = 1
-let g:mru_buffer_tmp = mru_buffer
 let g:prev_buffer_mine = 1
-"autocmd bufleave * if buflisted(bufnr()) == 1 | let g:mru_buffer_tmp = bufnr()
 autocmd bufleave * let g:prev_buffer_mine = bufnr()
-"autocmd bufenter * if (buflisted(bufnr()) == 1) && (IsTerminal() == 0) | let g:mru_buffer = mru_buffer_tmp
-"autocmd bufenter * if (buflisted(bufnr()) == 1) && (IsTerminal() == 0) | let g:mru_buffer_tmp = mru_buffer
 autocmd bufenter *  call SaveMRUBuffer()
 
 
@@ -146,27 +142,6 @@ function! IsTerminal(buf_num) abort
   return 0
 endfunction
 
-function! ToggleTerminal() abort
-  let l:cur_buf = bufnr()
-  let l:buf_term = bufnr("term://")
-  if cur_buf == buf_term
-    let l:buf_other = bufnr(!"term://")
-    if buf_other == -1
-      echo "does'nt exist restorable editor"
-    else
-      let l:command = 'buffer '.l:buf_other
-      execute(l:command)
-    endif
-  else
-    if buf_term == -1
-      :terminal
-    else
-      let l:command = 'buffer '.l:buf_term
-      execute(l:command)
-    endif
-  endif
-endfunction
-
 function! ToggleTerminalMRU() abort
   let l:cur_buf = bufnr()
   let l:term_buf = bufnr("terminal.buffer")
@@ -184,7 +159,6 @@ function! ToggleTerminalMRU() abort
       execute('buffer '.l:term_buf)
     endif
   endif
-  
 endfunction
 
 "---gdb---
