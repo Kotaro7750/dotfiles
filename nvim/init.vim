@@ -108,9 +108,38 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "---log---
 set verbosefile=/tmp/nvim.log
 set verbose=0
+
+"---memo---
+nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
+
+function! IsMemo(buf_num) abort
+  let l:memo_buf = bufnr("memo.buffer")
+  if a:buf_num == memo_buf
+    return 1
+  endif
+  return 0
+endfunction
+
+function! ToggleMemo() abort
+  let l:cur_buf = bufnr()
+  let l:memo_buf = bufnr("memo.buffer")
+  if cur_buf == memo_buf
+    if bufexists(g:mru_buffer) == 1
+      execute('buffer '.g:mru_buffer)
+    else
+      :echo "does'nt exist restorable editor"
+    endif
+  else
+    if memo_buf == -1
+      execute("e ~/Dropbox/memo/Changelog.md")
+      execute("f memo.buffer")
+    else
+      execute('buffer '.l:memo_buf)
+    endif
+  endif
+endfunction
 "---terminal---
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
-"nnoremap <silent> <Leader>t :Denite buffer -input=term:// -immediately<CR>
 nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 
 let g:mru_buffer = 1
@@ -118,11 +147,9 @@ let g:mru_buffer_prev = 1
 autocmd bufleave * let g:mru_buffer_prev = bufnr()
 autocmd bufenter *  call SaveMRUBuffer()
 
-
-
 "exec when enter
 function! SaveMRUBuffer() abort
-  if IsNormal(g:mru_buffer_prev)
+  if IsNormal(g:mru_buffer_prev) && IsMemo(g:mru_buffer_prev) == 0
     let g:mru_buffer = g:mru_buffer_prev
   endif
 endfunction
