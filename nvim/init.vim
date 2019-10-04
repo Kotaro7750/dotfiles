@@ -113,7 +113,7 @@ set verbose=0
 nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
 
 function! IsMemo(buf_num) abort
-  let l:memo_buf = bufnr("memo.buffer")
+  let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
   if a:buf_num == memo_buf
     return 1
   endif
@@ -122,7 +122,7 @@ endfunction
 
 function! ToggleMemo() abort
   let l:cur_buf = bufnr()
-  let l:memo_buf = bufnr("memo.buffer")
+  let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
   if cur_buf == memo_buf
     if bufexists(g:mru_buffer) == 1
       execute('buffer '.g:mru_buffer)
@@ -132,7 +132,6 @@ function! ToggleMemo() abort
   else
     if memo_buf == -1
       execute("e ~/Dropbox/memo/Changelog.md")
-      execute("f memo.buffer")
     else
       execute('buffer '.l:memo_buf)
     endif
