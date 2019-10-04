@@ -5,6 +5,7 @@ let s:denite_win_height_percent = 0.7
 
 autocmd BufEnter * silent! lcd %:p:h
 
+call denite#custom#option('default', 'prompt', '$')
 call denite#custom#option('default', {
     \ 'split': 'floating',
     \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
@@ -44,7 +45,7 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> . denite#do_map('move_up_path')
 endfunction
 
-nnoremap <silent> <Leader>db   :Denite buffer<CR>
-nnoremap <silent> <Leader>df   :Denite file<CR>
-nnoremap <silent> <Leader>dg   :Denite grep<CR>
-nnoremap <silent> <Leader>dr   :Denite register<CR>
+nnoremap <silent> <Leader>db   :Denite -start-filter buffer<CR>
+nnoremap <silent> <Leader>df   :Denite -start-filter file<CR>
+nnoremap <silent> <Leader>dg   :Denite -start-filter grep<CR>
+nnoremap <silent> <Leader>dr   :Denite -start-filter register<CR>

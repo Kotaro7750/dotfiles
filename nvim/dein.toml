@@ -41,9 +41,11 @@ hook_add = '''
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
+#bracket
 [[plugins]]
 repo ='cohama/lexima.vim'
 
+#indent
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 
