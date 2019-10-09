@@ -254,6 +254,7 @@ syntax on  "enable syntax highlighting
 "----------------------------
 filetype on
 autocmd FileType Makefile setlocal noexpandtab
+source ~/dotfiles/nvim/language/c.vim
 
 
 "----------------------------

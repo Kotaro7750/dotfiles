@@ -17,3 +17,7 @@ nnoremap <silent> <Leader>lk :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <Leader>lr :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
+
+
+autocmd BufWritePost *.c :call LanguageClient#textDocument_formatting()
+autocmd BufWritePost *.h :call LanguageClient#textDocument_formatting()
