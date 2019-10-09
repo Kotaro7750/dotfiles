@@ -138,6 +138,7 @@ function! ToggleMemo() abort
   endif
 endfunction
 "---terminal---
+set shell=/bin/zsh
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
 nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 
