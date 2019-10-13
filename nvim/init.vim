@@ -138,6 +138,7 @@ function! ToggleMemo() abort
   endif
 endfunction
 "---terminal---
+set shell=/bin/zsh
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
 nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 
@@ -254,6 +255,7 @@ syntax on  "enable syntax highlighting
 "----------------------------
 filetype on
 autocmd FileType Makefile setlocal noexpandtab
+source ~/dotfiles/nvim/language/c.vim
 
 
 "----------------------------
