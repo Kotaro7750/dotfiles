@@ -137,6 +137,11 @@ function! ToggleMemo() abort
     endif
   endif
 endfunction
+
+function! InsertNewDay() abort
+  :r !date +\%Y-\%m-\%d
+endfunction
+
 "---terminal---
 set shell=/bin/zsh
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
