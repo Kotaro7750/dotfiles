@@ -112,6 +112,7 @@ set verbose=0
 "---memo---
 nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
 autocmd BufEnter Changelog.md :call WhenNewDay()
+autocmd BufEnter Changelog.md nnoremap <buffer> <Leader>e :call NewEntry()<CR>
 
 function! IsMemo(buf_num) abort
   let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
@@ -156,6 +157,10 @@ function! WhenNewDay() abort
   if line != date
     :call InsertNewDay()
   endif
+endfunction
+
+function! NewEntry() abort
+  :call feedkeys("1Go	* [")
 endfunction
 
 "---terminal---
