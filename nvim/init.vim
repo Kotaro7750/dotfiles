@@ -111,6 +111,7 @@ set verbose=0
 
 "---memo---
 nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
+nnoremap <Leader>h :call InsertNewDay()<CR>
 
 function! IsMemo(buf_num) abort
   let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
@@ -139,7 +140,10 @@ function! ToggleMemo() abort
 endfunction
 
 function! InsertNewDay() abort
-  :r !date +\%Y-\%m-\%d
+  let l:date = system('date +\%Y-\%m-\%d')
+  let date = date." Kotaro Arata <7750koutarou@gmail.com>"
+  let date = substitute(date,"\s","","g")
+  :call append(0,l:date)
 endfunction
 
 "---terminal---
