@@ -111,7 +111,7 @@ set verbose=0
 
 "---memo---
 nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
-nnoremap <Leader>h :call InsertNewDay()<CR>
+autocmd BufEnter Changelog.md :call WhenNewDay()
 
 function! IsMemo(buf_num) abort
   let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
@@ -128,7 +128,7 @@ function! ToggleMemo() abort
     if bufexists(g:mru_buffer) == 1
       execute('buffer '.g:mru_buffer)
     else
-      :echo "does'nt exist restorable editor"
+      :echo "restorable editor does'nt exist"
     endif
   else
     if memo_buf == -1
@@ -142,8 +142,20 @@ endfunction
 function! InsertNewDay() abort
   let l:date = system('date +\%Y-\%m-\%d')
   let date = date." Kotaro Arata <7750koutarou@gmail.com>"
-  let date = substitute(date,"\s","","g")
+  let date = substitute(date,"[[:cntrl:]]","","g")
   :call append(0,l:date)
+  :call append(1,"")
+endfunction
+
+function! WhenNewDay() abort
+  let l:date = system('date +\%Y-\%m-\%d')
+  let date = date." Kotaro Arata <7750koutarou@gmail.com>"
+  let date = substitute(date,"[[:cntrl:]]","","g")
+  
+  let l:line = getline(1)
+  if line != date
+    :call InsertNewDay()
+  endif
 endfunction
 
 "---terminal---
