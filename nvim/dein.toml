@@ -43,6 +43,9 @@ hook_add = '''
 #status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/lightline.vim
+'''
 
 #bracket
 [[plugins]]
