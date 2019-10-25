@@ -2,7 +2,7 @@ let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ],['lsp'] ]
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ,'lsp'] ],
         \ },
         \ 'component_function': {
         \   'modified': 'LightlineModified',
@@ -14,8 +14,13 @@ let g:lightline = {
         \   'filetype': 'LightlineFiletype',
         \   'fileencoding': 'LightlineFileencoding',
         \   'mode': 'LightlineMode',
+        \ },
+        \ 'component_expand': {
         \   'lsp': 'LangugeServerStatus',
         \ },
+        \ 'component_type': {
+        \   'lsp': 'error',
+        \ }
         \ }
 
 function! LangugeServerStatus() abort
