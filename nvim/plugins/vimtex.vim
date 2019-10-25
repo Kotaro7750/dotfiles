@@ -21,5 +21,10 @@ let g:vimtex_compiler_latexmk = {
       \}
 
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:tex_conceal=''
 
-autocmd BufEnter *.ltx :VimtexCompile
+augroup vimtex_event_1
+  au!
+  au User VimtexEventQuit     call vimtex#compiler#clean(0)
+  au User VimtexEventInitPost call vimtex#compiler#compile()
+augroup END

@@ -218,6 +218,9 @@ endfunction
 packadd termdebug
 let g:termdebug_wide=163
 
+"---template---
+source ~/dotfiles/nvim/template/template.vim
+ 
 
 "----------------------------
 "dein setting

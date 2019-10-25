@@ -1,0 +1,30 @@
+\documentclass{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{here}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{}
+
+\subsection{}
+
+\subsubsection{}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{}
+  \caption{}
+  \label{}
+\end{figure}
+
+\section{参考文献}
+\begin{thebibliography}{9}
+  \bibitem{textbook} 電気電子情報実験・演習第二　テキスト　第二分冊　課題20
+\end{thebibliography}
+\end{document}
