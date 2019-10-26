@@ -1,8 +1,5 @@
-"can change buffer without saving
-set hidden
-
-"can recognize filetype
-filetype on
+set hidden "can change buffer without saving
+filetype on "can recognize filetype
 
 let g:LanguageClient_serverCommands = {
 \ 'python': ['pyls'],

@@ -3,6 +3,7 @@ let g:lightline = {
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ,'lsp'] ],
+        \   'right': [['lineinfo','percent'],['fileformat','fileencoding','filetype']]
         \ },
         \ 'component_function': {
         \   'modified': 'LightlineModified',
