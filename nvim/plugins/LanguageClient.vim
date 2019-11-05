@@ -6,7 +6,7 @@ filetype on
 
 let g:LanguageClient_serverCommands = {
 \ 'python': ['pyls'],
-\ 'go': [$GOPATH.'/bin/go-langserver','-format-tool','gofmt','-lint-tool','golint'],
+\ 'go': [$GOPATH.'/bin/gopls'],
 \ 'c': ['clangd-8'],
 \ 'cpp': ['clangd-8'],
 \ }
