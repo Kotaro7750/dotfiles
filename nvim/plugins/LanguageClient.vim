@@ -6,7 +6,15 @@ let g:LanguageClient_serverCommands = {
 \ 'go': [$GOPATH.'/bin/gopls'],
 \ 'c': ['clangd-8'],
 \ 'cpp': ['clangd-8'],
+\ 'javascript': ['javascript-typescript-stdio'],
+\ 'typescript': ['javascript-typescript-stdio'], 
 \ }
+
+let g:LanguageClient_rootMarkers = {
+    \ 'go': ['go.mod'],
+    \ 'javascript': ['jsconfig.json'],
+    \ 'typescript': ['tsconfig.json'],
+    \ }
 
 let g:LanguageClient_autoStart = 1
 
