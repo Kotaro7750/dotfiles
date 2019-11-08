@@ -1,4 +1,5 @@
-\documentclass{jarticle}
+\documentclass[twocolumn,10pt]{jarticle}
+\setlength{\columnsep}{3zw}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{here}
 \usepackage{url}

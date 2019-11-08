@@ -7,7 +7,7 @@ plt.rcParams["font.family"] = "IPAexGothic"
 x = np.array([1,2,3])
 y = np.array([1,2,3])
 
-plt.scatter(x, y, color="k",label="計測値")
+plt.scatter(x, y,label="計測値")
 
 plt.grid(which='major',color='black',linestyle='-')
 plt.grid(which='minor',color='black',linestyle='-')
