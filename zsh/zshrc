@@ -115,3 +115,6 @@ if [ -f '/Users/koutarou/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 #llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+#vivado
+export PATH="/tools/Xilinx/Vivado/2019.2/bin:$PATH"
