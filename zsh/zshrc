@@ -118,3 +118,6 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 #vivado
 export PATH="/tools/Xilinx/Vivado/2019.2/bin:$PATH"
+
+#riscv
+export PATH="~/opt/riscv/bin:$PATH"
