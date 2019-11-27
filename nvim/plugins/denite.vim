@@ -1,5 +1,3 @@
-"nmap <Leader>d [denite] 
-"nnoremap [denite] <Nop>
 let s:denite_win_width_percent = 0.7
 let s:denite_win_height_percent = 0.7
 
