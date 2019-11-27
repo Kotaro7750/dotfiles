@@ -8,6 +8,7 @@ let g:LanguageClient_serverCommands = {
 \ 'cpp': ['clangd-8'],
 \ 'javascript': ['javascript-typescript-stdio'],
 \ 'typescript': ['javascript-typescript-stdio'], 
+\ 'verilog': ['svls'],
 \ }
 
 let g:LanguageClient_rootMarkers = {
