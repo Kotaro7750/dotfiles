@@ -1,3 +1,4 @@
 autocmd BufRead,BufNewFile *.{mkd,md,mdwn,mkdn,mark*} set filetype=markdown
-set nofoldenable
-let g:vim_markdown_fonlding_disabled=1
+
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_conceal = 0
