@@ -121,6 +121,3 @@ export PATH="/tools/Xilinx/Vivado/2019.2/bin:$PATH"
 
 #riscv
 export PATH="~/opt/riscv/bin:$PATH"
-
-#my binary
-export PATH="~/dotfiles/bin:$PATH"
