@@ -10,6 +10,7 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript': ['javascript-typescript-stdio'],
 \ 'typescript': ['javascript-typescript-stdio'], 
 \ 'verilog': ['svls'],
+\ 'tex': ['texlab'],
 \ }
 
 let g:LanguageClient_rootMarkers = {
@@ -33,7 +34,7 @@ augroup LCHighlight
     autocmd!
     autocmd CursorHold *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#textDocument_documentHighlight()
     autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#clearDocumentHighlight()
-    autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
+    "autocmd CursorHold *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#textDocument_hover()
     "autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
 augroup END
 
