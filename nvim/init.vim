@@ -200,17 +200,26 @@ function! ToggleTerminalMRU() abort
   let l:term_buf = bufnr("terminal.buffer")
   if cur_buf == term_buf
     if bufexists(g:mru_buffer) == 1
-      execute('buffer '.g:mru_buffer)
+      call nvim_win_close(0,v:true)
     else
       :echo "does'nt exist restorable editor"
     endif
   else
-    if term_buf == -1
-      execute("terminal")
-      execute("f terminal.buffer")
-    else
-      execute('buffer '.l:term_buf)
-    endif
+    call FloatingTerminal(term_buf)
+  endif
+endfunction
+
+function! FloatingTerminal(buf) abort
+  let term_buf = a:buf
+  if a:buf == -1
+    let l:term_buf = nvim_create_buf(v:false, v:true)
+  endif
+  call nvim_open_win(l:term_buf, v:true, {'relative': 'win', 'height': 35, 'width': 145, 'col': 10, 'row': 3})
+  set winblend=0
+
+  if a:buf == -1
+    terminal
+    f terminal.buffer
   endif
 endfunction
 
