@@ -48,4 +48,5 @@ endfunction
 nnoremap <silent> <Leader>db   :Denite buffer<CR>
 nnoremap <silent> <Leader>df   :Denite file<CR>
 nnoremap <silent> <Leader>dg   :Denite grep<CR>
+nnoremap <silent> <Leader>dG   :DeniteCursorWord grep<CR>
 nnoremap <silent> <Leader>dr   :Denite register<CR>
