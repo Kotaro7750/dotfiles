@@ -114,12 +114,19 @@ depends = ['neosnippet-snippets']
 repo = 'Shougo/neosnippet-snippets'
 
 #LSP
+#[[plugins]]
+#repo = 'autozimu/LanguageClient-neovim'
+#rev = 'next'
+#build = './install.sh'
+#hook_add = '''
+#source ~/dotfiles/nvim/plugins/LanguageClient.vim
+#'''
+
 [[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
+repo = 'neoclide/coc.nvim'
 build = './install.sh'
 hook_add = '''
-source ~/dotfiles/nvim/plugins/LanguageClient.vim
+source ~/dotfiles/nvim/plugins/coc.vim
 '''
 
 [[plugins]]
