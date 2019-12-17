@@ -7,8 +7,8 @@ let g:LanguageClient_serverCommands = {
 \ 'go': [$GOPATH.'/bin/gopls'],
 \ 'c': ['clangd-8'],
 \ 'cpp': ['clangd-8'],
-\ 'javascript': ['javascript-typescript-stdio'],
-\ 'typescript': ['javascript-typescript-stdio'], 
+\ 'javascript': ['typescript-language-server','--stdio'],
+\ 'typescript': ['typescript-language-server','--stdio'], 
 \ 'verilog': ['svls'],
 \ 'tex': ['texlab'],
 \ }
