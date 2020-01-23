@@ -38,7 +38,7 @@ augroup LCHighlight
     "autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
 augroup END
 
-    autocmd BufWritePre *.c,*.h,*.cpp,*.py,*go,*.sh call LanguageClient#textDocument_formatting_sync()
+    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.py,*go,*.sh call LanguageClient#textDocument_formatting_sync()
 
 "50ms
 set updatetime=50
