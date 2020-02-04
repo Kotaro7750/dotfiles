@@ -3,7 +3,7 @@ filetype on "can recognize filetype
 
 let g:LanguageClient_serverCommands = {
 \ 'sh': ['bash-language-server', 'start'],
-\ 'python': ['pyls'],
+\ 'python': ['~/dotfiles/nvim/virtualenv/nvim-python3/bin/pyls'],
 \ 'go': [$GOPATH.'/bin/gopls'],
 \ 'c': ['clangd-8'],
 \ 'cpp': ['clangd-8'],
