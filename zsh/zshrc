@@ -1,4 +1,3 @@
-
 #-------------------
 #general
 #-------------------
@@ -33,7 +32,7 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
 # execute before prompt appear
 precmd(){ vcs_info }
 
-#補完機能
+#auto completion
 autoload -U compinit
 compinit
 
