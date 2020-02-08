@@ -27,9 +27,9 @@ set autoread  "auto-read when editting file is changed
 set hidden  "can open other files when buffer is being editting. 
 set showcmd  "show command typing now on status area.
 let mapleader="\<Space>"  "map Space to Leader
+set relativenumber  "show relative line number
 
 "---cursor---
-set number  "show line number
 set cursorline  "highlight present line
 set cursorcolumn  "highlight present column
 set virtualedit=onemore  "cursor can move 1 char after EOL
