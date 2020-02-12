@@ -1,18 +1,18 @@
 #!/bin/bash
-rm ~/.gdbinit
+rm -f ~/.gdbinit
 ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
 
-rm ~/.gitconfig
+rm -f ~/.gitconfig
 ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
 
-rm ~/.latexmkrc
+rm -f ~/.latexmkrc
 ln -s ~/dotfiles/latex/latexmkrc ~/.latexmkrc
 
-rm ~/.tmux.conf
+rm -f ~/.tmux.conf
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 
-rm ~/.config/nvim
+rm -f ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 
-rm ~/.zshrc
+rm -f ~/.zshrc
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
