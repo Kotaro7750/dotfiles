@@ -65,14 +65,12 @@ case ${OSTYPE} in
     alias ls='ls -G'
     ;;    
   linux* )
-    #export LSCOLORS=fxgxcxdxbxegedabagacad
-    #export LS_COLORS=fxgxcxdxbxegedabagacad
-    eval $(dircolors ~/ls_color/dircolors-solarized/dircolors.ansi-universal)
     alias ls='ls --color'
     ;;
 
 esac
 zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
 
 
 #インストール
