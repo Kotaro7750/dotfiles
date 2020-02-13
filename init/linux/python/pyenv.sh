@@ -8,9 +8,9 @@ pyenv install 2.7.15
 
 #install requirement
 source ~/dotfiles/nvim/virtualenv/nvim-python2/bin/activate
-pip install -r ~/dotfiles/init/linux/python/nvim_python2_require.txt
+pip install -r ~/dotfiles/init/linux/python/nvim-python2-requirements.txt
 deactivate
 
 source ~/dotfiles/nvim/virtualenv/nvim-python3/bin/activate
-pip install -r ~/dotfiles/init/linux/python/nvim_python3_require.txt
+pip install -r ~/dotfiles/init/linux/python/nvim-python3-requirements.txt
 deactivate
