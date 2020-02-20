@@ -2,7 +2,6 @@ greenlet==0.4.15
 jedi==0.15.2
 msgpack==0.6.2
 parso==0.6.1
-pkg-resources==0.0.0
 pluggy==0.13.1
 pynvim==0.4.1
 python-jsonrpc-server==0.3.4

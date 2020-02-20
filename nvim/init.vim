@@ -252,8 +252,8 @@ source ~/dotfiles/nvim/template/template.vim
 "----------------------------
 "python3 setting
 "----------------------------
-let g:python3_host_prog = expand('~/dotfiles/nvim/virtualenv/nvim-python3/bin/python3')
-let g:python_host_prog = expand('~/dotfiles/nvim/virtualenv/nvim-python2/bin/python2')
+let g:python3_host_prog = expand('~/nvim-python3/bin/python3')
+let g:python_host_prog = expand('~/nvim-python2/bin/python2')
 
 "----------------------------
 "dein setting
