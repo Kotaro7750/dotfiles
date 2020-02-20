@@ -65,6 +65,7 @@ case ${OSTYPE} in
     alias ls='ls -G'
     ;;    
   linux* )
+    eval $(dircolors ~/ls_color/dircolors-solarized/dircolors.ansi-universal)
     alias ls='ls --color'
     ;;
 
