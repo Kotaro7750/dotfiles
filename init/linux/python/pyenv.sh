@@ -9,9 +9,12 @@ pyenv install 2.7.15
 #make virtualenv
 pyenv global 3.8.1
 sudo pip install virtualenv
-virtualenv -p python3.8.1 ~/nvim-python3
+virtualenv -p python3 ~/nvim-python3
 
-virtualenv -p python2 ~/nvim-python2
+pyenv global 2.7.15
+virtualenv -p python ~/nvim-python2
+
+pyenv global system
 
 #install requirement
 source ~/nvim-python3/bin/activate
