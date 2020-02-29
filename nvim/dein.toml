@@ -8,6 +8,10 @@ repo = 'flazz/vim-colorschemes'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 
+#search
+[[plugins]]
+repo = 'markonm/traces.vim'
+
 #font
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -77,6 +81,9 @@ hook_add = '''
   source ~/dotfiles/nvim/plugins/open-browser.vim
 '''
 
+[[plugins]]
+repo = 'mattn/vim-maketable'
+
 #LaTeX
 [[plugins]]
 repo = 'lervag/vimtex'
@@ -124,3 +131,10 @@ source ~/dotfiles/nvim/plugins/LanguageClient.vim
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
+
+#clipy
+[[plugins]]
+repo = 'Kotaro7750/denite-clipy'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/denite-clipy.vim
+'''
