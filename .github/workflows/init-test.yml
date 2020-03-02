@@ -3,7 +3,8 @@ name: "init script test"
 on:
   push:
     paths:
-    - 'init/linux'
+    - '.github/workflows/init-test.yml'
+    - 'init/linux/**'
 
 jobs:
   init-test:
