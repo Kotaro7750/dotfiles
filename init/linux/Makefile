@@ -3,3 +3,6 @@ init:
 
 link:
 	./link.sh
+
+nvim-package-update:
+	./python/update.sh

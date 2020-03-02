@@ -1,9 +1,12 @@
+autopep8==1.5
 greenlet==0.4.15
 jedi==0.15.2
 msgpack==1.0.0
 parso==0.6.1
 pluggy==0.13.1
+pycodestyle==2.5.0
 pynvim==0.4.1
 python-jsonrpc-server==0.3.4
 python-language-server==0.31.8
+rope==0.16.0
 ujson==1.35
