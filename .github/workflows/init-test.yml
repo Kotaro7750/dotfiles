@@ -8,15 +8,17 @@ on:
 
 jobs:
   init-test:
+    runs-on: ${{matrix.os}}
 
-    matrix:
-      os: [ubuntu-latest,macos-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest,macos-latest]
 
     steps:
     - uses: actions/checkout@v2
-    - name: init
+    - name: init on ${{matrix.os}}
       working-directory: ./init/linux
       run: make init
-    - name: link
+    - name: link on ${{matrix.os}}
       working-directory: ./init/linux
       run: make link
