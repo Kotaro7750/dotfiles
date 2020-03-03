@@ -7,10 +7,25 @@ on:
     - 'init/linux/**'
 
 jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        script: ["./albert.sh", "./docker.sh","./latex.sh","./nvim.sh","./zsh.sh","./python/pyenv.sh"]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: unit-test of ${{matrix.script}}
+        working-directory: ./init/linux
+        run: ${{matrix.script}}
+  
   init-test:
     runs-on: ${{matrix.os}}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest,macos-latest]
 
