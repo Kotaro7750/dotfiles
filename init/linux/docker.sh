@@ -8,6 +8,6 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 ##sudoなしでdockerを使えるようにする
-sudo groupadd docker
+sudo groupadd -f docker
 sudo gpasswd -a $USER docker
 sudo systemctl restart docker
