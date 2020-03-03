@@ -22,18 +22,13 @@ jobs:
         run: ${{matrix.script}}
   
   init-test:
-    runs-on: ${{matrix.os}}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest,macos-latest]
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: init on ${{matrix.os}}
+    - name: init
       working-directory: ./init/linux
       run: make init
-    - name: link on ${{matrix.os}}
+    - name: link
       working-directory: ./init/linux
       run: make link

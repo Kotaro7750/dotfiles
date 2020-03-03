@@ -21,11 +21,19 @@ virtualenv -p python ~/nvim-python2
 
 pyenv global system
 
+REQUIREMENT_3=`eval "echo ~/dotfiles/init/linux/python/nvim-python3-requirements.txt"`
+if [ ! -e $REQUIREMENT_3 ]; then
+  REQUIREMENT_3=`find . -name nvim-python3-requirements\.txt`
+fi
 #install requirement
 source ~/nvim-python3/bin/activate
-pip install -r ~/dotfiles/init/linux/python/nvim-python3-requirements.txt
+pip install -r $REQUIREMENT_3
 deactivate
 
+REQUIREMENT_2=`eval "echo ~/dotfiles/init/linux/python/nvim-python2-requirements.txt"`
+if [ ! -e $REQUIREMENT_2 ]; then
+  REQUIREMENT_2=`find . -name nvim-python2-requirements\.txt`
+fi
 source ~/nvim-python2/bin/activate
-pip install -r ~/dotfiles/init/linux/python/nvim-python2-requirements.txt
+pip install -r $REQUIREMENT_2
 deactivate
