@@ -12,6 +12,7 @@ rm -f ~/.tmux.conf
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 
 rm -f ~/.config/nvim
+mkdir -p ~/.config
 ln -s ~/dotfiles/nvim ~/.config/nvim
 
 rm -f ~/.zshrc

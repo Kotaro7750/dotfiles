@@ -1,5 +1,6 @@
 init:
 	./install.sh
+	./link.sh
 
 link:
 	./link.sh

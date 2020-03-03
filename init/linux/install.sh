@@ -21,6 +21,3 @@ sudo apt-get -y install fcitx fcitx-mozc
 
 #latex
 ./latex.sh
-
-#リンク作成
-./link.sh
