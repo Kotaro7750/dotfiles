@@ -2,6 +2,10 @@
 #install pyenv
 git clone git://github.com/yyuu/pyenv.git ~/.pyenv
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 #install 2 and 3
 pyenv install 3.8.1
 pyenv install 2.7.15
