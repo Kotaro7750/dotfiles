@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xeu
 #install pyenv
 git clone git://github.com/yyuu/pyenv.git ~/.pyenv
 

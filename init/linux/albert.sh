@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xeu
 OS_VERSION=`cat /etc/os-release | grep VERSION=  | awk -F '"' '{print $2}'| awk '{print $1}' | awk -F '.' -v 'OFS=.' '{print $1,$2}'`
 curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add -
 

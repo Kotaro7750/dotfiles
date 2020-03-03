@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xeu
 rm -f ~/.gdbinit
 ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
 

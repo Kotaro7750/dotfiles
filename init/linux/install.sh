@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -xeu
 sudo apt-get update
 
 #zshのインストールと設定

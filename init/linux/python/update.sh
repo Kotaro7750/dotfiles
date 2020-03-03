@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xeu
 
 #update requirement
 source ~/nvim-python3/bin/activate

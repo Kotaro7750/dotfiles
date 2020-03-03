@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xeu
 sudo apt-get update
 sudo apt-get -y install zsh curl
 #zplug
