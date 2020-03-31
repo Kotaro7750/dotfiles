@@ -105,6 +105,19 @@ set hlsearch  "highlight hit words
 "cancel highlight words when 2 ESC
 nmap <Esc><Esc> :nohlsearch<CR><Esc>  
 
+"---IME---
+if has('unix')
+  autocmd InsertLeave * :call OffIME()
+endif
+
+function! OffIME() abort
+  " fcitx-remote returns 1 if current method is mozc
+  let l:fcitx_status = system('fcitx-remote')
+  if fcitx_status == 1
+    call system('fcitx-remote -s fcitx-keyboard-us')
+  endif
+endfunction
+
 "---log---
 set verbosefile=/tmp/nvim.log
 set verbose=0
