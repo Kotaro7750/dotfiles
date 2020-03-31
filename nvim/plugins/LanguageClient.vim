@@ -15,8 +15,8 @@ let g:LanguageClient_serverCommands = {
 
 let g:LanguageClient_rootMarkers = {
     \ 'go': ['go.mod'],
-    \ 'javascript': ['jsconfig.json','babel.config.json'],
-    \ 'typescript': ['tsconfig.json','babel.config.json'],
+    \ 'javascript': ['jsconfig.json','babel.config.json','.eslintrc.json'],
+    \ 'typescript': ['tsconfig.json','babel.config.json','.eslintrc.json'],
     \ }
 
 let g:LanguageClient_autoStart = 1
