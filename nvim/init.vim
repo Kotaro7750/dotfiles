@@ -27,6 +27,7 @@ set autoread  "auto-read when editting file is changed
 set hidden  "can open other files when buffer is being editting. 
 set showcmd  "show command typing now on status area.
 let mapleader="\<Space>"  "map Space to Leader
+set number  "show line number of under cursor line
 set relativenumber  "show relative line number
 
 "---cursor---
