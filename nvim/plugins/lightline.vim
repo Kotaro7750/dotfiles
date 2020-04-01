@@ -2,7 +2,7 @@ let g:lightline = {
         \ 'colorscheme': 'wombat' ,
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ,'lsp'] ],
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ,'lsp'] ],
         \   'right': [['lineinfo','percent'],['fileformat','fileencoding','filetype']]
         \ },
         \ 'component_function': {
@@ -58,10 +58,8 @@ endfunction
 
 function! LightlineFugitive()
   try
-    if exists('*fugitive#head')
-      let _ = fugitive#head()
-      return strlen(_) ? '⭠'._ : ''
-    endif
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠'._ : ''
   catch
   endtry
   return ''
@@ -84,8 +82,7 @@ function! LightlineMode()
 endfunction
 
 function! Lightlinegitgutter()
-  if ! exists('*GitGutterGetHunkSummary')
-        \ || ! get(g:, 'gitgutter_enabled', 0)
+  if ! get(g:, 'gitgutter_enabled', 0)
         \ || winwidth('.') <= 90
     return ''
   endif
