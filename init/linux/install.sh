@@ -2,22 +2,22 @@
 sudo apt-get update
 
 #zshのインストールと設定
-./zsh.sh
+./script/zsh.sh
 
 #英字キーボード用の設定
 sudo apt-get -y install fcitx fcitx-mozc
 
 #dockerのインストール
-./docker.sh
+./script/docker.sh
 
 #neovimのインストールと設定
-./nvim.sh
+./script/nvim.sh
 
 #python周り
-./python/pyenv.sh
+./script/python/pyenv.sh
 
 #albert
-./albert.sh
+./script/albert.sh
 
 #latex
-./latex.sh
+./script/latex.sh

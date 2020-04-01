@@ -6,4 +6,4 @@ link:
 	./link.sh
 
 nvim-package-update:
-	./python/update.sh
+	./script/python/update.sh
