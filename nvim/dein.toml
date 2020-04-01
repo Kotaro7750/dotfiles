@@ -26,6 +26,10 @@ hook_add = '''
   source ~/dotfiles/nvim/plugins/vim-fugitive.vim
 '''
 
+# comment
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
 #surround
 [[plugins]]
 repo = 'tpope/vim-surround'
