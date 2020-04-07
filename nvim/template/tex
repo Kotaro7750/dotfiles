@@ -18,12 +18,12 @@
 \subsubsection{}
 
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.5]{}
-  \caption{}
-  \label{}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=0.5]{}
+%   \caption{}
+%   \label{}
+% \end{figure}
 
 \section{参考文献}
 \begin{thebibliography}{9}
