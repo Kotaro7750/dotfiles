@@ -1,6 +1,9 @@
 set hidden "can change buffer without saving
 filetype on "can recognize filetype
 
+let g:LanguageClient_loggingFile = expand('~/LanguageClient.log')
+let g:LanguageClient_loggingLevel = 'DEBUG'
+
 let g:LanguageClient_serverCommands = {
 \ 'sh': ['bash-language-server', 'start'],
 \ 'python': ['~/nvim-python3/bin/pyls'],

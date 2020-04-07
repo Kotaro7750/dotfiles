@@ -127,6 +127,9 @@ export PATH="/tools/Xilinx/Vivado/2019.2/bin:$PATH"
 #riscv
 export PATH="~/opt/riscv/bin:$PATH"
 
+# rust
+source $HOME/.cargo/env
+
 if [[ ! -n $TMUX ]]; then
   # get the IDs
   ID="`tmux list-sessions`"

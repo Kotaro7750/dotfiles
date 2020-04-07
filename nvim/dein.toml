@@ -111,6 +111,13 @@ on_i = 1
 hook_add = '''
   source ~/dotfiles/nvim/plugins/deoplete.vim
 '''
+
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/echodoc.vim
+'''
+
 #snippet
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
