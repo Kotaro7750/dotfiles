@@ -5,8 +5,9 @@ let g:LanguageClient_serverCommands = {
 \ 'sh': ['bash-language-server', 'start'],
 \ 'python': ['~/nvim-python3/bin/pyls'],
 \ 'go': [$GOPATH.'/bin/gopls'],
-\ 'c': ['clangd-8'],
-\ 'cpp': ['clangd-8'],
+\ 'c': ['clangd-9'],
+\ 'cpp': ['clangd-9'],
+\ 'rust': ['rls'],
 \ 'javascript': ['typescript-language-server','--stdio'],
 \ 'typescript': ['typescript-language-server','--stdio'], 
 \ 'verilog': ['svls'],
@@ -32,13 +33,26 @@ let s:filetype_list=["*.c","*.h","*.py","*.cpp","*.go","*.sh"]
 
 augroup LCHighlight
     autocmd!
-    autocmd CursorHold *.c,*.h,*.py,*.cpp,*.hpp,*.go,*.sh,*.js,*.ts call LanguageClient#textDocument_documentHighlight()
-    autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.hpp,*.go,*.sh,*.js,*.ts call LanguageClient#clearDocumentHighlight()
+    autocmd CursorHold *.c,*.h,*.py,*.cpp,*.hpp,*.rust,*.go,*.sh,*.js,*.ts call LanguageClient#textDocument_documentHighlight()
+    autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.hpp,*.rust,*.go,*.sh,*.js,*.ts call LanguageClient#clearDocumentHighlight()
     "autocmd CursorHold *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#textDocument_hover()
     "autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
 augroup END
 
-    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
+    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.rust,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
 
 "50ms
 set updatetime=50
+
+let g:LanguageClient_semanticHighlightMaps = {}
+let g:LanguageClient_semanticHighlightMaps['cpp'] = {
+            \   'entity.name.function.cpp': 'Identifier',
+            \   'entity.name.function.method.cpp': 'Identifier',
+            \   'entity.name.type.class.cpp': 'Identifier',
+            \   'entity.name.type.enum.cpp': 'Type',
+            \   'variable.other.cpp': 'Identifier',
+            \   'variable.other.enummember.cpp': 'Type',
+            \   'variable.other.field.cpp': 'Type',
+            \   'entity.name.type.template.cpp': 'Type',
+            \   'entity.name.namespace.cpp': 'Special',
+            \ }
