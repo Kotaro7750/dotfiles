@@ -1,5 +1,5 @@
 let g:lightline = {
-        \ 'colorscheme': 'wombat' ,
+        \ 'colorscheme': 'nagomi' ,
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ,'lsp'] ],

@@ -1,5 +1,8 @@
 #colorschemes
 [[plugins]]
+repo = 'cocopon/pgmnt.vim'
+
+[[plugins]]
 repo = 'altercation/vim-colors-solarized'
 
 [[plugins]]
@@ -7,6 +10,9 @@ repo = 'flazz/vim-colorschemes'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = '~/develop/nagomi'
 
 #search
 [[plugins]]
