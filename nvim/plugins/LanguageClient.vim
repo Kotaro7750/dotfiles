@@ -1,6 +1,6 @@
 set hidden "can change buffer without saving
 filetype on "can recognize filetype
-
+ 
 let g:LanguageClient_loggingFile = expand('~/LanguageClient.log')
 let g:LanguageClient_loggingLevel = 'DEBUG'
 
@@ -40,6 +40,13 @@ augroup LCHighlight
     autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.hpp,*.rust,*.go,*.sh,*.js,*.ts call LanguageClient#clearDocumentHighlight()
     "autocmd CursorHold *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#textDocument_hover()
     "autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
+augroup END
+
+augroup LanguageClient_config
+  autocmd!
+  autocmd User LanguageClientStarted call lightline#update()
+  autocmd User LanguageClientStopped call lightline#update()
+  autocmd User LanguageClientDiagnosticsChanged call lightline#update()
 augroup END
 
     autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.rust,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()

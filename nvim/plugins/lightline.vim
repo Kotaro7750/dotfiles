@@ -2,8 +2,11 @@ let g:lightline = {
         \ 'colorscheme': 'nagomi' ,
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' ,'lsp'] ],
-        \   'right': [['lineinfo','percent'],['fileformat','fileencoding','filetype']]
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'gitgutter', 'filename' , 'lsp'] ],
+        \   'right': [['lineinfo','percent'],['fileformat','fileencoding','filetype','bufnum']]
+        \ },
+        \ 'component': {
+        \   'lineinfo': '%3l/%L:%-2v'
         \ },
         \ 'component_function': {
         \   'modified': 'LightlineModified',
@@ -25,18 +28,14 @@ let g:lightline = {
         \ }
 
 function! LangugeServerStatus() abort
-  let l:errors = 0
-        let l:warnings = 0
-        for item in getqflist()
-            if item["type"] == "E"
-                let l:errors += 1
-            else 
-              if item["type"] == "W"
-                let l:warnings += 1
-              endif
-            endif
-        endfor
-        return l:errors + l:warnings == 0 ? "✔ " : "✖ :" . l:errors . " " . "⚠ :" . l:warnings
+  if LanguageClient#isServerRunning() == 0
+    return ''
+  endif
+
+  let l:diagnosticsDict = LanguageClient#statusLineDiagnosticsCounts()
+  let l:errors = get(l:diagnosticsDict,'E',0)
+  let l:warnings = get(l:diagnosticsDict,'W',0)
+  return l:errors + l:warnings == 0 ? "✔ " : "✖ :" . l:errors . " " . "⚠ :" . l:warnings
 endfunction
 
 function! LightlineModified()

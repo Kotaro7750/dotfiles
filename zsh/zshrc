@@ -48,6 +48,13 @@ export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
 XDG_CONFIG_HOME=~/.config/
 
 #-------------------
+#alias
+#-------------------
+
+alias nvr='nvr --nostart'
+
+
+#-------------------
 #プラグイン
 #-------------------
 
@@ -128,7 +135,7 @@ export PATH="/tools/Xilinx/Vivado/2019.2/bin:$PATH"
 export PATH="~/opt/riscv/bin:$PATH"
 
 # rust
-source $HOME/.cargo/env
+export PATH="$HOME/.cargo/bin:$PATH"
 
 if [[ ! -n $TMUX ]]; then
   # get the IDs
