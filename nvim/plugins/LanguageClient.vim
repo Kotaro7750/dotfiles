@@ -36,10 +36,8 @@ let s:filetype_list=["*.c","*.h","*.py","*.cpp","*.go","*.sh"]
 
 augroup LCHighlight
     autocmd!
-    autocmd CursorHold *.c,*.h,*.py,*.cpp,*.hpp,*.rust,*.go,*.sh,*.js,*.ts call LanguageClient#textDocument_documentHighlight()
-    autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.hpp,*.rust,*.go,*.sh,*.js,*.ts call LanguageClient#clearDocumentHighlight()
-    "autocmd CursorHold *.c,*.h,*.py,*.cpp,*.go,*.sh call LanguageClient#textDocument_hover()
-    "autocmd CursorHold *.py,*.c,*.cpp call LanguageClient#textDocument_hover()
+    autocmd CursorHold *.c,*.h,*.py,*.cpp,*.hpp,*.rs,*.go,*.sh,*.js,*.ts call LanguageClient#textDocument_documentHighlight()
+    autocmd CursorMoved *.c,*.h,*.py,*.cpp,*.hpp,*.rs,*.go,*.sh,*.js,*.ts call LanguageClient#clearDocumentHighlight()
 augroup END
 
 augroup LanguageClient_config
@@ -49,7 +47,7 @@ augroup LanguageClient_config
   autocmd User LanguageClientDiagnosticsChanged call lightline#update()
 augroup END
 
-    autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.rust,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
+autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.rs,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
 
 "50ms
 set updatetime=50

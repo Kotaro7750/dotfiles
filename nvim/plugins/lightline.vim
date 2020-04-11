@@ -29,7 +29,7 @@ let g:lightline = {
 
 function! LangugeServerStatus() abort
   if LanguageClient#isServerRunning() == 0
-    return ''
+    return ""
   endif
 
   let l:diagnosticsDict = LanguageClient#statusLineDiagnosticsCounts()

@@ -21,3 +21,6 @@ sudo apt-get -y install fcitx fcitx-mozc
 
 #latex
 ./script/latex.sh
+
+#tmux
+./script/tmux.sh
