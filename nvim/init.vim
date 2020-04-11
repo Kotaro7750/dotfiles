@@ -320,12 +320,9 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 "set termguicolors
 if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-let &t_Cs = "\e[4m"
-let &t_Ce = "\e[4m"
+
 let g:solarized_termcolors=256
 
 "set background=dark
