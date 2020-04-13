@@ -47,7 +47,7 @@ augroup LanguageClient_config
   autocmd User LanguageClientDiagnosticsChanged call lightline#update()
 augroup END
 
-autocmd BufWritePre *.c,*.h,*.cpp,*.hpp,*.rs,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
+autocmd BufWritePre *.h,*.cpp,*.hpp,*.rs,*.py,*go,*.sh,*.js,*.ts call LanguageClient#textDocument_formatting_sync()
 
 "50ms
 set updatetime=50

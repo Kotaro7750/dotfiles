@@ -149,6 +149,13 @@ source ~/dotfiles/nvim/plugins/LanguageClient.vim
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
+#gdb
+[[plugins]]
+repo = 'sakhnik/nvim-gdb'
+hook_add = '''
+source ~/dotfiles/nvim/plugins/nvim-gdb.vim
+'''
+
 #clipy
 [[plugins]]
 repo = 'Kotaro7750/denite-clipy'
