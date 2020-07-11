@@ -14,6 +14,7 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript': ['typescript-language-server','--stdio'],
 \ 'typescript': ['typescript-language-server','--stdio'], 
 \ 'verilog': ['svls'],
+\ 'systemverilog': ['svls'],
 \ 'tex': ['texlab'],
 \ }
 

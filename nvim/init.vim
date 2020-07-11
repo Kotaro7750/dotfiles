@@ -96,6 +96,7 @@ set shiftwidth=2  "width when new line
 set list listchars=tab:\▸\-
 set autoindent  "continue same indent when new line
 set smartindent  "enable smartindent
+set breakindent
 
 "---search---
 set ignorecase  "ignore upper and lower case when search string is lower case
