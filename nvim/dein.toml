@@ -162,3 +162,10 @@ repo = 'Kotaro7750/denite-clipy'
 hook_add = '''
   source ~/dotfiles/nvim/plugins/denite-clipy.vim
 '''
+
+#memo
+[[plugins]]
+repo = 'Kotaro7750/vim1cache'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vim1cache.vim
+'''

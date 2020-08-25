@@ -125,7 +125,7 @@ set verbosefile=/tmp/nvim.log
 set verbose=0
 
 "---memo---
-nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
+"nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
 autocmd BufEnter Changelog.md :call WhenNewDay()
 autocmd BufEnter Changelog.md nnoremap <buffer> <Leader>e :call NewEntry()<CR>
 
