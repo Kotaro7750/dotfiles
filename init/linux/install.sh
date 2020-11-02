@@ -1,6 +1,8 @@
 #!/bin/sh -xeu
 sudo apt-get update
 
+. ./isWSL.sh
+
 #zshのインストールと設定
 ./script/zsh.sh
 
@@ -8,7 +10,9 @@ sudo apt-get update
 sudo apt-get -y install fcitx fcitx-mozc
 
 #dockerのインストール
-./script/docker.sh
+if !isWSL ; then
+  ./script/docker.sh
+fi
 
 #neovimのインストールと設定
 ./script/nvim.sh
@@ -17,10 +21,14 @@ sudo apt-get -y install fcitx fcitx-mozc
 ./script/python/pyenv.sh
 
 #albert
-./script/albert.sh
+if ! isWSL ; then
+  ./script/albert.sh
+fi
 
 #latex
-./script/latex.sh
+if ! isWSL ; then
+  ./script/latex.sh
+fi
 
 #tmux
 ./script/tmux.sh
