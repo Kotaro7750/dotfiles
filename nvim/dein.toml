@@ -12,7 +12,7 @@ repo = 'flazz/vim-colorschemes'
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
-repo = '~/develop/nagomi'
+repo = 'Kotaro7750/nagomi'
 
 #search
 [[plugins]]
