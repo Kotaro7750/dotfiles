@@ -29,6 +29,7 @@ set showcmd  "show command typing now on status area.
 let mapleader="\<Space>"  "map Space to Leader
 set number  "show line number of under cursor line
 set relativenumber  "show relative line number
+set nomodeline  "unset modeline
 
 "---cursor---
 set cursorline  "highlight present line
