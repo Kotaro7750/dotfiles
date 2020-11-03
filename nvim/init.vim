@@ -124,60 +124,6 @@ endfunction
 set verbosefile=/tmp/nvim.log
 set verbose=0
 
-"---memo---
-"nnoremap <silent> <Leader>m :call ToggleMemo()<CR>
-autocmd BufEnter Changelog.md :call WhenNewDay()
-autocmd BufEnter Changelog.md nnoremap <buffer> <Leader>e :call NewEntry()<CR>
-
-function! IsMemo(buf_num) abort
-  let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
-  if a:buf_num == memo_buf
-    return 1
-  endif
-  return 0
-endfunction
-
-function! ToggleMemo() abort
-  let l:cur_buf = bufnr()
-  let l:memo_buf = bufnr("~/Dropbox/memo/Changelog.md")
-  if cur_buf == memo_buf
-    if bufexists(g:mru_buffer) == 1
-      execute('buffer '.g:mru_buffer)
-    else
-      :echo "restorable editor does'nt exist"
-    endif
-  else
-    if memo_buf == -1
-      execute("e ~/Dropbox/memo/Changelog.md")
-    else
-      execute('buffer '.l:memo_buf)
-    endif
-  endif
-endfunction
-
-function! InsertNewDay() abort
-  let l:date = system('date +\%Y-\%m-\%d')
-  let date = date." Kotaro Arata <7750koutarou@gmail.com>"
-  let date = substitute(date,"[[:cntrl:]]","","g")
-  :call append(0,l:date)
-  :call append(1,"")
-endfunction
-
-function! WhenNewDay() abort
-  let l:date = system('date +\%Y-\%m-\%d')
-  let date = date." Kotaro Arata <7750koutarou@gmail.com>"
-  let date = substitute(date,"[[:cntrl:]]","","g")
-  
-  let l:line = getline(1)
-  if line != date
-    :call InsertNewDay()
-  endif
-endfunction
-
-function! NewEntry() abort
-  :call feedkeys("1Go	* [")
-endfunction
-
 "---terminal---
 set shell=/bin/zsh
 tnoremap <silent> <ESC><ESC> <C-\><C-n>
@@ -186,21 +132,6 @@ nnoremap <silent> <Leader>t :call ToggleTerminalMRU()<CR>
 let g:mru_buffer = 1
 let g:mru_buffer_prev = 1
 autocmd bufleave * let g:mru_buffer_prev = bufnr()
-autocmd bufenter *  call SaveMRUBuffer()
-
-"exec when enter
-function! SaveMRUBuffer() abort
-  if IsNormal(g:mru_buffer_prev) && IsMemo(g:mru_buffer_prev) == 0
-    let g:mru_buffer = g:mru_buffer_prev
-  endif
-endfunction
-
-function! IsNormal(buf_num) abort
-  if (buflisted(a:buf_num) == 1) && (IsTerminal(a:buf_num) == 0)
-    return 1
-  endif
-  return 0
-endfunction
 
 function! IsTerminal(buf_num) abort
   let l:term_buf = bufnr("terminal.buffer")
