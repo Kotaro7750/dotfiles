@@ -17,3 +17,6 @@ ln -s ~/dotfiles/nvim ~/.config/nvim
 
 rm -f ~/.zshrc
 ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+
+rm -rf ~/.zsh_path
+ln -s ~/dotfiles/zsh/path ~/.zsh_path
