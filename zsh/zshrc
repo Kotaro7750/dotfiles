@@ -94,9 +94,12 @@ zplug load --verbose
 #-------------------
 #environment variables
 #-------------------
-for path_file in ~/.zsh_path/*; do
-  source $path_file
-done
+PATH_DIR=~/.zsh_path
+if [ -n "$(ls $PATH_DIR )" ]; then
+  for path_file in $PATH_DIR/*; do
+    source $path_file
+  done
+fi
 
 if [[ ! -n $TMUX ]]; then
   # get the IDs
