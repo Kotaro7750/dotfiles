@@ -109,7 +109,7 @@ set hlsearch  "highlight hit words
 nmap <Esc><Esc> :nohlsearch<CR><Esc>  
 
 "---IME---
-if has('unix')
+if has('unix') && !exists('$WSLENV')
   autocmd InsertLeave * :call OffIME()
 endif
 
