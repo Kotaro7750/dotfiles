@@ -7,6 +7,11 @@ $makeindex        = 'mendex %O -o %D %S';
 $max_repeat       = 5;
 $pdf_mode         = 3;
 $pvc_view_file_via_temporary = 0;
+
+push @generated_exts, "synctex.gz";
+push @generated_exts, "dvi";
+push @generated_exts, "pdf";
+
 if ($^O eq 'darwin') {
     $pdf_previewer = 'open -a Preview %S';
 } elsif ($^O eq 'linux') {
