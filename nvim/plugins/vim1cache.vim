@@ -7,4 +7,5 @@ let g:vim1cache_email = '7750koutarou@gmail.com'
 nnoremap <silent> <Leader>ma :AddMemo<CR>
 nnoremap <silent> <Leader>ms :SearchMemo<CR>
 nnoremap <silent> <Leader>ml :ListMemo<CR>
+nnoremap <silent> <Leader>mo :OpenMemoUnderCursor<CR>
 nnoremap <silent> <Leader>mm :ToggleDailyMemo<CR>

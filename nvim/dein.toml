@@ -1,6 +1,7 @@
 #colorschemes
 [[plugins]]
 repo = 'cocopon/pgmnt.vim'
+rev = 'main'
 
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
