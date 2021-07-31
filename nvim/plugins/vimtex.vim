@@ -16,7 +16,7 @@ let g:vimtex_compiler_latexmk = {
       \}
 
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
-let g:tex_conceal=''
+let g:tex_conceal='' "This option itself is not vimtex's option.
 
 augroup vimtex_event_1
   au!

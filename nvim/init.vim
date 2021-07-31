@@ -36,6 +36,8 @@ set cursorline  "highlight present line
 set cursorcolumn  "highlight present column
 set virtualedit=onemore  "cursor can move 1 char after EOL
 set whichwrap=b,s,h,l,<,>,[,],~   "move L or R at EOL can move next line 
+set conceallevel=2
+set concealcursor=  "only conceal not present line
 
 "can move across apparent line even if it is logicaly single line
 nnoremap j gj

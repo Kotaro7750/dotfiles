@@ -72,6 +72,9 @@ repo ='cohama/lexima.vim'
 #indent
 [[plugins]]
 repo = 'Yggdroot/indentLine'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/indentLine.vim
+'''
 
 #markdown
 [[plugins]]
