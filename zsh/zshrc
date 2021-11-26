@@ -1,10 +1,11 @@
-#-------------------
-#general
-#-------------------
-#Vim mode
+# ----------
+# General
+# ----------
+
+# Vim mode
 bindkey -v
 
-#Vim prompt
+# --- Vim prompt ---
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
     vicmd)
@@ -19,49 +20,44 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# show branch name
+# --- Git prompt ---
 autoload -Uz vcs_info
 setopt prompt_subst 
 
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{blue}+"
-zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}*"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:git:*' stagedstr "%F{blue}A%f"
+zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}M%f"
+zstyle ':vcs_info:*' formats "%F{yellow}[%b]%f %u%c "
+zstyle ':vcs_info:*' actionformats "%F{red}[%b]%f %u%c "
 
-# execute before prompt appear
 precmd(){ vcs_info }
 
-#auto completion
+# --- Auto completion ---
 autoload -U compinit
 compinit
 
-#history mode by ctrl r
-bindkey '\e[3~' delete-char
+# --- History search
 bindkey '^R' history-incremental-search-backward
+# flowcontrolがオンだと前方検索が効かなくなるのでオフにする
+setopt noflowcontrol
+bindkey '^S' history-incremental-search-forward
 
-autoload -Uz colors
-colors
-
-export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
-
-XDG_CONFIG_HOME=~/.config/
-
-#-------------------
-#alias
-#-------------------
+# ----------
+# Alias
+# ----------
 
 alias nvr='nvr --nostart'
 
+# ----------
+# Plugin
+# ----------
 
-#-------------------
-#プラグイン
-#-------------------
-
-#-----zplug-----
 source ~/.zplug/init.zsh
 
-#プラグイン定義
+# --- zsh-syntax-highlighting ---
+autoload -Uz colors
+colors
+
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
@@ -77,11 +73,15 @@ case ${OSTYPE} in
     ;;
 
 esac
+
+# --- zsh-completions ---
 zplug "zsh-users/zsh-completions"
+
+# --- zsh-autosuggestions ---
 zplug "zsh-users/zsh-autosuggestions"
 
 
-#インストール
+# プラグインが無かったらインストールする
 if ! zplug check --verbose; then
   printf 'Install? [y/N]: '
   if read -q; then
@@ -91,9 +91,16 @@ fi
 
 zplug load --verbose
 
-#-------------------
-#environment variables
-#-------------------
+# ----------
+# Environment Variable
+# ----------
+
+export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
+
+XDG_CONFIG_HOME=~/.config/
+
+# PATH_DIR(実体はdotfile/zsh/path)以下にあるファイル内を全てsourceする
+# PATH_DIRはgitで追跡されないのでユーザー固有の環境変数等を個別で設定するために使う
 PATH_DIR=~/.zsh_path
 if [ -n "$(ls $PATH_DIR )" ]; then
   for path_file in $PATH_DIR/*; do
@@ -101,6 +108,11 @@ if [ -n "$(ls $PATH_DIR )" ]; then
   done
 fi
 
+# ----------
+# tmux
+# ----------
+
+# 既存のtmuxセッションがあればアタッチし，なかったならば新規セッションを作る
 if [[ ! -n $TMUX ]]; then
   # get the IDs
   ID="`tmux list-sessions`"
