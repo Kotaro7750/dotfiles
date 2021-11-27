@@ -1,0 +1,3 @@
+[submodule "font/Cica"]
+	path = font/Cica
+	url = git@github.com:miiton/Cica.git
