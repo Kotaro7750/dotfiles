@@ -224,13 +224,13 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-"configuration of vimproc
-call dein#add('Shougo/vimproc.vim',{'build':'make'})
+  "configuration of vimproc
+  call dein#add('Shougo/vimproc.vim',{'build':'make'})
   
   "configuration of TOML file
-  let g:rc_dir    = expand('~/dotfiles/nvim')
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  let s:rc_dir    = expand('~/dotfiles/nvim')
+  let s:toml      = s:rc_dir . '/dein.toml'
+  let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
 
   "load TOML and cash
   call dein#load_toml(s:toml,      {'lazy': 0})

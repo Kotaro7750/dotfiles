@@ -15,6 +15,12 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'Kotaro7750/nagomi'
 
+# Syntax highlighting using treesitter
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+hook_add = 'lua require("treesitter")'
+hook_post_update = 'TSUpdate'
+
 #search
 [[plugins]]
 repo = 'markonm/traces.vim'
