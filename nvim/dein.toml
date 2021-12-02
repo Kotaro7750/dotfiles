@@ -1,4 +1,6 @@
-#colorschemes
+# ----------
+# Colorscheme and Syntax highlight
+# ----------
 [[plugins]]
 repo = 'cocopon/pgmnt.vim'
 rev = 'main'
@@ -21,105 +23,46 @@ repo = 'nvim-treesitter/nvim-treesitter'
 hook_add = 'lua require("treesitter")'
 hook_post_update = 'TSUpdate'
 
-#search
-[[plugins]]
-repo = 'markonm/traces.vim'
+# ----------
+# Visual
+# ----------
 
-#font
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-
-#git
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-fugitive.vim
-'''
-
-# comment
-[[plugins]]
-repo = 'tpope/vim-commentary'
-
-#surround
-[[plugins]]
-repo = 'tpope/vim-surround'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-surround.vim
-'''
-
-#file tree
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/nerdtree.vim
-'''
-
-#united interface
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/denite.vim
-'''
-
-#status line
+# Cool status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
   source ~/dotfiles/nvim/plugins/lightline.vim
 '''
 
-#bracket
-[[plugins]]
-repo ='cohama/lexima.vim'
-
-#indent
+# Make indent visible
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
   source ~/dotfiles/nvim/plugins/indentLine.vim
 '''
 
-#markdown
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-markdown.vim
-'''
-
-[[plugins]]
-repo = 'kannokanno/previm'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/previm.vim
-'''
-
-[[plugins]]
-repo ='tyru/open-browser.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/open-browser.vim
-'''
-
-[[plugins]]
-repo = 'mattn/vim-maketable'
-
-#LaTeX
-[[plugins]]
-repo = 'lervag/vimtex'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vimtex.vim
-'''
-on_ft =['tex','plaintex']
-
-#make vim transparent
+# Make vim transparent
 [[plugins]]
 repo = 'miyakogi/seiya.vim'
 hook_add = '''
   source ~/dotfiles/nvim/plugins/seiya.vim
 '''
 
-#complettion
+# Add file type icon
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+# ----------
+# Search
+# ----------
+
+# Highlight searching result and substitute preview
+[[plugins]]
+repo = 'markonm/traces.vim'
+
+# ----------
+# Completion
+# ----------
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 on_i = 1
@@ -128,13 +71,18 @@ hook_add = '''
   source ~/dotfiles/nvim/plugins/deoplete.vim
 '''
 
+# Auto insert corresponding parentheses
+[[plugins]]
+repo ='cohama/lexima.vim'
+
+# Display function signature
 [[plugins]]
 repo = 'Shougo/echodoc.vim'
 hook_add = '''
   source ~/dotfiles/nvim/plugins/echodoc.vim
 '''
 
-#snippet
+# Insert snippet
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
 hook_add = '''
@@ -144,10 +92,80 @@ on_i  = 1
 on_ft = ['snippet']
 depends = ['neosnippet-snippets']
 
+# Standard snippets for neosnippet
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
-#LSP
+# ----------
+# Git
+# ----------
+# Show diff marker in column
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+# Git operation via vim
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vim-fugitive.vim
+'''
+
+# ----------
+# Interface
+# ----------
+
+# File tree
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/nerdtree.vim
+'''
+
+# United interface
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/denite.vim
+'''
+
+# Add clip board into denite
+[[plugins]]
+repo = 'Kotaro7750/denite-clipy'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/denite-clipy.vim
+'''
+
+# ----------
+# Language specific
+# ----------
+
+# Markdown in vim
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vim-markdown.vim
+'''
+
+# Online markdown preview
+[[plugins]]
+repo = 'previm/previm'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/previm.vim
+'''
+
+# LaTeX in vim
+[[plugins]]
+repo = 'lervag/vimtex'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vimtex.vim
+'''
+on_ft =['tex','plaintex']
+
+# ----------
+# LSP
+# ----------
+
+# LSP client
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
@@ -156,24 +174,48 @@ hook_add = '''
 source ~/dotfiles/nvim/plugins/LanguageClient.vim
 '''
 
+# File type utility
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
-#gdb
+# ----------
+# Extend basic function
+# ----------
+
+# Comment in a simple way
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+# Easily operate parentheses
+[[plugins]]
+repo = 'tpope/vim-surround'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/vim-surround.vim
+'''
+
+# Easily make table
+[[plugins]]
+repo = 'mattn/vim-maketable'
+
+# ----------
+# Cooperate with other program
+# ----------
+
+# Open URI in browser
+[[plugins]]
+repo ='tyru/open-browser.vim'
+hook_add = '''
+  source ~/dotfiles/nvim/plugins/open-browser.vim
+'''
+
+# Debug by vim
 [[plugins]]
 repo = 'sakhnik/nvim-gdb'
 hook_add = '''
 source ~/dotfiles/nvim/plugins/nvim-gdb.vim
 '''
 
-#clipy
-[[plugins]]
-repo = 'Kotaro7750/denite-clipy'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/denite-clipy.vim
-'''
-
-#memo
+# Memo in vim
 [[plugins]]
 repo = 'Kotaro7750/vim1cache'
 hook_add = '''
