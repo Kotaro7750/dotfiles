@@ -30,23 +30,17 @@ hook_post_update = 'TSUpdate'
 # Cool status line
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/lightline.vim
-'''
+hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
 
 # Make indent visible
 [[plugins]]
 repo = 'Yggdroot/indentLine'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/indentLine.vim
-'''
+hook_add = 'lua require("plugin-configs/indentLine")'
 
 # Make vim transparent
 [[plugins]]
 repo = 'miyakogi/seiya.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/seiya.vim
-'''
+hook_add = 'lua require("plugin-configs/seiya")'
 
 # Add file type icon
 [[plugins]]
@@ -72,9 +66,7 @@ repo = 'markonm/traces.vim'
 repo = 'Shougo/deoplete.nvim'
 on_i = 1
 
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/deoplete.vim
-'''
+hook_add = 'lua require("plugin-configs/deoplete")'
 
 # Auto insert corresponding parentheses
 [[plugins]]
@@ -83,16 +75,12 @@ repo ='cohama/lexima.vim'
 # Display function signature
 [[plugins]]
 repo = 'Shougo/echodoc.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/echodoc.vim
-'''
+hook_add = 'lua require("plugin-configs/echodoc")'
 
 # Insert snippet
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/neosnippet.vim
-'''
+hook_add = 'lua require("plugin-configs/neosnippet")'
 on_i  = 1
 on_ft = ['snippet']
 depends = ['neosnippet-snippets']
@@ -111,9 +99,7 @@ repo = 'airblade/vim-gitgutter'
 # Git operation via vim
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-fugitive.vim
-'''
+hook_add = 'lua require("plugin-configs/vim-fugitive")'
 
 # ----------
 # Interface
@@ -122,23 +108,17 @@ hook_add = '''
 # File tree
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/nerdtree.vim
-'''
+hook_add = 'lua require("plugin-configs/nerdtree")'
 
 # United interface
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/denite.vim
-'''
+hook_add = 'source ~/dotfiles/nvim/plugins/denite.vim'
 
 # Add clip board into denite
 [[plugins]]
 repo = 'Kotaro7750/denite-clipy'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/denite-clipy.vim
-'''
+hook_add = 'lua require("plugin-configs/denite-clipy")'
 
 # Fuzzy finder
 [[plugins]]
@@ -152,23 +132,17 @@ hook_add = 'lua require("plugin-configs/telescope")'
 # Markdown in vim
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-markdown.vim
-'''
+hook_add = 'lua require("plugin-configs/vim-markdown")'
 
 # Online markdown preview
 [[plugins]]
 repo = 'previm/previm'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/previm.vim
-'''
+hook_add = 'lua require("plugin-configs/previm")'
 
 # LaTeX in vim
 [[plugins]]
 repo = 'lervag/vimtex'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vimtex.vim
-'''
+hook_add = 'source ~/dotfiles/nvim/plugins/vimtex.vim'
 on_ft =['tex','plaintex']
 
 # Wrapper of NeoVim-Lua API
@@ -184,9 +158,7 @@ repo = 'nvim-lua/plenary.nvim'
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
 build = './install.sh'
-hook_add = '''
-source ~/dotfiles/nvim/plugins/LanguageClient.vim
-'''
+hook_add = 'source ~/dotfiles/nvim/plugins/LanguageClient.vim'
 
 # File type utility
 [[plugins]]
@@ -203,9 +175,6 @@ repo = 'tpope/vim-commentary'
 # Easily operate parentheses
 [[plugins]]
 repo = 'tpope/vim-surround'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim-surround.vim
-'''
 
 # Easily make table
 [[plugins]]
@@ -218,20 +187,14 @@ repo = 'mattn/vim-maketable'
 # Open URI in browser
 [[plugins]]
 repo ='tyru/open-browser.vim'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/open-browser.vim
-'''
+hook_add = 'lua require("plugin-configs/open-browser")'
 
 # Debug by vim
 [[plugins]]
 repo = 'sakhnik/nvim-gdb'
-hook_add = '''
-source ~/dotfiles/nvim/plugins/nvim-gdb.vim
-'''
+hook_add = 'lua require("plugin-configs/nvim-gdb")'
 
 # Memo in vim
 [[plugins]]
 repo = 'Kotaro7750/vim1cache'
-hook_add = '''
-  source ~/dotfiles/nvim/plugins/vim1cache.vim
-'''
+hook_add = 'lua require("plugin-configs/vim1cache")'
