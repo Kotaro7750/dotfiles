@@ -20,7 +20,7 @@ repo = 'Kotaro7750/nagomi'
 # Syntax highlighting using treesitter
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-hook_add = 'lua require("treesitter")'
+hook_add = 'lua require("plugin-configs/treesitter")'
 hook_post_update = 'TSUpdate'
 
 # ----------
@@ -51,6 +51,11 @@ hook_add = '''
 # Add file type icon
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+# Add file type icon into telescope.nvim
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
 
 # ----------
 # Search
@@ -135,6 +140,11 @@ hook_add = '''
   source ~/dotfiles/nvim/plugins/denite-clipy.vim
 '''
 
+# Fuzzy finder
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+hook_add = 'lua require("plugin-configs/telescope")'
+
 # ----------
 # Language specific
 # ----------
@@ -160,6 +170,10 @@ hook_add = '''
   source ~/dotfiles/nvim/plugins/vimtex.vim
 '''
 on_ft =['tex','plaintex']
+
+# Wrapper of NeoVim-Lua API
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
 
 # ----------
 # LSP

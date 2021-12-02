@@ -45,9 +45,6 @@ function! s:denite_my_settings() abort
   set splitright
 endfunction
 
-nnoremap <silent> <Leader>db   :Denite buffer<CR>
-nnoremap <silent> <Leader>df   :Denite file<CR>
-nnoremap <silent> <Leader>dg   :Denite grep<CR>
 nnoremap <silent> <Leader>dG   :DeniteCursorWord grep<CR>
 nnoremap <silent> <Leader>dr   :Denite register<CR>
 nnoremap <silent> <Leader>dc   :Denite clipy<CR>
