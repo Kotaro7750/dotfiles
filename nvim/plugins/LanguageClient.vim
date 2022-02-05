@@ -6,13 +6,14 @@ let g:LanguageClient_loggingLevel = 'DEBUG'
 
 let g:LanguageClient_serverCommands = {
 \ 'sh': ['bash-language-server', 'start'],
-\ 'python': ['~/nvim-python3/bin/pyls'],
 \ 'go': [$GOPATH.'/bin/gopls'],
+\ 'python': ['~/nvim-python3/bin/pylsp'],
 \ 'c': ['clangd-9'],
 \ 'cpp': ['clangd-9'],
 \ 'rust': ['rls'],
 \ 'javascript': ['typescript-language-server','--stdio'],
 \ 'typescript': ['typescript-language-server','--stdio'], 
+\ 'typescriptreact': ['typescript-language-server','--stdio'], 
 \ 'verilog': ['svls'],
 \ 'systemverilog': ['svls'],
 \ 'tex': ['texlab'],
@@ -54,14 +55,3 @@ autocmd BufWritePre *.h,*.cpp,*.hpp,*.rs,*.py,*go,*.sh,*.js,*.ts call LanguageCl
 set updatetime=50
 
 let g:LanguageClient_semanticHighlightMaps = {}
-let g:LanguageClient_semanticHighlightMaps['cpp'] = {
-            \   'entity.name.function.cpp': 'Identifier',
-            \   'entity.name.function.method.cpp': 'Identifier',
-            \   'entity.name.type.class.cpp': 'Identifier',
-            \   'entity.name.type.enum.cpp': 'Type',
-            \   'variable.other.cpp': 'Identifier',
-            \   'variable.other.enummember.cpp': 'Type',
-            \   'variable.other.field.cpp': 'Type',
-            \   'entity.name.type.template.cpp': 'Type',
-            \   'entity.name.namespace.cpp': 'Special',
-            \ }

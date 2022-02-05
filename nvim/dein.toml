@@ -68,6 +68,10 @@ on_i = 1
 
 hook_add = 'lua require("plugin-configs/deoplete")'
 
+# Lua base completion engine
+#[[plugins]]
+#repo = 'hrsh7th/nvim-cmp'
+
 # Auto insert corresponding parentheses
 [[plugins]]
 repo ='cohama/lexima.vim'
@@ -163,6 +167,11 @@ hook_add = 'source ~/dotfiles/nvim/plugins/LanguageClient.vim'
 # File type utility
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
+
+# build-in LSP client
+#[[plugins]]
+#repo = 'neovim/nvim-lspconfig'
+#hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 
 # ----------
 # Extend basic function
