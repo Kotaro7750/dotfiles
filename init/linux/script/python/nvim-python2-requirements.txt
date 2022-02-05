@@ -14,5 +14,5 @@ python-jsonrpc-server==0.3.4
 python-language-server==0.31.8
 scandir==1.10.0
 six==1.14.0
-ujson==1.35
+ujson==5.1.0
 zipp==1.1.0
