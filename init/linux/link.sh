@@ -5,6 +5,9 @@ ln -s ~/dotfiles/gdb/gdbinit ~/.gdbinit
 rm -f ~/.gitconfig
 ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
 
+rm -f ~/.gitconfig_dir
+ln -s ~/dotfiles/git/gitconfig_dir ~/.gitconfig_dir
+
 rm -f ~/.latexmkrc
 ln -s ~/dotfiles/latex/latexmkrc ~/.latexmkrc
 

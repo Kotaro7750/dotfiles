@@ -1,0 +1,2 @@
+/gitconfig_dir/*
+!/gitconfig_dir/.gitkeep
