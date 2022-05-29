@@ -158,20 +158,20 @@ repo = 'nvim-lua/plenary.nvim'
 # ----------
 
 # LSP client
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = './install.sh'
-hook_add = 'source ~/dotfiles/nvim/plugins/LanguageClient.vim'
+#[[plugins]]
+#repo = 'autozimu/LanguageClient-neovim'
+#rev = 'next'
+#build = './install.sh'
+#hook_add = 'source ~/dotfiles/nvim/plugins/LanguageClient.vim'
 
 # File type utility
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
 # build-in LSP client
-#[[plugins]]
-#repo = 'neovim/nvim-lspconfig'
-#hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 
 # ----------
 # Extend basic function
