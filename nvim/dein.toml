@@ -148,7 +148,6 @@ repo = 'nvim-lua/plenary.nvim'
 # build-in LSP client
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-hook_add = 'lua require("plugin-configs/nvim-lsp-installer")'
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'

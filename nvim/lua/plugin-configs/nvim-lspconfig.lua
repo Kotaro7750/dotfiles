@@ -1,3 +1,8 @@
+-- nvim-lsp-installerのsetupはnvim-lspconfigの設定よりも前に行わないといけない
+-- deinではロード順の制御はできなさそうだったのでnvim-lsp-installerの設定はここから手動で読み込む
+-- cf. https://github.com/williamboman/nvim-lsp-installer#setup
+require("plugin-configs/nvim-lsp-installer")
+
 -- diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
