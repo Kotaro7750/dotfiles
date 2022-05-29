@@ -62,36 +62,25 @@ repo = 'markonm/traces.vim'
 # ----------
 # Completion
 # ----------
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_i = 1
-
-hook_add = 'lua require("plugin-configs/deoplete")'
-
 # Lua base completion engine
-#[[plugins]]
-#repo = 'hrsh7th/nvim-cmp'
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+hook_add = 'lua require("plugin-configs/nvim-cmp")'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-vsnip'
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+hook_add = 'lua require("plugin-configs/vim-vsnip")'
 
 # Auto insert corresponding parentheses
 [[plugins]]
 repo ='cohama/lexima.vim'
-
-# Display function signature
-[[plugins]]
-repo = 'Shougo/echodoc.vim'
-hook_add = 'lua require("plugin-configs/echodoc")'
-
-# Insert snippet
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_add = 'lua require("plugin-configs/neosnippet")'
-on_i  = 1
-on_ft = ['snippet']
-depends = ['neosnippet-snippets']
-
-# Standard snippets for neosnippet
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
 
 # ----------
 # Git
@@ -156,22 +145,21 @@ repo = 'nvim-lua/plenary.nvim'
 # ----------
 # LSP
 # ----------
+# build-in LSP client
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+hook_add = 'lua require("plugin-configs/nvim-lsp-installer")'
 
-# LSP client
-#[[plugins]]
-#repo = 'autozimu/LanguageClient-neovim'
-#rev = 'next'
-#build = './install.sh'
-#hook_add = 'source ~/dotfiles/nvim/plugins/LanguageClient.vim'
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
 
 # File type utility
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
-
-# build-in LSP client
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
-hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 
 # ----------
 # Extend basic function
