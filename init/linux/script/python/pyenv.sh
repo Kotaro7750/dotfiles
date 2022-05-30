@@ -1,7 +1,7 @@
 #!/bin/bash -xeu
 #install pyenv
 if [ ! -e ~/.pyenv ]; then
-  git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 fi
 
 sudo apt update
