@@ -1,6 +1,6 @@
 require('nvim-treesitter.configs').setup({
-  -- Install only parsers which are maintained by someone automatically
-  ensure_installed = "maintained",
+  ensure_installed = "all",
+  sync_install = false,
   highlight = {
     enable = true,
 
