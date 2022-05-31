@@ -107,18 +107,3 @@ if [ -n "$(ls $PATH_DIR )" ]; then
     source $path_file
   done
 fi
-
-# ----------
-# tmux
-# ----------
-
-# 既存のtmuxセッションがあればアタッチし，なかったならば新規セッションを作る
-if [[ ! -n $TMUX ]]; then
-  # get the IDs
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux new-session
-  fi
-  ID="`echo $ID | $PERCOL | cut -d: -f1`"
-  tmux attach-session -t "$ID"
-fi
