@@ -1,8 +1,22 @@
 local wezterm = require('wezterm')
+
 local default_prog = { "zsh" }
+local launch_menu = {}
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   default_prog = { "wsl.exe", "--distribution", "Ubuntu-20.04" }
+
+  table.insert(launch_menu, {
+    label = "PowerShell",
+    args = { "pwsh.exe", "-NoLogo" },
+  })
+
+  -- 新しく開いたタブにアタッチできればさらによい
+  table.insert(launch_menu, {
+    label = "PowerShell Admin",
+    args = {"pwsh.exe", "-Command", "Start-Process pwsh.exe -Verb RunAs" },
+  })
 end
+
 return {
   default_prog = default_prog,
 
@@ -17,6 +31,8 @@ return {
   color_scheme = "iceberg",
   window_background_opacity = 0.8,
   text_background_opacity = 1.0,
+
+  launch_menu = launch_menu,
 
   disable_default_key_bindings = true,
   key_map_preference = "Mapped",

@@ -4,6 +4,7 @@
 
 [core]
   filemode = false
+  symlinks = true
   editor = nvim
 
 [include]
