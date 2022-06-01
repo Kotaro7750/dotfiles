@@ -47,5 +47,10 @@ return {
 
     { key = "\\", mods = "LEADER", action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
     { key = "x", mods = "LEADER", action = wezterm.action { CloseCurrentPane = { confirm = true } } },
+
+    { key = "l", mods = "LEADER", action = "ShowLauncher" },
+    { key = "w", mods = "LEADER", action = wezterm.action { CloseCurrentTab = { confirm = true } } },
+    { key = "t", mods = "LEADER", action = wezterm.action { ActivateTabRelative = 1 } },
+    { key = "T", mods = "LEADER|SHIFT", action = wezterm.action { ActivateTabRelative = -1 } },
   }
 }
