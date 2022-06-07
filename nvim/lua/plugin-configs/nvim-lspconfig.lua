@@ -49,7 +49,7 @@ local common_setup_option = {
 
 local servers = {
   clangd = {},
-  rust_analyzer = {},
+  rls = {},
   sumneko_lua = {
     settings = {
       Lua = {
