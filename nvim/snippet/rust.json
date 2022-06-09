@@ -1,0 +1,184 @@
+{
+  "Keyword Let": {
+    "prefix": [
+      "let"
+    ],
+    "body": [
+      "let "
+    ]
+  },
+  "Keyword Let Mutable": {
+    "prefix": [
+      "letmut"
+    ],
+    "body": [
+      "let mut "
+    ]
+  },
+  "Keyword Public": {
+    "prefix": [
+      "pub"
+    ],
+    "body": [
+      "pub "
+    ]
+  },
+  "Macro Derive": {
+    "prefix": [
+      "derive"
+    ],
+    "body": [
+      "#[derive(${1})]"
+    ]
+  },
+  "Macro println": {
+    "prefix": [
+      "println!"
+    ],
+    "body": [
+      "println!(${1})"
+    ]
+  },
+  "If": {
+    "prefix": [
+      "if"
+    ],
+    "body": [
+      "if ${1:true} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Else": {
+    "prefix": [
+      "else"
+    ],
+    "body": [
+      "else {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Else If": {
+    "prefix": [
+      "elseif"
+    ],
+    "body": [
+      "else if ${1:true} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "If Else": {
+    "prefix": [
+      "ifelse"
+    ],
+    "body": [
+      "if ${1:true} {",
+      "\t${2}",
+      "} else {",
+      "\t${3}",
+      "}"
+    ]
+  },
+  "For In": {
+    "prefix": [
+      "forin"
+    ],
+    "body": [
+      "for ${1} in ${2} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Match": {
+    "prefix": [
+      "match"
+    ],
+    "body": [
+      "match ${1} {",
+      "\t${2} => ${3},",
+      "}"
+    ]
+  },
+  "Function": {
+    "prefix": [
+      "fn"
+    ],
+    "body": [
+      "fn ${1:func_name}(${2:args}) {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Function with Return Value": {
+    "prefix": [
+      "fn-"
+    ],
+    "body": [
+      "fn ${1:func_name}(${2:args}) -> ${3:()} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Implementation": {
+    "prefix": [
+      "impl"
+    ],
+    "body": [
+      "impl ${1} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Implementation For": {
+    "prefix": [
+      "implfor"
+    ],
+    "body": [
+      "impl ${1} for ${2} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Trait": {
+    "prefix": [
+      "trait"
+    ],
+    "body": [
+      "trait ${1:TraitName} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Module": {
+    "prefix": [
+      "mod"
+    ],
+    "body": [
+      "mod ${1:mod_name} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Structure": {
+    "prefix": [
+      "struct"
+    ],
+    "body": [
+      "struct ${1:StructName} {",
+      "\t${0}",
+      "}"
+    ]
+  },
+  "Enumeration": {
+    "prefix": [
+      "enum"
+    ],
+    "body": [
+      "enum ${1:EnumName} {",
+      "\t${0}",
+      "}"
+    ]
+  }
+}
