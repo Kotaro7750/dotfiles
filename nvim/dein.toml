@@ -97,16 +97,6 @@ hook_add = 'lua require("plugin-configs/vim-fugitive")'
 repo = 'scrooloose/nerdtree'
 hook_add = 'lua require("plugin-configs/nerdtree")'
 
-# United interface
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-hook_add = 'source ~/dotfiles/nvim/plugins/denite.vim'
-
-# Add clip board into denite
-[[plugins]]
-repo = 'Kotaro7750/denite-clipy'
-hook_add = 'lua require("plugin-configs/denite-clipy")'
-
 # Fuzzy finder
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'

@@ -31,14 +31,17 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, { group = "lspconfig-diagnostic", 
 
 -- servers setup
 local on_attach = function(_, bufnr)
-  local opt = { noremap = true, silent = true }
+  local opt = { noremap = true, silent = true, buffer = bufnr }
 
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>lf', '<cmd>lua vim.lsp.buf.format()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Leader>li', '<cmd>lua vim.lsp.buf.implementation()<CR>', opt)
+  local telescope = require('telescope.builtin')
+
+  vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, opt)
+  vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, opt)
+  vim.keymap.set('n', '<Leader>lR', telescope.lsp_references, opt)
+  vim.keymap.set('n', '<Leader>lk', vim.lsp.buf.hover, opt)
+  vim.keymap.set('n', '<Leader>ld', telescope.lsp_definitions, opt)
+  vim.keymap.set('n', '<Leader>lD', vim.lsp.buf.declaration, opt)
+  vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
 end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
