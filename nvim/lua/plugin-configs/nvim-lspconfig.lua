@@ -18,16 +18,25 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- TODO diagnosticがある行でホバーをすると500msでdiagnosticで上書きされてしまう
-local function on_hover()
+local function on_cursor_hold()
   if vim.lsp.buf.server_ready() then
     vim.diagnostic.open_float()
   end
 end
 
-vim.api.nvim_create_augroup("lspconfig-diagnostic", { clear = true })
+local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
+
+local function enable_diagnostics_hover()
+  vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
+  vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
+end
+
+local function disable_diagnostics_hover()
+  vim.api.nvim_clear_autocmds({ group = diagnostic_hover_augroup_name })
+end
+
 vim.api.nvim_set_option('updatetime', 500)
-vim.api.nvim_create_autocmd({ "CursorHold" }, { group = "lspconfig-diagnostic", callback = on_hover })
+enable_diagnostics_hover()
 
 -- servers setup
 local on_attach = function(_, bufnr)
@@ -35,10 +44,26 @@ local on_attach = function(_, bufnr)
 
   local telescope = require('telescope.builtin')
 
+  -- diagnosticがある行でホバーをするとすぐにdiagnosticのfloating windowで上書きされてしまうのを阻止する
+  -- ホバーをしたら一時的にdiagnosticを開くautocmdを無効化する
+  -- これだけだとそれ以降diagnosticが自動表示されなくなってしまうので有効化するautocmdを一回だけ発行して削除する
+  local function on_hover()
+    disable_diagnostics_hover()
+
+    vim.lsp.buf.hover()
+
+    vim.api.nvim_create_augroup("lspconfig-enable-diagnostics-hover", { clear = true })
+    -- ウィンドウの切り替えなどのイベントが絡んでくるとおかしくなるかもしれない
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { group = "lspconfig-enable-diagnostics-hover", callback = function()
+      vim.api.nvim_clear_autocmds({ group = "lspconfig-enable-diagnostics-hover" })
+      enable_diagnostics_hover()
+    end })
+  end
+
   vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, opt)
   vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, opt)
   vim.keymap.set('n', '<Leader>lR', telescope.lsp_references, opt)
-  vim.keymap.set('n', '<Leader>lk', vim.lsp.buf.hover, opt)
+  vim.keymap.set('n', '<Leader>lk', on_hover, opt)
   vim.keymap.set('n', '<Leader>ld', telescope.lsp_definitions, opt)
   vim.keymap.set('n', '<Leader>lD', vim.lsp.buf.declaration, opt)
   vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
