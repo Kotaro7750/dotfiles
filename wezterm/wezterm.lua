@@ -72,7 +72,7 @@ local function construct_battery_info_format()
 end
 
 wezterm.on("update-right-status", function(window, pane)
-  local date = wezterm.strftime("%A %B %-d %H:%M ");
+  local date = wezterm.strftime("%a %F  %H:%M ");
 
   local format = {};
   flatten_array({ construct_battery_info_format(), { Foreground = { Color = "gray" } }, { Text = " "..date }, }, format);
