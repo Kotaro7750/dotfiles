@@ -17,6 +17,69 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   })
 end
 
+local function is_array(t)
+  local i = 0
+  for _ in pairs(t) do
+    i = i + 1
+    if t[i] == nil then
+      return false
+    end
+  end
+  return true
+end
+
+local function flatten_array(arr, result)
+  for _, v in ipairs(arr) do
+    if type(v) == "table" and is_array(v) then
+      flatten_array(v, result)
+    else
+      table.insert(result, v);
+    end
+  end
+end
+
+local function construct_battery_info_format()
+
+  local PLUG_EMOJI = utf8.char(0x1f50c);
+  local BATTERY_EMOJI = utf8.char(0x1f50b);
+
+  local battery_percentage = 100;
+  local battery = PLUG_EMOJI;
+
+  for _, b in ipairs(wezterm.battery_info()) do
+    battery_percentage = math.ceil(b.state_of_charge * 100);
+
+    local icon = BATTERY_EMOJI;
+    if b.state == "Charging" then
+      icon = PLUG_EMOJI;
+    end
+
+    battery = icon .. "  " .. battery_percentage;
+  end
+
+
+  local color = "lime";
+  if battery_percentage < 20 then
+    color = "red";
+  elseif battery_percentage < 50 then
+    color = "yellow";
+  end
+
+  return {
+    { Foreground = { Color = color } },
+    { Text = battery .. " " },
+  }
+end
+
+wezterm.on("update-right-status", function(window, pane)
+  local date = wezterm.strftime("%A %B %-d %H:%M ");
+
+  local format = {};
+  flatten_array({ construct_battery_info_format(), { Foreground = { Color = "gray" } }, { Text = date }, }, format);
+
+  window:set_right_status(wezterm.format(format));
+end);
+
 return {
   default_prog = default_prog,
 
