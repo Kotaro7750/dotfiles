@@ -58,15 +58,15 @@ local function construct_battery_info_format()
   end
 
 
-  local color = "lime";
+  local color = "Lime";
   if battery_percentage < 20 then
-    color = "red";
+    color = "Red";
   elseif battery_percentage < 50 then
-    color = "yellow";
+    color = "Yellow";
   end
 
   return {
-    { Foreground = { Color = color } },
+    { Foreground = { AnsiColor = color } },
     { Text = battery .. " " },
   }
 end
@@ -75,7 +75,7 @@ wezterm.on("update-right-status", function(window, pane)
   local date = wezterm.strftime("%a %F  %H:%M ");
 
   local format = {};
-  flatten_array({ construct_battery_info_format(), { Foreground = { Color = "gray" } }, { Text = " "..date }, }, format);
+  flatten_array({ construct_battery_info_format(), { Foreground = { AnsiColor = "Grey" } }, { Text = " " .. date }, }, format);
 
   window:set_right_status(wezterm.format(format));
 end);
@@ -91,7 +91,7 @@ return {
   font = wezterm.font("Cica"),
   font_size = 14,
 
-  color_scheme = "iceberg",
+  color_scheme = "iceberg-dark",
   window_background_opacity = 0.8,
   text_background_opacity = 1.0,
 
