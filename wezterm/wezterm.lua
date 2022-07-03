@@ -1,5 +1,8 @@
 local wezterm = require('wezterm')
 
+local color_scheme = "iceberg-dark";
+local color_palette = wezterm.get_builtin_color_schemes()[color_scheme];
+
 local default_prog = { "zsh" }
 local launch_menu = { { label = "zsh", args = { "zsh", "-l" } } }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -91,9 +94,26 @@ return {
   font = wezterm.font("Cica"),
   font_size = 14,
 
-  color_scheme = "iceberg-dark",
+  color_scheme = color_scheme,
   window_background_opacity = 0.8,
   text_background_opacity = 1.0,
+
+  window_frame = {
+    inactive_titlebar_bg = color_palette["background"],
+    active_titlebar_bg = color_palette["background"],
+  },
+
+  colors = {
+    tab_bar = {
+      background = color_palette["background"],
+      active_tab = { bg_color = color_palette["brights"][1], fg_color = color_palette["foreground"] },
+      inactive_tab = { bg_color = color_palette["background"], fg_color = color_palette["brights"][1] },
+      inactive_tab_hover = { bg_color = color_palette["background"], fg_color = color_palette["foreground"] },
+      inactive_tab_edge = color_palette["background"],
+      new_tab = { bg_color = color_palette["background"], fg_color = color_palette["brights"][1] },
+      new_tab_hover = { bg_color = color_palette["background"], fg_color = color_palette["foreground"] },
+    }
+  },
 
   launch_menu = launch_menu,
 
