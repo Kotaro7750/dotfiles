@@ -1,8 +1,5 @@
 local wezterm = require('wezterm')
 
-local color_scheme = "iceberg-dark";
-local color_palette = wezterm.get_builtin_color_schemes()[color_scheme];
-
 local default_prog = { "zsh" }
 local launch_menu = { { label = "zsh", args = { "zsh", "-l" } } }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -18,6 +15,44 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     label = "PowerShell Admin",
     args = { "pwsh.exe", "-Command", "Start-Process pwsh.exe -Verb RunAs" },
   })
+end
+
+local color_scheme = "iceberg-dark";
+-- 現在のカラースキームのカラーパレットからbackgroundやAnsiColorの色を取得する
+local function from_color_scheme(name)
+  local color_palette = wezterm.get_builtin_color_schemes()[color_scheme];
+
+  local ansi_map = {
+    Black = { table = "ansi", index = 1 },
+    Maroon = { table = "ansi", index = 2 },
+    Green = { table = "ansi", index = 3 },
+    Olive = { table = "ansi", index = 4 },
+    Navy = { table = "ansi", index = 5 },
+    Purple = { table = "ansi", index = 6 },
+    Teal = { table = "ansi", index = 7 },
+    Silver = { table = "ansi", index = 8 },
+    Grey = { table = "brights", index = 1 },
+    Red = { table = "brights", index = 2 },
+    Lime = { table = "brights", index = 3 },
+    Yellow = { table = "brights", index = 4 },
+    Blue = { table = "brights", index = 5 },
+    Fuchsia = { table = "brights", index = 6 },
+    Aque = { table = "brights", index = 7 },
+    White = { table = "brights", index = 8 },
+  }
+
+  -- backgroundやcursor_bgといった指定は直接取得できる
+  if color_palette[name] ~= nil then
+    return color_palette[name]
+    -- GreenやRedといった指定はテーブル経由
+  elseif ansi_map[name] ~= nil then
+    local table_name = ansi_map[name]["table"];
+    local index = ansi_map[name]["index"];
+
+    return color_palette[table_name][index]
+  else
+    return "#000000"
+  end
 end
 
 local function is_array(t)
@@ -99,19 +134,19 @@ return {
   text_background_opacity = 1.0,
 
   window_frame = {
-    inactive_titlebar_bg = color_palette["background"],
-    active_titlebar_bg = color_palette["background"],
+    inactive_titlebar_bg = from_color_scheme("background"),
+    active_titlebar_bg = from_color_scheme("background"),
   },
 
   colors = {
     tab_bar = {
-      background = color_palette["background"],
-      active_tab = { bg_color = color_palette["brights"][1], fg_color = color_palette["foreground"] },
-      inactive_tab = { bg_color = color_palette["background"], fg_color = color_palette["brights"][1] },
-      inactive_tab_hover = { bg_color = color_palette["background"], fg_color = color_palette["foreground"] },
-      inactive_tab_edge = color_palette["background"],
-      new_tab = { bg_color = color_palette["background"], fg_color = color_palette["brights"][1] },
-      new_tab_hover = { bg_color = color_palette["background"], fg_color = color_palette["foreground"] },
+      background = from_color_scheme("background"),
+      active_tab = { bg_color = from_color_scheme("Grey"), fg_color = from_color_scheme("foreground") },
+      inactive_tab = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("Grey") },
+      inactive_tab_hover = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("foreground") },
+      inactive_tab_edge = from_color_scheme("background"),
+      new_tab = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("Grey") },
+      new_tab_hover = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("foreground") },
     }
   },
 
