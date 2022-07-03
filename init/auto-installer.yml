@@ -1,0 +1,257 @@
+platform_config:
+  ubuntu-22.04:
+    same_with: ubuntu-20.04
+  ubuntu-20.04:
+    package_install:
+      - command: apt
+        as_root: true
+        args:
+          - install
+          - ${package}
+          - -y
+application:
+  - name: apt_update
+    recipe:
+      ubuntu-20.04:
+        operations:
+          - command: apt
+            as_root: true
+            args:
+              - update
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: git
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: which
+          args:
+            - git
+        operations:
+          - package_name: git
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: dotfiles
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/dotfiles
+        operations:
+          - command: git
+            args:
+              - clone
+              - https://github.com/Kotaro7750/dotfiles.git
+              - path: ~/dotfiles
+          - original: ~/dotfiles/git/gitconfig
+            link: ~/.gitconfig
+          - original: ~/dotfiles/git/gitconfig_dir
+            link: ~/.gitconfig_dir
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: curl
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: which
+          args:
+            - curl
+        operations:
+          - package_name: curl
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: fcitx5-mozc
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: which
+          args:
+            - fcitx5
+        operations:
+          - package_name: fcitx5-mozc
+  - name: zsh
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.zshrc
+        operations:
+          - package_name: zsh
+          - command: curl
+            args:
+              - -sL
+              - --proto-redir
+              - -all,https
+              - -o
+              - path: ~/installer.zsh
+              - https://raw.githubusercontent.com/zplug/installer/master/installer.zsh
+          - command: zsh
+            args:
+              - path: ~/installer.zsh
+          - command: rm
+            args:
+              - path: ~/installer.zsh
+          - original: ~/dotfiles/zsh/path
+            link: ~/.zsh_path
+          - original: ~/dotfiles/zsh/zshrc
+            link: ~/.zshrc
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: Cica-font
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.local/share/fonts/Cica
+        operations:
+          - command: curl
+            args:
+              - -L
+              - -o
+              - path: ~/Cica.zip
+              - https://github.com/miiton/Cica/releases/download/v5.0.3/Cica_v5.0.3.zip
+          - command: unzip
+            args:
+              - -d
+              - path: ~/Cica
+              - path: ~/Cica.zip
+          - command: mkdir
+            args:
+              - -p
+              - path: ~/.local/share/fonts
+          - command: mv
+            args:
+              - path: ~/Cica
+              - path: ~/.local/share/fonts/
+          - command: fc-cache
+            args:
+              - -f
+              - -v
+          - command: rm
+            args:
+              - path: ~/Cica.zip
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: neovim
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.config/nvim
+        operations:
+          - package_name: software-properties-common
+          - command: add-apt-repository 
+            as_root: true
+            args:
+              - -y
+              - ppa:neovim-ppa/unstable
+          - package_name: neovim
+          - original: ~/dotfiles/nvim
+            link: ~/.config/nvim
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
+  - name: wezterm
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.wezterm.lua
+        operations:
+          - command: curl
+            args:
+              - -L
+              - -o
+              - path: ~/wezterm.deb
+              - https://github.com/wez/wezterm/releases/download/20220624-141144-bd1b7c5d/wezterm-20220624-141144-bd1b7c5d.Ubuntu20.04.deb
+          - command: apt
+            as_root: true
+            args:
+              - install
+              - path: ~/wezterm.deb
+              - -y
+          - command: rm
+            args:
+              - path: ~/wezterm.deb
+          - original: ~/dotfiles/wezterm/wezterm.lua
+            link: ~/.wezterm.lua
+      ubuntu-22.04:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.wezterm.lua
+        operations:
+          - command: curl
+            args:
+              - -L
+              - -o
+              - path: ~/wezterm.deb
+              - https://github.com/wez/wezterm/releases/download/20220624-141144-bd1b7c5d/wezterm-20220624-141144-bd1b7c5d.Ubuntu22.04.deb
+          - command: apt
+            as_root: true
+            args:
+              - install
+              - path: ~/wezterm.deb
+              - -y
+          - command: rm
+            args:
+              - path: ~/wezterm.deb
+          - original: ~/dotfiles/wezterm/wezterm.lua
+            link: ~/.wezterm.lua
+  - name: docker
+    recipe:
+      ubuntu-20.04:
+        skip_if:
+          command: which
+          args:
+            - docker
+        operations:
+          - package_name: ca-certificates
+          - package_name: gnupg
+          - package_name: lsb-release
+          - command: mkdir
+            as_root: true
+            args:
+              - -p
+              - path: /etc/apt/keyrings
+          - command: curl
+            args:
+              - -L
+              - -o
+              - path: ~/docker-gpg
+              - https://download.docker.com/linux/ubuntu/gpg
+          - command: gpg
+            as_root: true
+            args:
+              - --dearmor
+              - -o
+              - path: /etc/apt/keyrings/docker.gpg
+              - path: ~/docker-gpg
+          - command: rm
+            args:
+              - path: ~/docker-gpg
+          - command: bash
+            as_root: true
+            args:
+              - -c
+              - 'echo deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable > /etc/apt/sources.list.d/docker.list'
+          - command: apt
+            as_root: true
+            args:
+              - update
+          - package_name: docker-ce
+          - package_name: docker-ce-cli
+          - package_name: containerd.io
+          - package_name: docker-compose-plugin
+      ubuntu-22.04:
+        same_with: ubuntu-20.04
