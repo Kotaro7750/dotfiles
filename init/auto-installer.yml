@@ -2,7 +2,6 @@ platform_config:
   osx-monterey:
     package_install:
       - command: brew
-        as_root: true
         args:
           - install
           - ${package}
@@ -32,6 +31,9 @@ application:
               - -fsSL
               - https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
           - command: bash
+            args:
+              - path: ~/homebrew.sh
+          - command: rm
             args:
               - path: ~/homebrew.sh
   - name: apt_update
@@ -110,10 +112,28 @@ application:
             - -e
             - path: ~/.zshrc
         operations:
+          - command: curl
+            args:
+              - -sL
+              - --proto-redir
+              - -all,https
+              - -o
+              - path: ~/installer.zsh
+              - https://raw.githubusercontent.com/zplug/installer/master/installer.zsh
+          - command: zsh
+            args:
+              - path: ~/installer.zsh
+          - command: rm
+            args:
+              - path: ~/installer.zsh
           - original: ~/dotfiles/zsh/path
             link: ~/.zsh_path
           - original: ~/dotfiles/zsh/zshrc
             link: ~/.zshrc
+          - command: mkdir
+            args:
+              - -p
+              - path: ~/.config
       ubuntu-20.04:
         skip_if:
           command: test
@@ -206,6 +226,16 @@ application:
         same_with: ubuntu-20.04
   - name: neovim
     recipe:
+      osx-monterey:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.config/nvim
+        operations:
+          - package_name: neovim
+          - original: ~/dotfiles/nvim
+            link: ~/.config/nvim
       ubuntu-20.04:
         skip_if:
           command: test
