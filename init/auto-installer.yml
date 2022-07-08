@@ -59,6 +59,8 @@ application:
         same_with: ubuntu-20.04
   - name: dotfiles
     recipe:
+      osx-monterey:
+        same_with: ubuntu-20.04
       ubuntu-20.04:
         skip_if:
           command: test
@@ -79,6 +81,8 @@ application:
         same_with: ubuntu-20.04
   - name: curl
     recipe:
+      osx-monterey:
+        same_with: ubuntu-20.04
       ubuntu-20.04:
         skip_if:
           command: which
@@ -99,6 +103,17 @@ application:
           - package_name: fcitx5-mozc
   - name: zsh
     recipe:
+      osx-monterey:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.zshrc
+        operations:
+          - original: ~/dotfiles/zsh/path
+            link: ~/.zsh_path
+          - original: ~/dotfiles/zsh/zshrc
+            link: ~/.zshrc
       ubuntu-20.04:
         skip_if:
           command: test
@@ -129,6 +144,31 @@ application:
         same_with: ubuntu-20.04
   - name: Cica-font
     recipe:
+      osx-monterey:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/Library/Fonts/Cica
+        operations:
+          - command: curl
+            args:
+              - -L
+              - -o
+              - path: ~/Cica.zip
+              - https://github.com/miiton/Cica/releases/download/v5.0.3/Cica_v5.0.3.zip
+          - command: unzip
+            args:
+              - -d
+              - path: ~/Cica
+              - path: ~/Cica.zip
+          - command: mv
+            args:
+              - path: ~/Cica
+              - path: ~/Library/Fonts/Cica
+          - command: rm
+            args:
+              - path: ~/Cica.zip
       ubuntu-20.04:
         skip_if:
           command: test
@@ -186,6 +226,24 @@ application:
         same_with: ubuntu-20.04
   - name: wezterm
     recipe:
+      osx-monterey:
+        skip_if:
+          command: test
+          args:
+            - -e
+            - path: ~/.wezterm.lua
+        operations:
+          - command: brew
+            args:
+              - tap
+              - wez/wezterm
+          - command: brew
+            args:
+              - install
+              - --cask
+              - wez/wezterm/wezterm
+          - original: ~/dotfiles/wezterm/wezterm.lua
+            link: ~/.wezterm.lua
       ubuntu-20.04:
         skip_if:
           command: test
