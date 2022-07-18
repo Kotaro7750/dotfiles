@@ -77,7 +77,7 @@ local common_setup_option = {
 
 local servers = {
   clangd = {},
-  rls = {},
+  rust_analyzer = {},
   jsonls = {},
   sumneko_lua = {
     settings = {
