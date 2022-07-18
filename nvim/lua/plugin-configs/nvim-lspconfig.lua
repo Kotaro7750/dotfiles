@@ -10,6 +10,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   -- signのデフォルト優先度は10なので呼ばれる順番によっては他のsignで上書きされてしまう
   -- cf. :help sign-priority
   signs = { priority = 11 },
+  severity_sort = true,
 })
 
 local signs = { Error = '✖ ', Warn = '⚠', Hint = '➤', Information = 'ℹ ' }
