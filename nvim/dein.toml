@@ -131,7 +131,11 @@ repo = 'nvim-lua/plenary.nvim'
 # ----------
 # build-in LSP client
 [[plugins]]
-repo = 'williamboman/nvim-lsp-installer'
+repo = 'williamboman/mason.nvim'
+hook_add = 'lua require("plugin-configs/mason")'
+
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
 
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'

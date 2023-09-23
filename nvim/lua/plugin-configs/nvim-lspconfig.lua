@@ -1,17 +1,12 @@
--- nvim-lsp-installerのsetupはnvim-lspconfigの設定よりも前に行わないといけない
--- deinではロード順の制御はできなさそうだったのでnvim-lsp-installerの設定はここから手動で読み込む
--- cf. https://github.com/williamboman/nvim-lsp-installer#setup
-require("plugin-configs/nvim-lsp-installer")
-
 -- diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  -- signのデフォルト優先度は10なので呼ばれる順番によっては他のsignで上書きされてしまう
-  -- cf. :help sign-priority
-  signs = { priority = 11 },
-  severity_sort = true,
-})
+    virtual_text = false,
+    -- signのデフォルト優先度は10なので呼ばれる順番によっては他のsignで上書きされてしまう
+    -- cf. :help sign-priority
+    signs = { priority = 11 },
+    severity_sort = true,
+  })
 
 local signs = { Error = '✖ ', Warn = '⚠', Hint = '➤', Information = 'ℹ ' }
 for type, icon in pairs(signs) do
@@ -55,10 +50,14 @@ local on_attach = function(_, bufnr)
 
     vim.api.nvim_create_augroup("lspconfig-enable-diagnostics-hover", { clear = true })
     -- ウィンドウの切り替えなどのイベントが絡んでくるとおかしくなるかもしれない
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { group = "lspconfig-enable-diagnostics-hover", callback = function()
-      vim.api.nvim_clear_autocmds({ group = "lspconfig-enable-diagnostics-hover" })
-      enable_diagnostics_hover()
-    end })
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+      {
+        group = "lspconfig-enable-diagnostics-hover",
+        callback = function()
+          vim.api.nvim_clear_autocmds({ group = "lspconfig-enable-diagnostics-hover" })
+          enable_diagnostics_hover()
+        end
+      })
   end
 
   vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, opt)
@@ -70,25 +69,36 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local common_setup_option = {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "bashls"
+  }
 }
 
 local servers = {
   clangd = {},
   rust_analyzer = {},
   jsonls = {},
-  sumneko_lua = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { 'vim' }
-        }
-      }
-    }
-  },
+  tsserver = {},
+  astro = {},
+  bashls = {},
+  --lua_ls = {
+  --  settings = {
+  --    Lua = {
+  --      diagnostics = {
+  --        globals = { 'vim' }
+  --      }
+  --    }
+  --  }
+  --},
 }
 
 for server_name, option in pairs(servers) do
