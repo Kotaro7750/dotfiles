@@ -1,9 +1,9 @@
 # Syntax highlighting using treesitter
 # 設定ファイルを読み込む順番を明示的に指定しないとエラーが出る
 # cf. https://zenn.dev/mkobayashime/articles/nvim-treesitter-dein
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-on_event = 'BufRead'
-merged = 0
-hook_source = 'lua require("plugin-configs/treesitter")'
-hook_post_update = 'TSUpdate'
+#[[plugins]]
+#repo = 'nvim-treesitter/nvim-treesitter'
+#on_event = 'BufRead'
+#merged = 0
+#hook_source = 'lua require("plugin-configs/treesitter")'
+#hook_post_update = 'TSUpdate'

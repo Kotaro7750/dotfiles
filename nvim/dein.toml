@@ -1,184 +1,184 @@
 # ----------
 # Colorscheme and Syntax highlight
 # ----------
-[[plugins]]
-repo = 'cocopon/pgmnt.vim'
-rev = 'main'
+#[[plugins]]
+#repo = 'cocopon/pgmnt.vim'
+#rev = 'main'
 
-[[plugins]]
-repo = 'altercation/vim-colors-solarized'
+#[[plugins]]
+#repo = 'altercation/vim-colors-solarized'
 
-[[plugins]]
-repo = 'flazz/vim-colorschemes'
+#[[plugins]]
+#repo = 'flazz/vim-colorschemes'
 
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
+#[[plugins]]
+#repo = 'cocopon/iceberg.vim'
 
-[[plugins]]
-repo = 'Kotaro7750/nagomi'
+#[[plugins]]
+#repo = 'Kotaro7750/nagomi'
 
 # ----------
 # Visual
 # ----------
 
 # Cool status line
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
+#[[plugins]]
+#repo = 'itchyny/lightline.vim'
+#hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
 
 # Make indent visible
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-hook_add = 'lua require("plugin-configs/indentLine")'
+#[[plugins]]
+#repo = 'Yggdroot/indentLine'
+#hook_add = 'lua require("plugin-configs/indentLine")'
 
 # Make vim transparent
-[[plugins]]
-repo = 'miyakogi/seiya.vim'
-hook_add = 'lua require("plugin-configs/seiya")'
+#[[plugins]]
+#repo = 'miyakogi/seiya.vim'
+#hook_add = 'lua require("plugin-configs/seiya")'
 
 # Add file type icon
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
+#[[plugins]]
+#repo = 'ryanoasis/vim-devicons'
 
 # Add file type icon into telescope.nvim
-[[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
-hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
+#[[plugins]]
+#repo = 'kyazdani42/nvim-web-devicons'
+#hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
 
 # ----------
 # Search
 # ----------
 
 # Highlight searching result and substitute preview
-[[plugins]]
-repo = 'markonm/traces.vim'
+#[[plugins]]
+#repo = 'markonm/traces.vim'
 
 # ----------
 # Completion
 # ----------
 # Lua base completion engine
-[[plugins]]
-repo = 'hrsh7th/nvim-cmp'
-hook_add = 'lua require("plugin-configs/nvim-cmp")'
+#[[plugins]]
+#repo = 'hrsh7th/nvim-cmp'
+#hook_add = 'lua require("plugin-configs/nvim-cmp")'
 
-[[plugins]]
-repo = 'hrsh7th/cmp-vsnip'
-[[plugins]]
-repo = 'hrsh7th/cmp-buffer'
-[[plugins]]
-repo = 'hrsh7th/cmp-path'
+#[[plugins]]
+#repo = 'hrsh7th/cmp-vsnip'
+#[[plugins]]
+#repo = 'hrsh7th/cmp-buffer'
+#[[plugins]]
+#repo = 'hrsh7th/cmp-path'
 
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-hook_add = 'lua require("plugin-configs/vim-vsnip")'
+#[[plugins]]
+#repo = 'hrsh7th/vim-vsnip'
+#hook_add = 'lua require("plugin-configs/vim-vsnip")'
 
 # Auto insert corresponding parentheses
-[[plugins]]
-repo ='cohama/lexima.vim'
+#[[plugins]]
+#repo ='cohama/lexima.vim'
 
 # ----------
 # Git
 # ----------
 # Show diff marker in column
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
+#[[plugins]]
+#repo = 'airblade/vim-gitgutter'
 
 # Git operation via vim
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-hook_add = 'lua require("plugin-configs/vim-fugitive")'
+#[[plugins]]
+#repo = 'tpope/vim-fugitive'
+#hook_add = 'lua require("plugin-configs/vim-fugitive")'
 
 # ----------
 # Interface
 # ----------
 
 # File tree
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-hook_add = 'lua require("plugin-configs/nerdtree")'
+#[[plugins]]
+#repo = 'scrooloose/nerdtree'
+#hook_add = 'lua require("plugin-configs/nerdtree")'
 
 # Fuzzy finder
-[[plugins]]
-repo = 'nvim-telescope/telescope.nvim'
-hook_add = 'lua require("plugin-configs/telescope")'
+#[[plugins]]
+#repo = 'nvim-telescope/telescope.nvim'
+#hook_add = 'lua require("plugin-configs/telescope")'
 
 # ----------
 # Language specific
 # ----------
 
 # Markdown in vim
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
-hook_add = 'lua require("plugin-configs/vim-markdown")'
+#[[plugins]]
+#repo = 'plasticboy/vim-markdown'
+#hook_add = 'lua require("plugin-configs/vim-markdown")'
 
 # Online markdown preview
-[[plugins]]
-repo = 'previm/previm'
-hook_add = 'lua require("plugin-configs/previm")'
+#[[plugins]]
+#repo = 'previm/previm'
+#hook_add = 'lua require("plugin-configs/previm")'
 
 # LaTeX in vim
-[[plugins]]
-repo = 'lervag/vimtex'
-hook_add = 'source ~/dotfiles/nvim/plugins/vimtex.vim'
-on_ft =['tex','plaintex']
+#[[plugins]]
+#repo = 'lervag/vimtex'
+#hook_add = 'source ~/dotfiles/nvim/plugins/vimtex.vim'
+#on_ft =['tex','plaintex']
 
 # Wrapper of NeoVim-Lua API
-[[plugins]]
-repo = 'nvim-lua/plenary.nvim'
+#[[plugins]]
+#repo = 'nvim-lua/plenary.nvim'
 
 # ----------
 # LSP
 # ----------
 # build-in LSP client
-[[plugins]]
-repo = 'williamboman/mason.nvim'
-hook_add = 'lua require("plugin-configs/mason")'
+#[[plugins]]
+#repo = 'williamboman/mason.nvim'
+#hook_add = 'lua require("plugin-configs/mason")'
 
-[[plugins]]
-repo = 'williamboman/mason-lspconfig.nvim'
+#[[plugins]]
+#repo = 'williamboman/mason-lspconfig.nvim'
 
-[[plugins]]
-repo = 'neovim/nvim-lspconfig'
-hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
+#[[plugins]]
+#repo = 'neovim/nvim-lspconfig'
+#hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 
-[[plugins]]
-repo = 'hrsh7th/cmp-nvim-lsp'
+#[[plugins]]
+#repo = 'hrsh7th/cmp-nvim-lsp'
 
 # File type utility
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
+#[[plugins]]
+#repo = 'Shougo/context_filetype.vim'
 
 # ----------
 # Extend basic function
 # ----------
 
 # Comment in a simple way
-[[plugins]]
-repo = 'tpope/vim-commentary'
+#[[plugins]]
+#repo = 'tpope/vim-commentary'
 
 # Easily operate parentheses
-[[plugins]]
-repo = 'tpope/vim-surround'
+#[[plugins]]
+#repo = 'tpope/vim-surround'
 
 # Easily make table
-[[plugins]]
-repo = 'mattn/vim-maketable'
+#[[plugins]]
+#repo = 'mattn/vim-maketable'
 
 # ----------
 # Cooperate with other program
 # ----------
 
 # Open URI in browser
-[[plugins]]
-repo ='tyru/open-browser.vim'
-hook_add = 'lua require("plugin-configs/open-browser")'
+#[[plugins]]
+#repo ='tyru/open-browser.vim'
+#hook_add = 'lua require("plugin-configs/open-browser")'
 
 # Debug by vim
-[[plugins]]
-repo = 'sakhnik/nvim-gdb'
-hook_add = 'lua require("plugin-configs/nvim-gdb")'
+#[[plugins]]
+#repo = 'sakhnik/nvim-gdb'
+#hook_add = 'lua require("plugin-configs/nvim-gdb")'
 
 # Memo in vim
-[[plugins]]
-repo = 'Kotaro7750/vim1cache'
-hook_add = 'lua require("plugin-configs/vim1cache")'
+#[[plugins]]
+#repo = 'Kotaro7750/vim1cache'
+#hook_add = 'lua require("plugin-configs/vim1cache")'
