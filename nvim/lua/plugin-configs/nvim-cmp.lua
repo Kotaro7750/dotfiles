@@ -31,12 +31,16 @@ local cmp_kinds = {
 cmp.setup({
   snippet = {
     expand = function(args)
-      --vim.fn["vsnip#anonymous"](args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   window = {
-    --completion = cmp.config.window.bordered(),
-    --documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(
+      { border = 'double' }
+    ),
+    documentation = cmp.config.window.bordered(
+      { border = 'double' }
+    ),
   },
   formatting = {
     format = function(_, vim_item)
@@ -48,11 +52,14 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources(
     {
-      { name = 'nvim_lsp' }
+      { name = 'nvim_lsp' },
+    },
+    {
+      { name = 'vsnip' },
     },
     {
       { name = 'nvim_lsp_signature_help' }
