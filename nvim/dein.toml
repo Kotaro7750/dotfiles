@@ -79,6 +79,9 @@ repo = 'hrsh7th/cmp-cmdline'
 [[plugins]]
 repo = 'dmitmel/cmp-cmdline-history'
 
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+
 #[[plugins]]
 #repo = 'hrsh7th/vim-vsnip'
 #hook_add = 'lua require("plugin-configs/vim-vsnip")'
@@ -150,9 +153,6 @@ repo = 'williamboman/mason-lspconfig.nvim'
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
-
-#[[plugins]]
-#repo = 'hrsh7th/cmp-nvim-lsp'
 
 # File type utility
 #[[plugins]]

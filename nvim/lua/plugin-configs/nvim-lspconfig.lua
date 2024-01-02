@@ -69,10 +69,10 @@ local on_attach = function(_, bufnr)
   --vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
 end
 
---local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local common_setup_option = {
   on_attach = on_attach,
-  --capabilities = capabilities,
+  capabilities = capabilities,
 }
 
 require("mason").setup {}
