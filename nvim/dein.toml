@@ -11,8 +11,8 @@
 #[[plugins]]
 #repo = 'flazz/vim-colorschemes'
 
-#[[plugins]]
-#repo = 'cocopon/iceberg.vim'
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
 
 #[[plugins]]
 #repo = 'Kotaro7750/nagomi'
