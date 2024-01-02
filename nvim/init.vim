@@ -264,7 +264,7 @@ let g:solarized_termcolors=256
 "colorscheme molokai 
 "colorscheme solarized
 "colorscheme wombat256
-colorscheme iceberg
+"colorscheme iceberg
 "colorscheme elflord
 "colorscheme nagomi
 

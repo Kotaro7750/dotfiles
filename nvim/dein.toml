@@ -14,6 +14,10 @@
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 
+[[plugins]]
+repo = 'EdenEast/nightfox.nvim'
+hook_add = 'lua require("plugin-configs/nightfox")'
+
 #[[plugins]]
 #repo = 'Kotaro7750/nagomi'
 
