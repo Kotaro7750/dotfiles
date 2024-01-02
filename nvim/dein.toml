@@ -61,12 +61,23 @@ repo = 'cocopon/iceberg.vim'
 repo = 'hrsh7th/nvim-cmp'
 hook_add = 'lua require("plugin-configs/nvim-cmp")'
 
+# nvim-cmp sources
 #[[plugins]]
 #repo = 'hrsh7th/cmp-vsnip'
-#[[plugins]]
-#repo = 'hrsh7th/cmp-buffer'
-#[[plugins]]
-#repo = 'hrsh7th/cmp-path'
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-calc'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-cmdline'
+
+[[plugins]]
+repo = 'dmitmel/cmp-cmdline-history'
 
 #[[plugins]]
 #repo = 'hrsh7th/vim-vsnip'
