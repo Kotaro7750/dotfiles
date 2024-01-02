@@ -141,16 +141,15 @@ repo = 'dmitmel/cmp-cmdline-history'
 # LSP
 # ----------
 # build-in LSP client
-#[[plugins]]
-#repo = 'williamboman/mason.nvim'
-#hook_add = 'lua require("plugin-configs/mason")'
+[[plugins]]
+repo = 'williamboman/mason.nvim'
 
-#[[plugins]]
-#repo = 'williamboman/mason-lspconfig.nvim'
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
 
-#[[plugins]]
-#repo = 'neovim/nvim-lspconfig'
-#hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 
 #[[plugins]]
 #repo = 'hrsh7th/cmp-nvim-lsp'
