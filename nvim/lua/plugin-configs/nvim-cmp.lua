@@ -31,7 +31,7 @@ local cmp_kinds = {
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   window = {
@@ -55,12 +55,10 @@ cmp.setup({
       return vim_item
     end,
   },
-  mapping = cmp.mapping.preset.insert({
+  mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
+  },
   sources = cmp.config.sources(
     {
       { name = 'nvim_lsp' },
@@ -69,7 +67,7 @@ cmp.setup({
       { name = 'nvim_lua' },
     },
     {
-      { name = 'vsnip' },
+      { name = 'luasnip' },
     },
     {
       { name = 'nvim_lsp_signature_help' }
