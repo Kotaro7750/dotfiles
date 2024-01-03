@@ -40,10 +40,6 @@ hook_add = 'lua require("plugin-configs/indent-blankline")'
 #repo = 'miyakogi/seiya.vim'
 #hook_add = 'lua require("plugin-configs/seiya")'
 
-# Add file type icon
-#[[plugins]]
-#repo = 'ryanoasis/vim-devicons'
-
 # Add file type icon into telescope.nvim
 [[plugins]]
 repo = 'nvim-tree/nvim-web-devicons'
