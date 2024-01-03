@@ -97,6 +97,9 @@ hook_add = 'lua require("plugin-configs/vim-vsnip")'
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
 
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lua'
+
 # Auto insert corresponding parentheses
 #[[plugins]]
 #repo ='cohama/lexima.vim'
