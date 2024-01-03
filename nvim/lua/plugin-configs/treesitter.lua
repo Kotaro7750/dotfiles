@@ -22,3 +22,8 @@ require('nvim-treesitter.configs').setup({
     enable = false,
   },
 })
+
+-- This commented setting is for folding
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldenable = false
