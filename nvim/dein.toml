@@ -101,8 +101,8 @@ repo = 'hrsh7th/vim-vsnip-integ'
 repo = 'hrsh7th/cmp-nvim-lua'
 
 # Auto insert corresponding parentheses
-#[[plugins]]
-#repo ='cohama/lexima.vim'
+[[plugins]]
+repo ='cohama/lexima.vim'
 
 # ----------
 # Git
