@@ -31,10 +31,6 @@ hook_add = 'lua require("plugin-configs/nightfox")'
 #hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
 
 # Make indent visible
-#[[plugins]]
-#repo = 'Yggdroot/indentLine'
-#hook_add = 'lua require("plugin-configs/indentLine")'
-
 [[plugins]]
 repo = 'lukas-reineke/indent-blankline.nvim'
 hook_add = 'lua require("plugin-configs/indent-blankline")'
