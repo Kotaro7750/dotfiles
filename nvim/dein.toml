@@ -26,10 +26,6 @@ hook_add = 'lua require("plugin-configs/nightfox")'
 # ----------
 
 # Cool status line
-#[[plugins]]
-#repo = 'itchyny/lightline.vim'
-#hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
-
 [[plugins]]
 repo = 'nvim-lualine/lualine.nvim'
 hook_add = 'lua require("plugin-configs/lualine")'
