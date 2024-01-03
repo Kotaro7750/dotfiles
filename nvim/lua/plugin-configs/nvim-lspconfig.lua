@@ -81,6 +81,7 @@ require("mason-lspconfig").setup {
     "astro",
     "bashls",
     "clangd",
+    "gopls",
     "jsonls",
     "lua_ls",
     "rust_analyzer",
@@ -92,6 +93,11 @@ local servers = {
   astro = {},
   bashls = {},
   clangd = {},
+  gopls = {
+    init_options = {
+      usePlaceholders = true,
+    },
+  },
   jsonls = {},
   lua_ls = {
     settings = {
