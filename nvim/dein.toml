@@ -181,6 +181,10 @@ hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 #[[plugins]]
 #repo = 'tpope/vim-commentary'
 
+[[plugins]]
+repo = 'numToStr/Comment.nvim'
+hook_add = 'lua require("plugin-configs/comment")'
+
 # Easily operate parentheses
 #[[plugins]]
 #repo = 'tpope/vim-surround'
