@@ -45,9 +45,9 @@ hook_add = 'lua require("plugin-configs/indent-blankline")'
 #repo = 'ryanoasis/vim-devicons'
 
 # Add file type icon into telescope.nvim
-#[[plugins]]
-#repo = 'kyazdani42/nvim-web-devicons'
-#hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
+[[plugins]]
+repo = 'nvim-tree/nvim-web-devicons'
+hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
 
 # ----------
 # Search
@@ -127,9 +127,9 @@ hook_add = 'lua require("plugin-configs/gitsigns")'
 #hook_add = 'lua require("plugin-configs/nerdtree")'
 
 # Fuzzy finder
-#[[plugins]]
-#repo = 'nvim-telescope/telescope.nvim'
-#hook_add = 'lua require("plugin-configs/telescope")'
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+hook_add = 'lua require("plugin-configs/telescope")'
 
 # ----------
 # Language specific
@@ -152,8 +152,8 @@ hook_add = 'lua require("plugin-configs/gitsigns")'
 #on_ft =['tex','plaintex']
 
 # Wrapper of NeoVim-Lua API
-#[[plugins]]
-#repo = 'nvim-lua/plenary.nvim'
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
 
 # ----------
 # LSP

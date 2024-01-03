@@ -38,7 +38,7 @@ enable_diagnostics_hover()
 local on_attach = function(_, bufnr)
   local opt = { noremap = true, silent = true, buffer = bufnr }
 
-  --local telescope = require('telescope.builtin')
+  local telescope = require('telescope.builtin')
 
   -- diagnosticがある行でホバーをするとすぐにdiagnosticのfloating windowで上書きされてしまうのを阻止する
   -- ホバーをしたら一時的にdiagnosticを開くautocmdを無効化する
@@ -62,11 +62,11 @@ local on_attach = function(_, bufnr)
 
   vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, opt)
   vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, opt)
-  --vim.keymap.set('n', '<Leader>lR', telescope.lsp_references, opt)
+  vim.keymap.set('n', '<Leader>lR', telescope.lsp_references, opt)
   vim.keymap.set('n', '<Leader>lk', on_hover, opt)
-  --vim.keymap.set('n', '<Leader>ld', telescope.lsp_definitions, opt)
+  vim.keymap.set('n', '<Leader>ld', telescope.lsp_definitions, opt)
   vim.keymap.set('n', '<Leader>lD', vim.lsp.buf.declaration, opt)
-  --vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
+  vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
