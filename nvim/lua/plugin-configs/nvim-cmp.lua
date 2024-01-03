@@ -48,6 +48,10 @@ cmp.setup({
       vim_item.menu = vim_item.kind or ''
       vim_item.kind = (cmp_kinds[vim_item.kind] or '')
 
+      if entry.source.name == 'calc' then
+        vim_item.kind = '󰃬  '
+      end
+
       return vim_item
     end,
   },
