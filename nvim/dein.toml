@@ -178,9 +178,6 @@ hook_add = 'lua require("plugin-configs/nvim-lspconfig")'
 # ----------
 
 # Comment in a simple way
-#[[plugins]]
-#repo = 'tpope/vim-commentary'
-
 [[plugins]]
 repo = 'numToStr/Comment.nvim'
 hook_add = 'lua require("plugin-configs/comment")'
