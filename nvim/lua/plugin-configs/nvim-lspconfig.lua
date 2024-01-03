@@ -1,14 +1,14 @@
 -- diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
+    virtual_text = true,
     -- signのデフォルト優先度は10なので呼ばれる順番によっては他のsignで上書きされてしまう
     -- cf. :help sign-priority
     signs = { priority = 11 },
     severity_sort = true,
   })
 
-local signs = { Error = '', Warn = '', Hint = '', Information = '' }
+local signs = { Error = '', Warn = '', Hint = '', Information = '' }
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
