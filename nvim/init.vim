@@ -25,11 +25,12 @@ set fileformats=unix,dos,mac  "auto-recognize newline. left is priority
 
 " resolve the problems of full size text. ex.◯
 " Some exception is applied using setcellwidths() for preventing UI collapse. Exceptions are
-" 罫線素片 and ブロック要素
+" 罫線素片, ブロック要素 and Nerdfont ple lower triangle
 set ambiwidth=double  
 call setcellwidths([
   \ [0x2500, 0x257f, 1],
   \ [0x2580, 0x259f, 1],
+  \ [0xe0b8, 0xe0be, 1],
 \])
 
 set autoread  "auto-read when editting file is changed
