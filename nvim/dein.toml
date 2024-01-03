@@ -30,6 +30,10 @@ hook_add = 'lua require("plugin-configs/nightfox")'
 #repo = 'itchyny/lightline.vim'
 #hook_add = 'source ~/dotfiles/nvim/plugins/lightline.vim'
 
+[[plugins]]
+repo = 'nvim-lualine/lualine.nvim'
+hook_add = 'lua require("plugin-configs/lualine")'
+
 # Make indent visible
 [[plugins]]
 repo = 'lukas-reineke/indent-blankline.nvim'
