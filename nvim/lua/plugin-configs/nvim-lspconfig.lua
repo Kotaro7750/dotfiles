@@ -78,19 +78,21 @@ local common_setup_option = {
 require("mason").setup {}
 require("mason-lspconfig").setup {
   ensure_installed = {
+    "astro",
+    "bashls",
+    "clangd",
+    "jsonls",
     "lua_ls",
     "rust_analyzer",
-    "bashls"
+    "tsserver",
   }
 }
 
 local servers = {
-  clangd = {},
-  rust_analyzer = {},
-  jsonls = {},
-  tsserver = {},
   astro = {},
   bashls = {},
+  clangd = {},
+  jsonls = {},
   lua_ls = {
     settings = {
       Lua = {
@@ -100,6 +102,8 @@ local servers = {
       }
     }
   },
+  rust_analyzer = {},
+  tsserver = {},
 }
 
 for server_name, option in pairs(servers) do
