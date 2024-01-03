@@ -35,6 +35,10 @@ hook_add = 'lua require("plugin-configs/nightfox")'
 #repo = 'Yggdroot/indentLine'
 #hook_add = 'lua require("plugin-configs/indentLine")'
 
+[[plugins]]
+repo = 'lukas-reineke/indent-blankline.nvim'
+hook_add = 'lua require("plugin-configs/indent-blankline")'
+
 # Make vim transparent
 #[[plugins]]
 #repo = 'miyakogi/seiya.vim'
