@@ -57,6 +57,7 @@ cmp.setup({
   },
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources(
