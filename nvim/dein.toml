@@ -108,8 +108,6 @@ repo ='cohama/lexima.vim'
 # Git
 # ----------
 # Show diff marker in column
-#[[plugins]]
-#repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'lewis6991/gitsigns.nvim'
 hook_add = 'lua require("plugin-configs/gitsigns")'
