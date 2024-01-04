@@ -143,6 +143,12 @@ hook_add = 'lua require("plugin-configs/telescope")'
 #hook_add = 'source ~/dotfiles/nvim/plugins/vimtex.vim'
 #on_ft =['tex','plaintex']
 
+[[plugins]]
+repo = 'golang/vscode-go'
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
+
 # Wrapper of NeoVim-Lua API
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
