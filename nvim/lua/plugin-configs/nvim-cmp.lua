@@ -62,25 +62,13 @@ cmp.setup({
   },
   sources = cmp.config.sources(
     {
-      { name = 'nvim_lsp' },
-    },
-    {
-      { name = 'nvim_lua' },
-    },
-    {
       { name = 'luasnip' },
-    },
-    {
-      { name = 'nvim_lsp_signature_help' }
-    },
-    {
+      { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'nvim_lua' },
       { name = 'buffer' },
-    },
-    {
-      { name = 'calc' },
-    },
-    {
       { name = 'path' },
+      { name = 'calc' },
     }
   )
 })
