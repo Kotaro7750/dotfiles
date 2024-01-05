@@ -45,6 +45,10 @@ hook_add = 'lua require("plugin-configs/indent-blankline")'
 repo = 'nvim-tree/nvim-web-devicons'
 hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
 
+[[plugins]]
+repo = 'rcarriga/nvim-notify'
+hook_add = 'lua require("plugin-configs/nvim-notify")'
+
 # ----------
 # Search
 # ----------
