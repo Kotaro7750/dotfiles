@@ -197,6 +197,10 @@ hook_add = 'lua require("plugin-configs/nvim-surround")'
 # Cooperate with other program
 # ----------
 
+[[plugins]]
+repo = 'epwalsh/obsidian.nvim'
+hook_add = 'lua require("plugin-configs/obsidian")'
+
 # Open URI in browser
 #[[plugins]]
 #repo ='tyru/open-browser.vim'

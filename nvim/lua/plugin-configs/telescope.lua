@@ -20,3 +20,4 @@ require('telescope').setup({
 vim.api.nvim_set_keymap('n', '<Leader>db', ':Telescope buffers<CR>', { silent = true, noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>df', ':Telescope find_files<CR>', { silent = true, noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>dg', ':Telescope live_grep<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<Leader>do', ':ObsidianSearch<CR>', { silent = true, noremap = true })
