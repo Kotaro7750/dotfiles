@@ -86,6 +86,7 @@ require("mason-lspconfig").setup {
     "lua_ls",
     "rust_analyzer",
     "tsserver",
+    "yamlls",
   }
 }
 
@@ -113,6 +114,7 @@ local servers = {
   },
   rust_analyzer = {},
   tsserver = {},
+  yamlls = {},
 }
 
 for server_name, option in pairs(servers) do
