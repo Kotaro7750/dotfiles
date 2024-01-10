@@ -79,6 +79,7 @@ require("mason").setup {}
 require("mason-lspconfig").setup {
   ensure_installed = {
     "astro",
+    "awk_ls",
     "bashls",
     "clangd",
     "gopls",
@@ -92,6 +93,7 @@ require("mason-lspconfig").setup {
 
 local servers = {
   astro = {},
+  awk_ls = {},
   bashls = {},
   clangd = {},
   gopls = {
