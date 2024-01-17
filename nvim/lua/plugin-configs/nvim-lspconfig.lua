@@ -85,7 +85,9 @@ require("mason-lspconfig").setup {
     "gopls",
     "jsonls",
     "lua_ls",
+    "pylsp",
     "rust_analyzer",
+    "terraformls",
     "tsserver",
     "yamlls",
   }
@@ -114,7 +116,9 @@ local servers = {
       }
     }
   },
+  pylsp = {},
   rust_analyzer = {},
+  terraformls = {},
   tsserver = {},
   yamlls = {},
 }
