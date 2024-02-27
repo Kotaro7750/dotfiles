@@ -113,6 +113,9 @@ hook_add = 'lua require("plugin-configs/gitsigns")'
 #repo = 'tpope/vim-fugitive'
 #hook_add = 'lua require("plugin-configs/vim-fugitive")'
 
+[[plugins]]
+repo = 'github/copilot.vim'
+
 # ----------
 # Interface
 # ----------
