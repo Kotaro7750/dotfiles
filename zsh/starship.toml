@@ -1,0 +1,84 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](green)\
+$time\
+[](fg:black bg:green)\
+$username\
+[@](fg:black bg:green)\
+$hostname\
+[](bg:blue fg:green)\
+$directory\
+$git_branch\
+$git_status\
+[](fg:blue bg:cyan)\
+$c\
+$golang\
+$nodejs\
+$rust\
+[](fg:cyan)\
+\n$character\
+"""
+
+add_newline = true
+
+[time]
+disabled = false
+time_format = "%Y-%m-%d %H:%M"
+style = "fg:black bg:green"
+format = '[ 󰃭  $time ]($style)'
+
+[username]
+show_always = true
+style_user = "fg:black bg:green"
+style_root = "fg:black bg:green"
+format = '[ 󰍹  $user]($style)'
+disabled = false
+
+[hostname]
+ssh_only = false
+trim_at = '.'
+style = 'fg:black bg:green'
+format = '[$hostname ]($style)'
+
+[directory]
+style = "bg:blue fg:black"
+format = "[   $path ]($style)"
+truncate_to_repo = false
+truncation_length = 0
+
+[git_branch]
+symbol = ""
+style = "bg:blue fg:black"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:blue fg:black"
+untracked = "?$count"
+modified = "~$count"
+staged = "+$count"
+format = '[$untracked$modified$staged]($style)'
+
+[character]
+vimcmd_symbol = "[](cyan)"
+
+[c]
+symbol = " "
+style = "bg:cyan fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = " "
+style = "bg:cyan fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:cyan fg:black"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:cyan fg:black"
+format = '[ $symbol ($version) ]($style)'

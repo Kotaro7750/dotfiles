@@ -5,32 +5,32 @@
 # Vim mode
 bindkey -v
 
-# --- Vim prompt ---
-function zle-line-init zle-keymap-select {
-  case $KEYMAP in
-    vicmd)
-    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{blue}NOR%f> "
-    ;;
-    main|viins)
-    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{green}INS%f> "
-    ;;
-  esac
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# --- Git prompt ---
-autoload -Uz vcs_info
-setopt prompt_subst 
-
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{blue}A%f"
-zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}M%f"
-zstyle ':vcs_info:*' formats "%F{yellow}[%b]%f %u%c "
-zstyle ':vcs_info:*' actionformats "%F{red}[%b]%f %u%c "
-
-precmd(){ vcs_info }
+## --- Vim prompt ---
+#function zle-line-init zle-keymap-select {
+#  case $KEYMAP in
+#    vicmd)
+#    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{blue}NOR%f> "
+#    ;;
+#    main|viins)
+#    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{green}INS%f> "
+#    ;;
+#  esac
+#  zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+#
+## --- Git prompt ---
+#autoload -Uz vcs_info
+#setopt prompt_subst 
+#
+#zstyle ':vcs_info:git:*' check-for-changes true
+#zstyle ':vcs_info:git:*' stagedstr "%F{blue}A%f"
+#zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}M%f"
+#zstyle ':vcs_info:*' formats "%F{yellow}[%b]%f %u%c "
+#zstyle ':vcs_info:*' actionformats "%F{red}[%b]%f %u%c "
+#
+#precmd(){ vcs_info }
 
 # --- Auto completion ---
 autoload -U compinit
@@ -107,3 +107,6 @@ if [ -n "$(ls $PATH_DIR )" ]; then
     source $path_file
   done
 fi
+
+export STARSHIP_CONFIG=~/.starship.toml
+eval "$(starship init zsh)"
