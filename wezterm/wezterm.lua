@@ -55,6 +55,67 @@ local function from_color_scheme(name)
   end
 end
 
+-- The filled in variant of the < symbol
+-- This function returns the suggested title for a tab.
+-- It prefers the title that was set via `tab:set_title()`
+-- or `wezterm cli set-tab-title`, but falls back to the
+-- title of the active pane in that tab.
+local function tab_title(tab_info)
+  local title = tab_info.tab_title
+  -- if the tab title is explicitly set, take that
+  if title and #title > 0 then
+    return title
+  end
+  -- Otherwise, use the title from the active pane
+  -- in that tab
+  return tab_info.active_pane.title
+end
+
+local color_palette = {
+  background = from_color_scheme("background"),
+  ansi = {
+    black = from_color_scheme("Black"),
+    green = from_color_scheme("Green"),
+    grey = from_color_scheme("Grey"),
+  }
+}
+
+local function on_format_tab_title(tab, tabs, panes, config, hover, max_width)
+  local  background = color_palette.ansi.grey
+  local  foreground = color_palette.ansi.black
+
+  if tab.is_active then
+    background = color_palette.ansi.green
+    foreground = color_palette.ansi.black
+  elseif hover then
+    background = color_palette.ansi.grey
+    foreground = color_palette.ansi.green
+  end
+
+  local edge_background = color_palette.background
+  local edge_foreground = background
+
+  local title = tab_title(tab)
+
+  local LEFT_TRIANGLE = wezterm.nerdfonts.ple_lower_right_triangle
+  local RIGHT_TRIANGLE = wezterm.nerdfonts.ple_upper_left_triangle
+
+  return {
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = LEFT_TRIANGLE },
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = title },
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = RIGHT_TRIANGLE },
+  }
+end
+
+wezterm.on('format-tab-title',on_format_tab_title)
+
+
 local function is_array(t)
   local i = 0
   for _ in pairs(t) do
@@ -77,24 +138,18 @@ local function flatten_array(arr, result)
 end
 
 local function construct_battery_info_format()
-
-  local PLUG_EMOJI = utf8.char(0x1f50c);
-  local BATTERY_EMOJI = utf8.char(0x1f50b);
-
   local battery_percentage = 100;
-  local battery = PLUG_EMOJI;
+  local has_battery = false
+  local charging = false
 
   for _, b in ipairs(wezterm.battery_info()) do
+    has_battery = true
     battery_percentage = math.ceil(b.state_of_charge * 100);
 
-    local icon = BATTERY_EMOJI;
     if b.state == "Charging" then
-      icon = PLUG_EMOJI;
+      charging = true
     end
-
-    battery = icon .. battery_percentage .. "%";
   end
-
 
   local color = "Lime";
   if battery_percentage < 20 then
@@ -103,17 +158,35 @@ local function construct_battery_info_format()
     color = "Yellow";
   end
 
+  local power_status = ""
+
+  if has_battery then
+    -- Specify nerdfont icon like md_battery_50
+    local battery_percentage_roundup = math.ceil(battery_percentage / 10) * 10
+    local battery_emoji = wezterm.nerdfonts["md_battery" .. (battery_percentage_roundup == 100 and "" or "_" .. battery_percentage_roundup)]
+    local battery_status = ""
+
+    if charging then
+      battery_status = wezterm.nerdfonts["md_lightning_bolt"]
+    end
+
+    power_status = battery_status .. battery_emoji .. battery_percentage .. "%"
+  else
+    power_status = wezterm.nerdfonts["md_power_plug_outline"]
+  end
+
   return {
     { Foreground = { AnsiColor = color } },
-    { Text = battery .. " " },
+    { Background = { Color = color_palette.background } },
+    { Text = power_status .. " " },
   }
 end
 
 wezterm.on("update-right-status", function(window, pane)
-  local date = wezterm.strftime("%a %F  %H:%M ");
+  local date = wezterm.strftime("%a %F  %H:%M:%S ");
 
-  local format = {};
-  flatten_array({ construct_battery_info_format(), { Foreground = { AnsiColor = "Grey" } }, { Text = " " .. date }, }, format);
+  local format = {}
+  flatten_array({ construct_battery_info_format(), { Foreground = { Color = color_palette.ansi.grey } },{ Background = { Color = color_palette.background } }, { Text = " " .. date }, }, format);
 
   window:set_right_status(wezterm.format(format));
 end);
@@ -133,20 +206,18 @@ return {
   window_background_opacity = 0.8,
   text_background_opacity = 1.0,
 
+  show_new_tab_button_in_tab_bar = false,
+
   window_frame = {
-    inactive_titlebar_bg = from_color_scheme("background"),
-    active_titlebar_bg = from_color_scheme("background"),
+    font = wezterm.font("Cica"),
+    font_size = 14,
+    inactive_titlebar_bg = color_palette.background,
+    active_titlebar_bg = color_palette.background
   },
 
   colors = {
     tab_bar = {
-      background = from_color_scheme("background"),
-      active_tab = { bg_color = from_color_scheme("Grey"), fg_color = from_color_scheme("foreground") },
-      inactive_tab = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("Grey") },
-      inactive_tab_hover = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("foreground") },
-      inactive_tab_edge = from_color_scheme("background"),
-      new_tab = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("Grey") },
-      new_tab_hover = { bg_color = from_color_scheme("background"), fg_color = from_color_scheme("foreground") },
+      inactive_tab_edge = color_palette.background,
     }
   },
 
