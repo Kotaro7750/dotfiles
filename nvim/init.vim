@@ -273,4 +273,5 @@ syntax on  "enable syntax highlighting
 "----------------------------
 filetype on
 autocmd FileType Makefile setlocal noexpandtab
+autocmd FileType tf set filetype=terraform
 source ~/dotfiles/nvim/language/c.vim
