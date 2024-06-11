@@ -14,64 +14,85 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local function on_cursor_hold()
-  if vim.lsp.buf.server_ready() then
-    vim.diagnostic.open_float()
-  end
-end
-
 local diagnostic_hover_augroup_name = "lspconfig-diagnostic"
 
 local function enable_diagnostics_hover()
   vim.api.nvim_create_augroup(diagnostic_hover_augroup_name, { clear = true })
-  vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = on_cursor_hold })
+  vim.api.nvim_create_autocmd({ "CursorHold" }, { group = diagnostic_hover_augroup_name, callback = function ()
+    vim.diagnostic.open_float()
+  end })
 end
 
 local function disable_diagnostics_hover()
   vim.api.nvim_clear_autocmds({ group = diagnostic_hover_augroup_name })
 end
 
-vim.api.nvim_set_option('updatetime', 500)
-enable_diagnostics_hover()
+-- diagnosticがある行でホバーをするとすぐにdiagnosticのfloating windowで上書きされてしまうのを阻止する
+-- ホバーをしたら一時的にdiagnosticを開くautocmdを無効化する
+-- これだけだとそれ以降diagnosticが自動表示されなくなってしまうので有効化するautocmdを一回だけ発行して削除する
+local function on_lsp_hover()
+  disable_diagnostics_hover()
 
--- servers setup
-local on_attach = function(_, bufnr)
-  local opt = { noremap = true, silent = true, buffer = bufnr }
+  vim.lsp.buf.hover()
 
+  vim.api.nvim_create_augroup("lspconfig-enable-diagnostics-hover", { clear = true })
+  -- ウィンドウの切り替えなどのイベントが絡んでくるとおかしくなるかもしれない
+  vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
+    {
+      group = "lspconfig-enable-diagnostics-hover",
+      callback = function()
+        vim.api.nvim_clear_autocmds({ group = "lspconfig-enable-diagnostics-hover" })
+        enable_diagnostics_hover()
+      end
+    })
+end
+
+local function set_lsp_keymap(bufnr)
+  local opt= { noremap = true, silent = true, buffer = bufnr }
   local telescope = require('telescope.builtin')
-
-  -- diagnosticがある行でホバーをするとすぐにdiagnosticのfloating windowで上書きされてしまうのを阻止する
-  -- ホバーをしたら一時的にdiagnosticを開くautocmdを無効化する
-  -- これだけだとそれ以降diagnosticが自動表示されなくなってしまうので有効化するautocmdを一回だけ発行して削除する
-  local function on_hover()
-    disable_diagnostics_hover()
-
-    vim.lsp.buf.hover()
-
-    vim.api.nvim_create_augroup("lspconfig-enable-diagnostics-hover", { clear = true })
-    -- ウィンドウの切り替えなどのイベントが絡んでくるとおかしくなるかもしれない
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" },
-      {
-        group = "lspconfig-enable-diagnostics-hover",
-        callback = function()
-          vim.api.nvim_clear_autocmds({ group = "lspconfig-enable-diagnostics-hover" })
-          enable_diagnostics_hover()
-        end
-      })
-  end
 
   vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, opt)
   vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, opt)
   vim.keymap.set('n', '<Leader>lR', telescope.lsp_references, opt)
-  vim.keymap.set('n', '<Leader>lk', on_hover, opt)
+  vim.keymap.set('n', '<Leader>lk', on_lsp_hover, opt)
   vim.keymap.set('n', '<Leader>ld', telescope.lsp_definitions, opt)
   vim.keymap.set('n', '<Leader>lD', vim.lsp.buf.declaration, opt)
   vim.keymap.set('n', '<Leader>li', telescope.lsp_implementations, opt)
 end
 
+local function unset_lsp_keymap(bufnr)
+  local opt= { noremap = true, silent = true, buffer = bufnr }
+
+  print("hogehoge")
+
+  vim.keymap.del('n', '<Leader>lf', opt)
+  vim.keymap.del('n', '<Leader>lr', opt)
+  vim.keymap.del('n', '<Leader>lR', opt)
+  vim.keymap.del('n', '<Leader>lk', opt)
+  vim.keymap.del('n', '<Leader>ld', opt)
+  vim.keymap.del('n', '<Leader>lD', opt)
+  vim.keymap.del('n', '<Leader>li', opt)
+end
+
+vim.api.nvim_create_autocmd({"LspAttach"}, {
+  callback = function(args)
+    enable_diagnostics_hover()
+    set_lsp_keymap(args.buf)
+  end
+})
+
+vim.api.nvim_create_autocmd({"LspDetach"}, {
+  callback = function(args)
+    disable_diagnostics_hover()
+    unset_lsp_keymap(args.buf)
+  end
+})
+
+vim.api.nvim_set_option('updatetime', 500)
+
+-- servers setup
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local common_setup_option = {
-  on_attach = on_attach,
   capabilities = capabilities,
 }
 
