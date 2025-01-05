@@ -115,6 +115,12 @@ hook_add = 'lua require("plugin-configs/gitsigns")'
 
 [[plugins]]
 repo = 'github/copilot.vim'
+hook_add = 'lua require("plugin-configs/copilot")'
+
+[[plugins]]
+repo = 'CopilotC-Nvim/CopilotChat.nvim'
+rev = "main"
+hook_add = 'lua require("plugin-configs/copilot-chat")'
 
 # ----------
 # Interface
