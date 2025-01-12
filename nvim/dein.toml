@@ -49,6 +49,10 @@ hook_add = 'lua require("plugin-configs/nvim-web-devicons")'
 repo = 'rcarriga/nvim-notify'
 hook_add = 'lua require("plugin-configs/nvim-notify")'
 
+[[plugins]]
+repo = 'simrat39/symbols-outline.nvim'
+hook_add = 'lua require("plugin-configs/symbols-outline")'
+
 # ----------
 # Search
 # ----------
