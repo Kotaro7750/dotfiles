@@ -8,6 +8,13 @@ return {
         theme = 'auto',
         section_separators = { left = '', right = '' },
         component_separators = { left = '/', right = '/' },
+        disabled_filetypes = {
+          statusline = {
+            "Avante",
+            "AvanteSelectedFiles",
+            "AvanteInput",
+          },
+        },
       },
       sections = {
         lualine_a = { 'mode' },
@@ -46,6 +53,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     opts = {
       ensure_installed = "all",
       sync_install = false,
@@ -69,6 +77,34 @@ return {
       indent = {
         enable = false,
       },
-    }
-  }
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end
+  },
+  -- Render markdown
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      render_modes = true,
+      file_types = { "markdown", "Avante" },
+      latex = { enabled = false },
+
+      sign = { enabled = false },
+
+      heading = {
+        width = "block",
+        left_pad = 0,
+        right_pad = 4,
+        icons = {},
+      },
+      code = {
+        width = "block",
+        left_pad = 0,
+        right_pad = 4,
+      },
+    },
+    ft = { "markdown", "Avante" },
+  },
 }
