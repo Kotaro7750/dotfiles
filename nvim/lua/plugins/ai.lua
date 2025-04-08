@@ -25,6 +25,9 @@ return {
     version = false, -- Never set this value to "*"! Never!
     opts = {
       provider = 'copilot',
+      copilot = {
+        model = "claude-3.7-sonnet"
+      },
       windows = {
         width = 40,
         sidebar_header = {
