@@ -53,7 +53,7 @@ vim.opt.clipboard = "unnamedplus"
 
 -- ---bracket---
 vim.opt.showmatch = true  -- show matching bracket when input bracket
-vim.cmd("source $VIMRUNTIME/macros/matchit.vim")  -- extend '%'
+vim.g.loaded_matchit = true -- extend '%'
 
 -- ---layout---
 vim.opt.laststatus = 2 -- show status line always
