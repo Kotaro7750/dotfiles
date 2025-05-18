@@ -105,71 +105,32 @@ return {
       vim.api.nvim_set_option('updatetime', 500)
 
       -- servers setup
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local common_setup_option = {
-        capabilities = capabilities,
+      vim.lsp.config('*', {
+        capabilities = require('cmp_nvim_lsp').default_capabilities()
+      })
+
+      local servers = {
+        "astro",
+        "awk_ls",
+        "bashls",
+        "clangd",
+        "gopls",
+        "jsonls",
+        "lua_ls",
+        "pylsp",
+        "rust_analyzer",
+        "terraformls",
+        "ts_ls",
+        "yamlls",
       }
 
       require("mason").setup {}
       require("mason-lspconfig").setup {
-        ensure_installed = {
-          "astro",
-          "awk_ls",
-          "bashls",
-          "clangd",
-          "gopls",
-          "jsonls",
-          "lua_ls",
-          "pylsp",
-          "rust_analyzer",
-          "terraformls",
-          "ts_ls",
-          "yamlls",
-        }
+        ensure_installed = servers,
       }
 
-      local servers = {
-        astro = {},
-        awk_ls = {},
-        bashls = {},
-        clangd = {},
-        gopls = {
-          init_options = {
-            usePlaceholders = true,
-          },
-        },
-        jsonls = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace"
-              },
-              diagnostics = {
-                globals = { 'vim' }
-              }
-            }
-          }
-        },
-        pylsp = {},
-        rust_analyzer = {},
-        terraformls = {},
-        ts_ls = {},
-        yamlls = {},
-      }
-
-      for server_name, option in pairs(servers) do
-        local setup_option = {}
-
-        for property, value in pairs(common_setup_option) do
-          setup_option[property] = value
-        end
-
-        for property, value in pairs(option) do
-          setup_option[property] = value
-        end
-
-        require('lspconfig')[server_name].setup(setup_option)
+      for _, server_name in ipairs(servers) do
+        vim.lsp.enable(server_name)
       end
     end
   }
