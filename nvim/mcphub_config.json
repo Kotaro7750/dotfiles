@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "git": {
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--mount",
+        "type=bind,src=${MCPHUB_PROJECT_ROOT},dst=/workspace",
+        "mcp/git",
+        "--repository",
+        "/workspace"
+      ],
+      "command": "docker",
+      "disabled": false
+    }
+  },
+  "nativeMCPServers": []
+}
