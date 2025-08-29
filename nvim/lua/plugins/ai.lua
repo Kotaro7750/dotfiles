@@ -100,7 +100,7 @@ return {
     config = function()
       require("mcphub").setup({
         config = vim.fn.expand("~/dotfiles/nvim/mcphub_config.json"),
-        shutdown_delay = 5000, -- milliseconds
+        shutdown_delay = 5000,
         extensions = {
           avante = {}
         },
@@ -108,8 +108,9 @@ return {
 
         global_env = function(context)
           local env = {
-            MCPHUB_PROJECT_ROOT = require("lspconfig.util").root_pattern(".git")(vim.fn.expand("%:p")) or vim.fn.getcwd()
+            MCPHUB_PROJECT_ROOT = require("lspconfig.util").root_pattern(".git")(vim.fn.getcwd()) or vim.fn.getcwd()
           }
+
           -- Add context-aware variables
           if context.is_workspace_mode then
             env.MCPHUB_PROJECT_ROOT = context.workspace_root

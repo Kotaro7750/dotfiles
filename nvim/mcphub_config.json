@@ -6,10 +6,12 @@
         "--rm",
         "-i",
         "--mount",
-        "type=bind,src=${MCPHUB_PROJECT_ROOT},dst=/workspace",
+        "type=bind,src=${MCPHUB_PROJECT_ROOT},dst=${MCPHUB_PROJECT_ROOT}",
+        "-w",
+        "${MCPHUB_PROJECT_ROOT}",
         "mcp/git",
         "--repository",
-        "/workspace"
+        "${MCPHUB_PROJECT_ROOT}"
       ],
       "command": "docker",
       "disabled": false
