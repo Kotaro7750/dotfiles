@@ -152,3 +152,5 @@ vim.cmd("source ~/dotfiles/nvim/language/c.vim")
 --- package
 --- ---------------------------
 require("config.lazy")
+
+vim.g.copilot_proxy_strict_ssl = false

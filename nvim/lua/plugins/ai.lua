@@ -26,13 +26,14 @@ return {
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
-      provider = 'copilot',
-      behaviour = {
-        enable_cursor_planning_mode = true, -- enable cursor planning mode!
-      },
-      providers = {
-        copilot = {
-          model = "claude-sonnet-4",
+      provider = 'codex',
+      acp_providers = {
+        ["codex"] = {
+          command = "npx",
+          args = { "@zed-industries/codex-acp" },
+          env = {
+            NODE_NO_WARNINGS = "1",
+          },
         },
       },
       windows = {
