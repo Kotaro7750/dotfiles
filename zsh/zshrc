@@ -36,23 +36,42 @@ bindkey -v
 autoload -U compinit
 compinit
 
+autoload -U bashcompinit
+bashcompinit
+
 # --- History search
-bindkey '^R' history-incremental-search-backward
-# flowcontrolがオンだと前方検索が効かなくなるのでオフにする
-setopt noflowcontrol
-bindkey '^S' history-incremental-search-forward
+function peco-select-history() {
+  BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
 
 # ----------
 # Alias
 # ----------
 
-alias nvr='nvr --nostart'
+# ----------
+# Environment Variable pre plugin install
+# ----------
+export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
+
+XDG_CONFIG_HOME=~/.config/
+
+# PATH_DIR(実体はdotfile/zsh/path)以下にあるファイル内を全てsourceする
+# PATH_DIRはgitで追跡されないのでユーザー固有の環境変数等を個別で設定するために使う
+PRE_PATH_DIR=~/.zsh_path/pre
+if [ -n "$(ls $PRE_PATH_DIR )" ]; then
+  for path_file in $PRE_PATH_DIR/*; do
+    source $path_file
+  done
+fi
 
 # ----------
 # Plugin
 # ----------
-
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 # --- zsh-syntax-highlighting ---
 autoload -Uz colors
@@ -92,18 +111,11 @@ fi
 zplug load --verbose
 
 # ----------
-# Environment Variable
+# Environment Variable post plugin install
 # ----------
-
-export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
-
-XDG_CONFIG_HOME=~/.config/
-
-# PATH_DIR(実体はdotfile/zsh/path)以下にあるファイル内を全てsourceする
-# PATH_DIRはgitで追跡されないのでユーザー固有の環境変数等を個別で設定するために使う
-PATH_DIR=~/.zsh_path
-if [ -n "$(ls $PATH_DIR )" ]; then
-  for path_file in $PATH_DIR/*; do
+POST_PATH_DIR=~/.zsh_path/post
+if [ -n "$(ls $POST_PATH_DIR )" ]; then
+  for path_file in $POST_PATH_DIR/*; do
     source $path_file
   done
 fi
