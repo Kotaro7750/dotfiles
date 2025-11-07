@@ -1,5 +1,15 @@
 local wezterm = require('wezterm')
 
+-- Some configuration should be overrided from non-tracked file
+local override_config = {}
+
+local override_config_path = wezterm.home_dir .. "/dotfiles/wezterm/override_config.lua"
+local override_config_file = io.open(override_config_path, "r")
+if override_config_file then
+  override_config_file:close()
+  override_config = dofile(override_config_path)
+end
+
 local default_prog = { "zsh" }
 local launch_menu = { { label = "zsh", args = { "zsh", "-l" } } }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -200,7 +210,7 @@ return {
   audible_bell = "Disabled",
 
   font = wezterm.font("Cica"),
-  font_size = 14,
+  font_size = override_config.font_size or 20,
 
   color_scheme = color_scheme,
   window_background_opacity = 0.8,
@@ -241,5 +251,6 @@ return {
     { key = "w", mods = "LEADER", action = wezterm.action { CloseCurrentTab = { confirm = true } } },
     { key = "t", mods = "LEADER", action = wezterm.action { ActivateTabRelative = 1 } },
     { key = "T", mods = "LEADER|SHIFT", action = wezterm.action { ActivateTabRelative = -1 } },
+    { key = "R", mods = "LEADER", action = wezterm.action.ReloadConfiguration },
   }
 }
