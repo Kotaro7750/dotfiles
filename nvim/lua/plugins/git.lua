@@ -7,6 +7,7 @@ return {
   {
     "tpope/vim-fugitive",
     lazy = false,
-    config = true,
+    config = function()
+    end,
   }
 }
