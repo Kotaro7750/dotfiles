@@ -4,9 +4,13 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       { "nvim-tree/nvim-web-devicons", opts = {} },
+      "nvim-telescope/telescope-file-browser.nvim",
     },
     config = function()
-      require('telescope').setup({
+      local telescope = require('telescope')
+      local actions = require('telescope.actions')
+
+      telescope.setup({
         defaults = {
           initial_mode = "normal",
           borderchars = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
@@ -16,17 +20,31 @@ return {
             n = {
               -- Close telescope window by 'q' not '<ESC>'
               ["<esc>"] = false,
-              ["q"] = require('telescope.actions').close,
+              ["q"] = actions.close,
             }
           },
         },
+        extensions = {
+          file_browser = {
+            grouped = true,
+            respect_gitignore = true,
+            hidden = true,
+          },
+        },
       })
+
+      telescope.load_extension('file_browser')
 
       -- ----------
       -- Keymap
       -- ----------
       vim.api.nvim_set_keymap('n', '<Leader>db', ':Telescope buffers<CR>', { silent = true, noremap = true })
-      vim.api.nvim_set_keymap('n', '<Leader>df', ':Telescope find_files<CR>', { silent = true, noremap = true })
+      vim.keymap.set('n', '<Leader>df', function()
+        telescope.extensions.file_browser.file_browser({
+          path = vim.fn.expand('%:p:h'),
+          select_buffer = true,
+        })
+      end, { silent = true, noremap = true, desc = 'Telescope file browser' })
       vim.api.nvim_set_keymap('n', '<Leader>dg', ':Telescope live_grep<CR>', { silent = true, noremap = true })
       vim.keymap.set('n', '<Leader>do', ':ObsidianSearch<CR>', { silent = true, noremap = true })
     end
