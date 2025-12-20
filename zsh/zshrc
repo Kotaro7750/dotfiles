@@ -1,45 +1,17 @@
-# ----------
-# General
-# ----------
-
-# Vim mode
+# ---------- General ----------
 bindkey -v
 
-## --- Vim prompt ---
-#function zle-line-init zle-keymap-select {
-#  case $KEYMAP in
-#    vicmd)
-#    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{blue}NOR%f> "
-#    ;;
-#    main|viins)
-#    PROMPT="%F{green}[%W %T]%/ %f"$'\n'"${vcs_info_msg_0_}%n@%m/%F{green}INS%f> "
-#    ;;
-#  esac
-#  zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
-#
-## --- Git prompt ---
-#autoload -Uz vcs_info
-#setopt prompt_subst 
-#
-#zstyle ':vcs_info:git:*' check-for-changes true
-#zstyle ':vcs_info:git:*' stagedstr "%F{blue}A%f"
-#zstyle ':vcs_info:git:*' unstagedstr "%F{cyan}M%f"
-#zstyle ':vcs_info:*' formats "%F{yellow}[%b]%f %u%c "
-#zstyle ':vcs_info:*' actionformats "%F{red}[%b]%f %u%c "
-#
-#precmd(){ vcs_info }
+# ---------- Completion ----------
+fpath=("$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/src" $fpath)
+autoload -Uz compinit
+rm -f ~/.zcompdump; compinit
 
-# --- Auto completion ---
-autoload -U compinit
-compinit
+# ---------- Prompt ----------
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
-autoload -U bashcompinit
-bashcompinit
-
-# --- History search
+# ---------- History search (peco) ----------
 function peco-select-history() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
   CURSOR=$#BUFFER
@@ -48,77 +20,52 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
-# ----------
-# Alias
-# ----------
-
-# ----------
-# Environment Variable pre plugin install
-# ----------
-export PATH=/usr/local/bin:/usr/bin:$HOME/bin/:$PATH
-
-XDG_CONFIG_HOME=~/.config/
-
-# PATH_DIR(実体はdotfile/zsh/path)以下にあるファイル内を全てsourceする
-# PATH_DIRはgitで追跡されないのでユーザー固有の環境変数等を個別で設定するために使う
-PRE_PATH_DIR=~/.zsh_path/pre
-if [ -n "$(ls $PRE_PATH_DIR )" ]; then
-  for path_file in $PRE_PATH_DIR/*; do
-    source $path_file
+# ---------- pre/post (keep) ----------
+# zsh の glob 修飾 (N-.):
+#  - N: マッチしなくてもエラーにしない
+#  - -.: 通常ファイルのみ
+zsh_source_dir() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return 0
+  local f
+  # for f in "$dir"/*.zsh(N-.); do
+  for f in "$dir"/*(N-.); do
+    source "$f"
   done
-fi
+}
 
-# ----------
-# Plugin
-# ----------
-source $ZPLUG_HOME/init.zsh
+# pre
+zsh_source_dir "$DOTFILES/zsh/path/pre"
 
-# --- zsh-syntax-highlighting ---
-autoload -Uz colors
-colors
-
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-case ${OSTYPE} in
-  darwin* )
-#OSによってコメントアウトを変える
+# ---------- OS specific ----------
+case "$OSTYPE" in
+  darwin*)
     export LSCOLORS=fxgxcxdxbxegedabagacad
     alias ls='ls -G'
-    ;;    
-  linux* )
-    eval $(dircolors ~/ls_color/dircolors-solarized/dircolors.ansi-universal)
-    alias ls='ls --color'
     ;;
-
+  linux*)
+    if command -v dircolors >/dev/null 2>&1 \
+      && [ -f "$HOME/ls_color/dircolors-solarized/dircolors.ansi-universal" ]; then
+      eval "$(dircolors "$HOME/ls_color/dircolors-solarized/dircolors.ansi-universal")"
+    fi
+    alias ls='ls --color=auto'
+    ;;
 esac
 
-# --- zsh-completions ---
-zplug "zsh-users/zsh-completions"
-
-# --- zsh-autosuggestions ---
-zplug "zsh-users/zsh-autosuggestions"
-
-
-# プラグインが無かったらインストールする
-if ! zplug check --verbose; then
-  printf 'Install? [y/N]: '
-  if read -q; then
-    echo; zplug install
-  fi
+# ---------- Plugins and others ----------
+if [ -f "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions.zsh" ]; then
+  source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions.zsh"
 fi
 
-zplug load --verbose
+# post
+zsh_source_dir "$DOTFILES/zsh/path/post"
 
-# ----------
-# Environment Variable post plugin install
-# ----------
-POST_PATH_DIR=~/.zsh_path/post
-if [ -n "$(ls $POST_PATH_DIR )" ]; then
-  for path_file in $POST_PATH_DIR/*; do
-    source $path_file
-  done
+# Some plugins, user-defined setup may install completion definitions, so re-initialize compinit.
+autoload -U compinit && compinit
+
+# zsh-syntax-highlighting must be sourced at the end of zshrc.
+# https://github.com/zsh-users/zsh-syntax-highlighting?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
+if [ -f "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting.zsh" ]; then
+  source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting.zsh"
 fi
 
-export STARSHIP_CONFIG=~/.starship.toml
-eval "$(starship init zsh)"
