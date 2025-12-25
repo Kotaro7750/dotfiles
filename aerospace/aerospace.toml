@@ -5,17 +5,21 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 after-startup-command = [
-  'layout tiles'  # This is for avoiding non compliance with default-root-container-layout at startup cf. https://github.com/nikitabobko/AeroSpace/issues/568
+  'layout tiles',  # This is for avoiding non compliance with default-root-container-layout at startup cf. https://github.com/nikitabobko/AeroSpace/issues/568
+  'exec-and-forget sketchybar',
 ]
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+[exec.env-vars]
+PATH = '${HOME}/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
 [gaps]
 inner.horizontal = 5
 inner.vertical =   5
 outer.left =       0
 outer.bottom =     0
-outer.top =        0
+outer.top =        [ { monitor."Built-in Retina Display" = 0 }, 30 ]
 outer.right =      0
 
 [mode.main.binding]

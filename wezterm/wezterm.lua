@@ -209,8 +209,8 @@ return {
 
   audible_bell = "Disabled",
 
-  font = wezterm.font("Cica"),
-  font_size = override_config.font_size or 20,
+  font = wezterm.font("Moralerspace Neon HW"),
+  font_size = override_config.font_size or 18,
 
   color_scheme = color_scheme,
   window_background_opacity = 0.8,

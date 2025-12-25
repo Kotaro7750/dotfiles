@@ -1,0 +1,90 @@
+#!/bin/bash -xeu
+set +x
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PLUGIN_DIR="$SCRIPT_DIR/plugins"
+if [ ! -d "$PLUGIN_DIR" ]; then
+  PLUGIN_DIR="$HOME/dotfiles/sketchybar/plugins"
+fi
+
+# Reload safe: remove our items/brackets if they exist
+for name in \
+  left_pill right_pill \
+  aero_workspace front_app \
+  cpu_usage mem_usage \
+  battery clock calendar
+do
+  sketchybar --remove "$name" >/dev/null 2>&1 || true
+done
+
+sketchybar --hotload on
+
+source "$PLUGIN_DIR/color.sh"
+
+sketchybar --bar \
+  position=top \
+  height=34 \
+  blur_radius=0 \
+  notch_display_height=33 \
+  color="$BAR_BG_COLOR" \
+  margin=0 \
+  padding_left=0 \
+  padding_right=0
+
+sketchybar --default \
+  drawing=on \
+  icon.color="${ICON_COLOR}" \
+  label.color="$TEXT_COLOR" \
+  label.font="Moralerspace Argon HW:Regular:14.0" \
+  icon.font="Moralerspace Argon HW:Bold:16.0" \
+  label.align=center \
+  label.background.color="0xff253a55" \
+  icon.background.height=22 \
+  label.background.height=22 \
+  label.padding_right=5 \
+  label.padding_left=5 \
+  icon.padding_right=5 \
+  icon.padding_left=5 \
+  background.padding_right=5 \
+
+# --- Left ---
+sketchybar --add item aero_workspace left \
+  --set aero_workspace \
+  script="$PLUGIN_DIR/aerospace.sh" \
+  background.padding_left=20 \
+  --subscribe aero_workspace space_change front_app_switched
+
+sketchybar --add item front_app left \
+  --set front_app \
+  script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+# --- Right ---
+sketchybar --add item clock right \
+  --set clock \
+  script="$PLUGIN_DIR/clock.sh" \
+  background.padding_right=20 \
+  update_freq=1
+
+sketchybar --add item calendar right \
+  --set calendar \
+  script="$PLUGIN_DIR/calendar.sh" \
+  update_freq=1 \
+  click_script='open -a Fantastical'
+
+sketchybar --add item battery right \
+  --set battery \
+  script="$PLUGIN_DIR/battery.sh" \
+  update_freq=5
+
+sketchybar --add item cpu_usage right \
+  --set cpu_usage \
+  script="$PLUGIN_DIR/cpu_usage.sh" \
+  update_freq=2 \
+  click_script='open -a "Activity Monitor"'
+
+sketchybar --add item mem_usage right \
+  --set mem_usage \
+  script="$PLUGIN_DIR/mem_usage.sh" \
+  update_freq=2 \
+  click_script='open -a "Activity Monitor"'
