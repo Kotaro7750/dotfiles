@@ -60,6 +60,8 @@ fi
 # post
 zsh_source_dir "$DOTFILES/zsh/path/post"
 
+eval "$(direnv hook zsh)"
+
 # Some plugins, user-defined setup may install completion definitions, so re-initialize compinit.
 autoload -U compinit && compinit
 

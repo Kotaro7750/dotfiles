@@ -1,0 +1,14 @@
+# Codex CLI
+# Whitelist方式: まず `.codex/` 配下を全て無視し、必要なものだけ例外で追跡する。
+.codex/*
+!.codex/config.toml
+!.codex/skills/
+
+# Direnv (often contains machine-local secrets)
+.envrc
+.env
+.env.*
+!.env.example
+
+# OS / editor noise
+.DS_Store

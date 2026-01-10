@@ -1,13 +1,16 @@
-# Setup
-## zplug
-Install zplug by following the instructions on [GitHub](https://github.com/zplug/zplug) page.
+## Setup
+With Nix and Home Manager installed, run the setup command from the repository root and specify the host-specific configuration in the flake output:
 
-Then create below file. The env value may be changed as you like.
-
-```bash
-# zsh/path/pre/zplug
-export ZPLUG_HOME=~/.zplug/
+```sh
+home-manager switch --flake ./nix#<host>
 ```
 
-# Deprecated
-![init script test](https://github.com/Kotaro7750/dotfiles/workflows/init%20script%20test/badge.svg)
+Example for the current host configuration:
+
+```sh
+home-manager switch --flake ./nix#private-osx-arm
+```
+
+## Nix layout
+- Common packages and shared settings live under `nix/home-manager/` (for example `nix/home-manager/common.nix` and the shared module files).
+- Host-specific configuration lives under `nix/home-manager/hosts/` and each host has its own `.nix` file (for example `nix/home-manager/hosts/private-osx-arm.nix`).

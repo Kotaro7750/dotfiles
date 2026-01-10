@@ -1,7 +1,8 @@
-model = "gpt-5.2"
+model = "gpt-5.2-codex"
 
 [features]
 web_search_request = true
+skills = true
 
 [mcp_servers.context7]
 command = "npx"

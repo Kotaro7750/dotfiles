@@ -3,8 +3,9 @@
 {
   imports = [
     ./common-variables.nix
-    ./common-nvim.nix
-    ./common-zsh.nix
+    ./direnv.nix
+    ./nvim.nix
+    ./zsh.nix
   ];
 
   home.packages = [
