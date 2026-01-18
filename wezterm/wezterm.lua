@@ -81,6 +81,82 @@ local function tab_title(tab_info)
   return tab_info.active_pane.title
 end
 
+local git_cache = {}
+
+local function cwd_from_uri(cwd_uri)
+  if not cwd_uri then
+    return nil
+  end
+
+  if type(cwd_uri) == "string" then
+    local parsed = wezterm.url.parse(cwd_uri)
+    if parsed and parsed.file_path then
+      return parsed.file_path
+    end
+    if parsed and parsed.path then
+      return parsed.path
+    end
+    return cwd_uri
+  end
+
+  if cwd_uri.file_path then
+    return cwd_uri.file_path
+  end
+  if cwd_uri.path then
+    return cwd_uri.path
+  end
+
+  return nil
+end
+
+local function trim(s)
+  return (s or ""):gsub("%s+$", "")
+end
+
+local function get_git_branch(cwd)
+  if not cwd then
+    return nil
+  end
+
+  local now = os.time()
+  local cached = git_cache[cwd]
+  if cached and (now - cached.time) < 3 then
+    return cached.branch
+  end
+
+  local ok, stdout = wezterm.run_child_process({ "git", "-C", cwd, "rev-parse", "--abbrev-ref", "HEAD" })
+  if not ok then
+    git_cache[cwd] = { branch = nil, time = now }
+    return nil
+  end
+
+  local branch = trim(stdout)
+  if branch == "HEAD" then
+    local ok_detached, sha = wezterm.run_child_process({ "git", "-C", cwd, "rev-parse", "--short", "HEAD" })
+    if ok_detached then
+      branch = "@" .. trim(sha)
+    end
+  end
+
+  git_cache[cwd] = { branch = branch, time = now }
+  return branch
+end
+
+wezterm.on("update-right-status", function(window, pane)
+  local cwd = cwd_from_uri(pane:get_current_working_dir())
+  local branch = get_git_branch(cwd)
+
+  local right_status = " " .. cwd .. " "
+
+  if branch and #branch > 0 then
+    right_status = right_status .. "" .. branch
+  else
+    right_status = right_status .. "not a git repo"
+  end
+
+  window:set_right_status(right_status)
+end)
+
 local color_palette = {
   background = from_color_scheme("background"),
   ansi = {
@@ -91,8 +167,8 @@ local color_palette = {
 }
 
 local function on_format_tab_title(tab, tabs, panes, config, hover, max_width)
-  local  background = color_palette.ansi.grey
-  local  foreground = color_palette.ansi.black
+  local background = color_palette.ansi.grey
+  local foreground = color_palette.ansi.black
 
   if tab.is_active then
     background = color_palette.ansi.green
@@ -123,83 +199,7 @@ local function on_format_tab_title(tab, tabs, panes, config, hover, max_width)
   }
 end
 
-wezterm.on('format-tab-title',on_format_tab_title)
-
-
-local function is_array(t)
-  local i = 0
-  for _ in pairs(t) do
-    i = i + 1
-    if t[i] == nil then
-      return false
-    end
-  end
-  return true
-end
-
-local function flatten_array(arr, result)
-  for _, v in ipairs(arr) do
-    if type(v) == "table" and is_array(v) then
-      flatten_array(v, result)
-    else
-      table.insert(result, v);
-    end
-  end
-end
-
-local function construct_battery_info_format()
-  local battery_percentage = 100;
-  local has_battery = false
-  local charging = false
-
-  for _, b in ipairs(wezterm.battery_info()) do
-    has_battery = true
-    battery_percentage = math.ceil(b.state_of_charge * 100);
-
-    if b.state == "Charging" then
-      charging = true
-    end
-  end
-
-  local color = "Lime";
-  if battery_percentage < 20 then
-    color = "Red";
-  elseif battery_percentage < 50 then
-    color = "Yellow";
-  end
-
-  local power_status = ""
-
-  if has_battery then
-    -- Specify nerdfont icon like md_battery_50
-    local battery_percentage_roundup = math.ceil(battery_percentage / 10) * 10
-    local battery_emoji = wezterm.nerdfonts["md_battery" .. (battery_percentage_roundup == 100 and "" or "_" .. battery_percentage_roundup)]
-    local battery_status = ""
-
-    if charging then
-      battery_status = wezterm.nerdfonts["md_lightning_bolt"]
-    end
-
-    power_status = battery_status .. battery_emoji .. battery_percentage .. "%"
-  else
-    power_status = wezterm.nerdfonts["md_power_plug_outline"]
-  end
-
-  return {
-    { Foreground = { AnsiColor = color } },
-    { Background = { Color = color_palette.background } },
-    { Text = power_status .. " " },
-  }
-end
-
-wezterm.on("update-right-status", function(window, pane)
-  local date = wezterm.strftime("%a %F  %H:%M:%S ");
-
-  local format = {}
-  flatten_array({ construct_battery_info_format(), { Foreground = { Color = color_palette.ansi.grey } },{ Background = { Color = color_palette.background } }, { Text = " " .. date }, }, format);
-
-  window:set_right_status(wezterm.format(format));
-end);
+wezterm.on('format-tab-title', on_format_tab_title)
 
 return {
   default_prog = default_prog,
@@ -226,9 +226,15 @@ return {
   },
 
   colors = {
+    split = color_palette.background,
     tab_bar = {
       inactive_tab_edge = color_palette.background,
     }
+  },
+
+  inactive_pane_hsb = {
+    saturation = 1,
+    brightness = 0.75,
   },
 
   launch_menu = launch_menu,
@@ -237,20 +243,57 @@ return {
   key_map_preference = "Mapped",
   leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
-    { key = "[", mods = "LEADER", action = "ActivateCopyMode" },
+    { key = "[", mods = "LEADER",       action = "ActivateCopyMode" },
+    { key = "n", mods = "LEADER",       action = "ShowLauncher" },
+    { key = "R", mods = "LEADER",       action = wezterm.action.ReloadConfiguration },
 
-    { key = "C", mods = "CTRL|SHIFT", action = wezterm.action { CopyTo = "Clipboard" } },
-    { key = "c", mods = "SUPER", action = wezterm.action { CopyTo = "Clipboard" } },
-    { key = "V", mods = "CTRL|SHIFT", action = wezterm.action { PasteFrom = "Clipboard" } },
-    { key = "v", mods = "SUPER", action = wezterm.action { PasteFrom = "Clipboard" } },
+    -- Font size
+    { key = "+", mods = "LEADER|SHIFT", action = wezterm.action.IncreaseFontSize },
+    { key = "-", mods = "LEADER",       action = wezterm.action.DecreaseFontSize },
+    { key = "0", mods = "LEADER",       action = wezterm.action.ResetFontSize },
 
-    { key = "\\", mods = "LEADER", action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
-    { key = "x", mods = "LEADER", action = wezterm.action { CloseCurrentPane = { confirm = true } } },
-
-    { key = "l", mods = "LEADER", action = "ShowLauncher" },
-    { key = "w", mods = "LEADER", action = wezterm.action { CloseCurrentTab = { confirm = true } } },
-    { key = "t", mods = "LEADER", action = wezterm.action { ActivateTabRelative = 1 } },
+    -- Content management
+    -- -- Tab
+    { key = "t", mods = "LEADER",       action = wezterm.action { ActivateTabRelative = 1 } },
     { key = "T", mods = "LEADER|SHIFT", action = wezterm.action { ActivateTabRelative = -1 } },
-    { key = "R", mods = "LEADER", action = wezterm.action.ReloadConfiguration },
+
+    { key = "X", mods = "LEADER",       action = wezterm.action { CloseCurrentTab = { confirm = true } } },
+
+    -- -- Pane
+    { key = "z", mods = "LEADER",       action = wezterm.action.TogglePaneZoomState },
+
+    { key = "h", mods = "LEADER",       action = wezterm.action.ActivatePaneDirection("Left") },
+    { key = "j", mods = "LEADER",       action = wezterm.action.ActivatePaneDirection("Down") },
+    { key = "k", mods = "LEADER",       action = wezterm.action.ActivatePaneDirection("Up") },
+    { key = "l", mods = "LEADER",       action = wezterm.action.ActivatePaneDirection("Right") },
+
+    { key = "x", mods = "LEADER",       action = wezterm.action { CloseCurrentPane = { confirm = true } } },
+
+    { key = "H", mods = "LEADER",       action = wezterm.action.AdjustPaneSize { "Left", 5 } },
+    { key = "J", mods = "LEADER",       action = wezterm.action.AdjustPaneSize { "Down", 5 } },
+    { key = "K", mods = "LEADER",       action = wezterm.action.AdjustPaneSize { "Up", 5 } },
+    { key = "L", mods = "LEADER",       action = wezterm.action.AdjustPaneSize { "Right", 5 } },
+
+    -- Clipboard
+    { key = "C", mods = "CTRL|SHIFT",   action = wezterm.action { CopyTo = "Clipboard" } },
+    { key = "c", mods = "SUPER",        action = wezterm.action { CopyTo = "Clipboard" } },
+    { key = "V", mods = "CTRL|SHIFT",   action = wezterm.action { PasteFrom = "Clipboard" } },
+    { key = "v", mods = "SUPER",        action = wezterm.action { PasteFrom = "Clipboard" } },
+
+
+    -- Custom
+    {
+      key = "a",
+      mods = "LEADER",
+      action = wezterm.action_callback(
+        function(_, pane)
+          pane:split { direction = "Left", size = 0.4, args = { "zsh", "-ic", "codex" } }
+          pane:split { direction = "Top", size = 0.7, args = { "zsh", "-ic", "nvim" } }
+
+          pane:activate()
+        end
+      ),
+    },
+
   }
 }

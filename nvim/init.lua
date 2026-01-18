@@ -44,8 +44,7 @@ vim.keymap.set('n', '<up>', 'gk', { noremap = true })
 vim.opt.backspace = { "indent", "eol", "start" } -- backspace available
 
 -- ---mouse---
--- disable mouse
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 
 -- ---paste---
 -- sync to clipboard
