@@ -4,6 +4,7 @@
   imports = [
     ./common-variables.nix
     ./direnv.nix
+    ./lazygit.nix
     ./nvim.nix
     ./zsh.nix
   ];
