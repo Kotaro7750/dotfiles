@@ -7,10 +7,10 @@
     ./lazygit.nix
     ./nvim.nix
     ./zsh.nix
+    ./wezterm.nix
   ];
 
   home.packages = [
-    pkgs.wezterm
     pkgs.devcontainer
   ];
 }
