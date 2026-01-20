@@ -3,6 +3,8 @@
 {
   imports = [
     ./common-variables.nix
+    ./codex.nix
+    ./claude.nix
     ./direnv.nix
     ./lazygit.nix
     ./nvim.nix
