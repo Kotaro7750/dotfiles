@@ -287,7 +287,7 @@ return {
       mods = "LEADER",
       action = wezterm.action_callback(
         function(_, pane)
-          pane:split { direction = "Left", size = 0.4, args = { "zsh", "-ic", "codex" } }
+          pane:split { direction = "Left", size = 0.4, args = { "zsh", "-ic", "${CLI_CODING_AGENT:-claude}" } }
           pane:split { direction = "Top", size = 0.7, args = { "zsh", "-ic", "nvim" } }
 
           pane:activate()

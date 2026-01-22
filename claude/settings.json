@@ -1,0 +1,26 @@
+{
+  "model": "opusplan",
+  "alwaysThinkingEnabled": true,
+  "showTurnDuration": true,
+  "autoUpdatesChannel": "stable",
+  "extraKnownMarketplaces": {
+    "anthropics/claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code-plugins"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "feature-dev@anthropics/claude-code-plugins": true,
+    "security-guidance@anthropics/claude-code-plugins": true,
+    "example-skills@anthropic-agent-skills": true,
+    "document-skills@anthropic-agent-skills": true
+  }
+}
