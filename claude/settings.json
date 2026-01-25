@@ -1,6 +1,6 @@
 {
   "model": "opusplan",
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "showTurnDuration": true,
   "autoUpdatesChannel": "stable",
   "extraKnownMarketplaces": {

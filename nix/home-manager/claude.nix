@@ -12,6 +12,10 @@ in
     config.lib.file.mkOutOfStoreSymlink
       (config.home.homeDirectory + "/dotfiles/claude/skills");
 
+  home.file.".claude/agents".source =
+    config.lib.file.mkOutOfStoreSymlink
+      (config.home.homeDirectory + "/dotfiles/claude/agents");
+
   home.activation.claudeManagedConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     PATH="${pkgs.coreutils}/bin:${pkgs.jq}/bin:$PATH" sh "${script}"
   '';
