@@ -24,6 +24,15 @@ return {
             }
           },
         },
+        pickers = {
+          buffers = {
+            mappings = {
+              n = {
+                ["d"] = actions.delete_buffer,
+              },
+            },
+          },
+        },
         extensions = {
           file_browser = {
             grouped = true,
@@ -46,7 +55,6 @@ return {
         })
       end, { silent = true, noremap = true, desc = 'Telescope file browser' })
       vim.api.nvim_set_keymap('n', '<Leader>dg', ':Telescope live_grep<CR>', { silent = true, noremap = true })
-      vim.keymap.set('n', '<Leader>do', ':ObsidianSearch<CR>', { silent = true, noremap = true })
     end
   }
 }

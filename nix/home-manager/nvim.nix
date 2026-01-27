@@ -17,6 +17,8 @@ in
 {
   home.packages = [
     pkgs.neovim-unwrapped
+    pkgs.ripgrep
+    pkgs.fd
   ];
 
   xdg.configFile."nvim/providers.lua".source = pkgs.replaceVars ./nvim/providers.lua.in {
