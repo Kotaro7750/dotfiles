@@ -77,15 +77,15 @@ return {
       end
 
       local function unset_lsp_keymap(bufnr)
-        local opt = { noremap = true, silent = true, buffer = bufnr }
+        local opt = { buffer = bufnr }
 
-        vim.keymap.del('n', '<Leader>lf', opt)
-        vim.keymap.del('n', '<Leader>lr', opt)
-        vim.keymap.del('n', '<Leader>lR', opt)
-        vim.keymap.del('n', '<Leader>lk', opt)
-        vim.keymap.del('n', '<Leader>ld', opt)
-        vim.keymap.del('n', '<Leader>lD', opt)
-        vim.keymap.del('n', '<Leader>li', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>lf', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>lr', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>lR', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>lk', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>ld', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>lD', opt)
+        pcall(vim.keymap.del, 'n', '<Leader>li', opt)
       end
 
       vim.api.nvim_create_autocmd({ "LspAttach" }, {
