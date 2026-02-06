@@ -1,14 +1,14 @@
 ## Setup
-With Nix and Home Manager installed, run the setup command from the repository root and specify the host-specific configuration in the flake output:
+With Nix and Home Manager installed, run the setup script from the repository root and specify the host-specific configuration:
 
 ```sh
-home-manager switch --flake ./nix#<host>
+./apply-home-manager.sh <host>
 ```
 
 Example for the current host configuration:
 
 ```sh
-home-manager switch --flake ./nix#private-osx-arm
+./apply-home-manager.sh private-osx-arm
 ```
 
 ## Nix layout

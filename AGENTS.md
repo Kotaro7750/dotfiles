@@ -1,21 +1,71 @@
-# Repository Guidelines
+# リポジトリ運用ガイド
 
-## Project Structure & Module Organization
-Active configurations live in `git/`, `nvim/`, `wezterm/`, and `zsh/`, each holding the dotfiles for that tool. Neovim lives in `nvim/`, with Lua modules under `nvim/lua/`, filetype overrides in `nvim/ftplugin/`, and plugin locks in `nvim/lazy-lock.json`. Bootstrap code in `init/` and other legacy directories are considered deprecated; ignore them unless explicitly instructed, and expect them to be removed or heavily rewritten.
+## 目的と適用範囲
+- この文書は、このリポジトリ（dotfiles ルート）に対する日常的な編集・検証・レビューの実行ルールを定義する。
+- 明示の指示がない限り、作業対象は「アクティブディレクトリ」に限定する。
+- 既存のローカル差分や機微情報を壊さないことを最優先とする。
 
-## Build, Test, and Development Commands
-- No repo-wide bootstrap commands are supported; disregard historical `make -C init/linux ...` targets.
-- Handle relinks or provisioning tasks manually within the active directories and document any ad-hoc steps in future updates.
-- Skip build or test targets that touch deprecated directories; focus effort on the active `git/`, `nvim/`, `wezterm/`, and `zsh/` trees unless told otherwise.
+## ディレクトリ構成と責務
+### アクティブディレクトリ
+- `aerospace/`: AeroSpace 設定
+- `claude/`: Claude 用設定・エージェント/スキル連携資産
+- `codex/`: Codex 用設定
+- `direnv/`: direnv 設定
+- `git/`: Git 設定
+- `lazygit/`: lazygit 設定
+- `nix/`: Home Manager / Nix 構成
+- `nvim/`: Neovim 設定（Lua は `nvim/lua/`、ftplugin は `nvim/ftplugin/`、ロックファイルは `nvim/lazy-lock.json`）
+- `sketchybar/`: sketchybar 設定
+- `wezterm/`: WezTerm 設定
+- `zsh/`: zsh 設定
 
-## Coding Style & Naming Conventions
-Default to POSIX `sh` unless the script needs Bash; keep the `#!/bin/sh -xeu` or `#!/bin/bash -xeu` shebang and use 2-space indentation. Script filenames stay lowercase with hyphens (`tmux.sh`, `pyenv.sh`), while exported variables remain uppercase. Neovim Lua modules follow snake_case and configure through `vim.opt`/`vim.keymap.set`. Commit generated lockfiles such as `lazy-lock.json` whenever plugin revisions are updated.
+### 補助・ドキュメント
+- `README.md` はセットアップ手順の正本とし、`nix/` の現行運用と一致させる。
+- `AGENTS.md` は実装/編集時の実行ルールの正本とする。
+- Nix 設定の適用操作は `./apply-home-manager.sh <host>` を正準コマンドとして扱う。
 
-## Testing Guidelines
-Automated CI is not configured, so rely on local checks. After provisioning, run `nvim --headless "+Lazy sync" +qa` to confirm plugin health, `zsh -n ./zsh/.zshrc` for syntax validation, and `shellcheck` on new shell scripts. Exercise bootstrap changes in both WSL and non-WSL VMs to ensure `isWSL` logic works.
+## 非推奨・対象外ディレクトリ
+- `init/` および過去互換用ディレクトリは非推奨とする。
+- 非推奨領域は、ユーザーが明示的に指定した場合のみ編集してよい。
+- 非推奨領域向けの旧コマンド（例: `make -C init/linux ...`）は通常作業で使わない。
 
-## Commit & Pull Request Guidelines
-Reuse the `Type: Summary` style seen in history (`Add: Override wezterm config`, `Fix: Wrong repository root detection`). Keep commits focused on a single tool, include regenerated assets, and document behavioral impact in the body. PRs should link issues, state the tested environments (e.g., Ubuntu 22.04, WSL2), and attach screenshots or terminal snippets for UI-facing tweaks.
+## 開発・編集ルール
+### シェル/Lua/命名
+- シェルスクリプトは原則 POSIX `sh` を使い、Bash 固有機能が必要な場合のみ `bash` を使う。
+- シェバンは `#!/bin/sh -xeu` または `#!/bin/bash -xeu` を維持する。
+- シェルは 2 スペースインデント、ファイル名は小文字ハイフン区切りを使う。
+- 環境変数名は大文字を使う。
+- Neovim Lua モジュールは snake_case を使い、設定は `vim.opt` / `vim.keymap.set` を優先する。
 
-## Security & Configuration Tips
-Audit scripts before executing; many invoke privileged package installs or tweak input methods. Keep machine-specific secrets out of the repo and rely on untracked overrides (such as the WezTerm override in recent commits). Sanitize personal paths before sharing updates.
+### 生成物・ロックファイル
+- プラグイン更新時は `nvim/lazy-lock.json` の更新をコミットに含める。
+- 自動生成ファイルを更新した場合は、対応する設定変更と同一コミットに含める。
+
+## 検証ルール
+- 自動 CI は前提にしない。変更ごとにローカルで必要最小限の確認を行う。
+- ユーザーが Nix 設定の適用を依頼した場合は、README の手順に従い `./apply-home-manager.sh <host>` を実行する。
+- Neovim 変更時は `nvim --headless "+Lazy sync" +qa` を実行する。
+- zsh 変更時は `zsh -n ./zsh/.zshrc` を実行する。
+- 新規または更新したシェルスクリプトには `shellcheck` を実行する。
+- WSL 分岐や OS 分岐を変更した場合は、可能な範囲で WSL/非WSL の両方で挙動確認する。
+
+## コミット・PRルール
+- コミットメッセージは `Type: Summary` 形式（例: `Add: ...`, `Fix: ...`）を使う。
+- 1コミット1目的を原則とし、ツール横断の無関係変更を混在させない。
+- 振る舞いに影響する変更は、コミット本文または PR 説明で影響範囲を明示する。
+- PR では検証環境（例: macOS, Ubuntu, WSL2）を明記し、UI変更はスクリーンショットや端末出力を添付する。
+
+## セキュリティと機微情報
+- セットアップ系スクリプトは実行前に内容を確認する。権限昇格やシステム設定変更を含む可能性がある。
+- マシン固有情報や秘密情報はコミットしない。必要な上書きは未追跡ファイルで管理する。
+- ログ共有時はユーザー名・パス・ホスト情報などの個人情報をマスクする。
+
+## Skills運用
+- Skills は特定パスに固定せず、そのセッションで有効な Codex の通常ルールに従って解決・適用する。
+- スキル名が明示された場合、またはタスク内容がスキル説明と一致する場合は該当スキルを優先利用する。
+- スキルが参照不能な場合は、その旨を短く示したうえで通常手順にフォールバックする。
+
+## ドキュメント整合ルール
+- `AGENTS.md` を更新する際は、必ず `README.md` と矛盾がないか確認する。
+- 特に対象ディレクトリとセットアップ手順（`nix/` 周辺）の整合を確認する。
+- 差分が大きい場合は、同一変更で README も更新するか、更新しない理由を明記する。
