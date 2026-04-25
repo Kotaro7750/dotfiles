@@ -16,5 +16,8 @@
   home.packages = [
     pkgs.slack
     pkgs.discord
+    pkgs.colima
+    pkgs.docker
+    pkgs.docker-compose
   ];
 }
