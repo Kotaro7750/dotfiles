@@ -1,14 +1,9 @@
-model = "gpt-5.4"
 model_reasoning_effort = "high"
 web_search = "live"
 
 [features]
-skills = true
-collaboration_modes = true
-unified_exec = true
 apps = true
-steer = true
-multi_agent = true
+memories = true
 
 [mcp_servers.context7]
 command = "npx"
