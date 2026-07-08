@@ -1,6 +1,6 @@
 [user]
-	name = Kotaro7750
-	email = 7750koutarou@gmail.com
+	name = {{ .git.user }}
+	email = {{ .git.email }}
 
 [core]
   filemode = false
@@ -15,5 +15,6 @@
 
 [http]
   postBuffer = 524288000
+
 [init]
   defaultBranch = main
