@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../sketchybar.nix
-  ];
-
   home.username = "koutarou";
   home.homeDirectory = "/Users/koutarou";
 

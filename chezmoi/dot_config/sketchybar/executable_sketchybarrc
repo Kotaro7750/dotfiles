@@ -3,9 +3,6 @@ set +x
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 PLUGIN_DIR="$SCRIPT_DIR/plugins"
-if [ ! -d "$PLUGIN_DIR" ]; then
-  PLUGIN_DIR="$HOME/dotfiles/sketchybar/plugins"
-fi
 
 # Reload safe: remove our items/brackets if they exist
 for name in \

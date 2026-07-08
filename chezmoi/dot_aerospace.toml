@@ -6,7 +6,6 @@ default-root-container-orientation = 'auto'
 
 after-startup-command = [
   'layout tiles',  # This is for avoiding non compliance with default-root-container-layout at startup cf. https://github.com/nikitabobko/AeroSpace/issues/568
-  'exec-and-forget sketchybar',
 ]
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']

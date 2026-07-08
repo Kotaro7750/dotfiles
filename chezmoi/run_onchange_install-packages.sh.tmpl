@@ -1,4 +1,9 @@
 #!/bin/sh
 {{ if eq .chezmoi.os "darwin" -}}
 brew install --cask nikitabobko/tap/aerospace
+
+brew tap FelixKratz/formulae
+brew trust felixkratz/formulae
+brew install sketchybar
+brew services start sketchybar
 {{ end -}}
