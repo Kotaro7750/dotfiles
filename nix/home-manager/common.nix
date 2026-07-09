@@ -3,7 +3,6 @@
 {
   imports = [
     ./common-variables.nix
-    ./claude.nix
     ./nvim.nix
     ./zsh.nix
   ];
