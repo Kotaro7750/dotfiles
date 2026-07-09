@@ -1,0 +1,10 @@
+# chezmoi:modify-template
+# chezmoi-template-start
+model_reasoning_effort = "high"
+web_search = "live"
+
+[features]
+apps = true
+memories = true
+# chezmoi-template-end
+{{ regexReplaceAll "(?s)^# chezmoi-template-start.*# chezmoi-template-end\n(.*)\n" .chezmoi.stdin "${1}" }}
