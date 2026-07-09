@@ -7,7 +7,6 @@
     ./claude.nix
     ./nvim.nix
     ./zsh.nix
-    ./wezterm.nix
   ];
 
   home.packages = [

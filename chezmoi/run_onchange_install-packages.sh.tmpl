@@ -6,4 +6,10 @@ brew tap FelixKratz/formulae
 brew trust felixkratz/formulae
 brew install sketchybar
 brew services start sketchybar
+
+brew install --cask wezterm
+{{ else if eq .chezmoi.os "linux" }}
+brew tap wezterm/wezterm-linuxbrew
+brew trust wezterm/wezterm-linuxbrew
+brew install wezterm/wezterm-linuxbrew/wezterm
 {{ end -}}
