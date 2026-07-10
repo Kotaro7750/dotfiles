@@ -8,9 +8,11 @@ description: Keep all README files aligned with the current codebase by rewritin
 ## Goals
 
 - Keep every README in the repo accurate for the current codebase.
-- Ensure README explains the nix directory layout for common packages/settings and host-specific configuration placement.
+- Ensure README explains the current chezmoi setup workflow.
+- Ensure README includes the mise install step that runs after chezmoi apply.
+- Ensure README explains the practical split between Homebrew and mise.
 - Remove outdated or no-longer-true statements.
-- Write in concise English.
+- Write in concise Japanese unless the user explicitly asks for another language.
 
 ## Workflow
 
@@ -27,14 +29,14 @@ description: Keep all README files aligned with the current codebase by rewritin
 
 3) Rewrite the README
 
-- Keep content minimal; include `## Setup` and `## Nix layout`.
-- `## Setup`
+- Keep content minimal; include `## セットアップ`.
+- `## セットアップ`
   - Describe the exact setup steps required now.
+  - Install Homebrew by following the official installation instructions, then install chezmoi with `brew install chezmoi`.
   - Include copy-pasteable commands in Markdown code blocks so the setup can be executed directly.
+  - After `chezmoi --source ./chezmoi apply`, include `mise install -C ~`.
   - Remove deprecated steps or tooling references.
-- `## Nix layout`
-  - Explain where common packages/settings live and where host-specific configuration lives inside `nix/`.
-  - Use short sentences or bullets; avoid excessive detail.
+  - Explain that Homebrew manages OS-level packages and mise manages versioned development tools.
 
 4) Remove obsolete content
 
@@ -43,12 +45,15 @@ description: Keep all README files aligned with the current codebase by rewritin
 
 ## Output expectations
 
-- English only.
-- No extra sections beyond the required two.
-- For the root README, never mention deprecated folders (like `init/`) or non-active folders unless instructed.
+- Do not add extra sections unless the user explicitly asks for them.
+- For the root README, never mention deprecated folders (like `init/` or old Nix/Home Manager paths) or non-active folders unless instructed.
 - Only `README.md` at repo root may exist; delete any others.
 
 ## Notes
 
-- This repo treats `git/`, `nvim/`, `wezterm/`, and `zsh/` as the active configuration roots.
+- This repo treats `chezmoi/` as the active configuration root.
+- The setup starts by installing Homebrew with the official installer, then installing chezmoi with Homebrew.
+- The canonical dry-run/check command is `chezmoi --source ./chezmoi diff`.
+- The canonical apply command is `chezmoi --source ./chezmoi apply`.
+- The canonical mise tool installation command is `mise install -C ~`.
 - If a README claims to manage files or scripts that no longer exist, remove those claims.

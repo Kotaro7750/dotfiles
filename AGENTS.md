@@ -2,32 +2,29 @@
 
 ## 目的と適用範囲
 - この文書は、このリポジトリ（dotfiles ルート）に対する日常的な編集・検証・レビューの実行ルールを定義する。
-- 明示の指示がない限り、作業対象は「アクティブディレクトリ」に限定する。
+- 明示の指示がない限り、作業対象は `chezmoi/` と関連ドキュメントに限定する。
 - 既存のローカル差分や機微情報を壊さないことを最優先とする。
 
 ## ディレクトリ構成と責務
 ### アクティブディレクトリ
-- `aerospace/`: AeroSpace 設定
-- `claude/`: Claude 用設定・エージェント/スキル連携資産
-- `codex/`: Codex 用設定
-- `direnv/`: direnv 設定
-- `git/`: Git 設定
-- `lazygit/`: lazygit 設定
-- `nix/`: Home Manager / Nix 構成
-- `nvim/`: Neovim 設定（Lua は `nvim/lua/`、ftplugin は `nvim/ftplugin/`、ロックファイルは `nvim/lazy-lock.json`）
-- `sketchybar/`: sketchybar 設定
-- `wezterm/`: WezTerm 設定
-- `zsh/`: zsh 設定
+- `chezmoi/`: chezmoi source directory。通常の dotfiles 本体はここで管理する。
 
 ### 補助・ドキュメント
-- `README.md` はセットアップ手順の正本とし、`nix/` の現行運用と一致させる。
+- `README.md` はセットアップ手順の正本とし、chezmoi の現行運用と一致させる。
 - `AGENTS.md` は実装/編集時の実行ルールの正本とする。
-- Nix 設定の適用操作は `./apply-home-manager.sh <host>` を正準コマンドとして扱う。
+- Homebrew は公式のインストール手順に従って導入する。
+- Homebrew の導入は `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` を正準コマンドとして扱う。
+- chezmoi の導入は `brew install chezmoi` を正準コマンドとして扱う。
+- chezmoi の適用操作は `chezmoi --source ./chezmoi apply` を正準コマンドとして扱う。
+- 適用前の差分確認は `chezmoi --source ./chezmoi diff` を使う。
+- chezmoi 適用後の mise 管理ツール導入は `mise install -C ~` を使う。
+- Homebrew は OS 側に配置するパッケージ、mise は開発用ツールのバージョン管理に使う。
 
 ## 非推奨・対象外ディレクトリ
 - `init/` および過去互換用ディレクトリは非推奨とする。
+- 旧 Nix/Home Manager 構成や旧 top-level 設定ディレクトリは、現行の通常作業対象ではない。
 - 非推奨領域は、ユーザーが明示的に指定した場合のみ編集してよい。
-- 非推奨領域向けの旧コマンド（例: `make -C init/linux ...`）は通常作業で使わない。
+- 非推奨領域向けの旧コマンド（例: `./apply-home-manager.sh <host>` や `make -C init/linux ...`）は通常作業で使わない。
 
 ## 開発・編集ルール
 ### シェル/Lua/命名
@@ -38,15 +35,19 @@
 - Neovim Lua モジュールは snake_case を使い、設定は `vim.opt` / `vim.keymap.set` を優先する。
 
 ### 生成物・ロックファイル
-- プラグイン更新時は `nvim/lazy-lock.json` の更新をコミットに含める。
+- `.tmpl` は chezmoi テンプレートとして扱い、レンダリング後の内容も意識して編集する。
+- `run_onchange_*.tmpl` は適用時にコマンドを実行し得るため、変更前に影響範囲を確認する。
+- OS 分岐を変更した場合は、テンプレート条件と `chezmoi/.chezmoiignore` の整合を確認する。
+- プラグイン更新時は、対応するロックファイルが存在する場合に更新をコミットに含める。
 - 自動生成ファイルを更新した場合は、対応する設定変更と同一コミットに含める。
 
 ## 検証ルール
 - 自動 CI は前提にしない。変更ごとにローカルで必要最小限の確認を行う。
-- ユーザーが Nix 設定の適用を依頼した場合は、README の手順に従い `./apply-home-manager.sh <host>` を実行する。
-- Neovim 変更時は `nvim --headless "+Lazy sync" +qa` を実行する。
-- zsh 変更時は `zsh -n ./zsh/.zshrc` を実行する。
-- 新規または更新したシェルスクリプトには `shellcheck` を実行する。
+- chezmoi 管理ファイルを変更した場合は `chezmoi --source ./chezmoi diff` を実行する。
+- ユーザーが chezmoi 適用を依頼した場合は、README の手順に従い `chezmoi --source ./chezmoi apply` を実行する。
+- Neovim 変更時は、適用先または同等の設定パスで `nvim --headless "+Lazy sync" +qa` を実行する。
+- zsh 変更時は `zsh -n ./chezmoi/dot_zshrc` を実行する。
+- 新規または更新したシェルスクリプトには `shellcheck` を実行する。chezmoi テンプレートの場合は、対象 OS 向けにレンダリングした内容を確認してから実行する。
 - WSL 分岐や OS 分岐を変更した場合は、可能な範囲で WSL/非WSL の両方で挙動確認する。
 
 ## コミット・PRルール
@@ -67,5 +68,5 @@
 
 ## ドキュメント整合ルール
 - `AGENTS.md` を更新する際は、必ず `README.md` と矛盾がないか確認する。
-- 特に対象ディレクトリとセットアップ手順（`nix/` 周辺）の整合を確認する。
+- 特に対象ディレクトリ、セットアップ手順、chezmoi 適用コマンド、mise 導入手順の整合を確認する。
 - 差分が大きい場合は、同一変更で README も更新するか、更新しない理由を明記する。
