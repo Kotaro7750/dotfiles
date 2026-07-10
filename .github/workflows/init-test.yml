@@ -1,10 +1,12 @@
 name: Install dotfiles
 
 on:
-  pull_request:
   push:
     branches:
       - master
+    paths:
+      - 'chezmoi/**'
+      - '.github/workflows/init-test.yml'
   workflow_dispatch:
 
 permissions:
@@ -22,10 +24,6 @@ jobs:
         os:
           - ubuntu-24.04
           - macos-15
-
-    env:
-      CHEZMOI_DATA: >-
-        {"git":{"user":"CI","email":"ci@example.invalid"},"wezterm":{"font":"monospace","font_size":12}}
 
     steps:
       - uses: actions/checkout@v6
@@ -47,7 +45,7 @@ jobs:
           HOME="$TEST_HOME" chezmoi \
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
-            --override-data "$CHEZMOI_DATA" \
+            -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
             --no-tty \
             apply
 
@@ -60,14 +58,14 @@ jobs:
           HOME="$TEST_HOME" chezmoi \
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
-            --override-data "$CHEZMOI_DATA" \
+            -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
             --no-tty \
             apply
 
           HOME="$TEST_HOME" chezmoi \
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
-            --override-data "$CHEZMOI_DATA" \
+            -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
             verify
 
           zsh -n "$TEST_HOME/.zshrc"

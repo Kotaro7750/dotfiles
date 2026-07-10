@@ -1,0 +1,7 @@
+data:
+  git:
+    user: YOUR_NAME
+    email: YOUR_EMAIL
+  wezterm:
+    font: Super Cool Font
+    font_size: 18

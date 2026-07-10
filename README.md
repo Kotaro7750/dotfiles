@@ -20,6 +20,13 @@ brew install chezmoi
 chezmoi --version
 ```
 
+chezmoi の設定ファイルを標準パスに配置する。コピー後の設定は利用環境に合わせて編集する。
+
+```sh
+mkdir -p ~/.config/chezmoi
+cp ./chezmoi.example.yaml ~/.config/chezmoi/chezmoi.yaml
+```
+
 このリポジトリでは `chezmoi/` を chezmoi source directory として使う。適用前に差分を確認する。
 
 ```sh
