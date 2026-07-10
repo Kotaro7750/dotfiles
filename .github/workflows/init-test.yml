@@ -1,34 +1,74 @@
-name: "init script test"
+name: Install dotfiles
 
 on:
+  pull_request:
   push:
-    paths:
-    - '.github/workflows/init-test.yml'
-    - 'init/linux/**'
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  unit-test:
-    runs-on: ubuntu-latest
-    
+  install:
+    name: install (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+
     strategy:
       fail-fast: false
       matrix:
-        script: ["./script/albert.sh", "./script/docker.sh","./script/latex.sh","./script/nvim.sh","./script/zsh.sh","./script/python/pyenv.sh","./script/tmux.sh"]
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: unit-test of ${{matrix.script}}
-        working-directory: ./init/linux
-        run: ${{matrix.script}}
-  
-  init-test:
-    runs-on: ubuntu-latest
+        os:
+          - ubuntu-24.04
+          - macos-15
+
+    env:
+      CHEZMOI_DATA: >-
+        {"git":{"user":"CI","email":"ci@example.invalid"},"wezterm":{"font":"monospace","font_size":12}}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: init
-      working-directory: ./init/linux
-      run: make init
-    - name: link
-      working-directory: ./init/linux
-      run: make link
+      - uses: actions/checkout@v6
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+
+      - name: Configure test environment
+        run: echo "TEST_HOME=$RUNNER_TEMP/dotfiles-home" >> "$GITHUB_ENV"
+
+      - name: Prepare clean home
+        run: |
+          mkdir -p "$TEST_HOME"
+          brew --version
+          brew install chezmoi
+
+      - name: Apply dotfiles
+        run: |
+          HOME="$TEST_HOME" chezmoi \
+            --source "$GITHUB_WORKSPACE/chezmoi" \
+            --destination "$TEST_HOME" \
+            --override-data "$CHEZMOI_DATA" \
+            --no-tty \
+            apply
+
+      - name: Install mise tools
+        run: |
+          HOME="$TEST_HOME" mise install -C "$TEST_HOME"
+
+      - name: Verify installation
+        run: |
+          HOME="$TEST_HOME" chezmoi \
+            --source "$GITHUB_WORKSPACE/chezmoi" \
+            --destination "$TEST_HOME" \
+            --override-data "$CHEZMOI_DATA" \
+            --no-tty \
+            apply
+
+          HOME="$TEST_HOME" chezmoi \
+            --source "$GITHUB_WORKSPACE/chezmoi" \
+            --destination "$TEST_HOME" \
+            --override-data "$CHEZMOI_DATA" \
+            verify
+
+          zsh -n "$TEST_HOME/.zshrc"
+          HOME="$TEST_HOME" nvim --headless "+Lazy sync" +qa
