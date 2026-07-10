@@ -27,7 +27,8 @@ vim.fn.setcellwidths({
 
 -- ---cursor---
 vim.opt.cursorline = true               -- highlight present line
-vim.opt.cursorcolumn = true             -- highlight present column
+vim.opt.cursorlineopt = "number"        -- highlight present line number and screenline
+vim.opt.cursorcolumn = false            -- highlight present column
 vim.opt.virtualedit = "onemore"         -- cursor can move 1 char after EOL
 vim.opt.whichwrap = "b,s,h,l,<,>,[,],~" -- move L or R at EOL can move next line
 vim.opt.conceallevel = 2

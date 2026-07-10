@@ -1,15 +1,8 @@
 return {
-  { "EdenEast/nightfox.nvim" },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "night",
-    },
-    config = function(_, opts)
-      require("tokyonight").setup(opts)
-      vim.cmd.colorscheme("tokyonight")
-    end,
-  },
+  { "EdenEast/nightfox.nvim", lazy = true },
+  { "folke/tokyonight.nvim",  lazy = true },
+  { "rebelot/kanagawa.nvim",  lazy = true },
+  { "cocopon/iceberg.vim",    lazy = true },
+  { "Catppuccin/nvim",        lazy = true },
+  { "shaunsingh/nord.nvim",   lazy = true }
 }
