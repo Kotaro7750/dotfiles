@@ -1,0 +1,51 @@
+# ---------- General ----------
+bindkey -v
+# cf. https://unicornee.ai/articles/gnu-coreutils-macos/
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/opt/homebrew/bin:$PATH"
+
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+# ---------- history ----------
+source <(fzf --zsh)
+setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_LEX_WORDS
+
+# ---------- pre/post (keep) ----------
+# zsh の glob 修飾 (N-.):
+#  - N: マッチしなくてもエラーにしない
+#  - -.: 通常ファイルのみ
+zsh_source_dir() {
+  local dir="$1"
+  [[ -d "$dir" ]] || return 0
+  local f
+  # for f in "$dir"/*.zsh(N-.); do
+  for f in "$dir"/*(N-.); do
+    source "$f"
+  done
+}
+
+# pre
+zsh_source_dir "$DOTFILES/zsh/path/pre"
+
+# ---------- ls color ----------
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+alias ls='ls --color=auto'
+
+# ---------- Plugins and others ----------
+# Some plugins, user-defined setup may install completion definitions, so re-initialize compinit.
+autoload -U compinit && compinit
+
+# TMP for migration from nix to chezmoi
+export DOTFILES="$HOME/dotfiles"
+
+eval "$(sheldon source)"

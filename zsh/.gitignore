@@ -1,4 +1,0 @@
-/path/post/*
-!/path/post/.gitkeep
-/path/pre/*
-!/path/pre/.gitkeep

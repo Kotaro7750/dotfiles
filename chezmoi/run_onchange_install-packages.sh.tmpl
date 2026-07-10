@@ -8,8 +8,16 @@ brew install sketchybar
 brew services start sketchybar
 
 brew install --cask wezterm
+
+# cf. https://unicornee.ai/articles/gnu-coreutils-macos/
+brew install coreutils
 {{ else if eq .chezmoi.os "linux" }}
 brew tap wezterm/wezterm-linuxbrew
 brew trust wezterm/wezterm-linuxbrew
 brew install wezterm/wezterm-linuxbrew/wezterm
 {{ end -}}
+
+brew install zsh
+brew install sheldon
+brew install starship
+brew install fzf
