@@ -10,9 +10,6 @@ after-startup-command = [
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-[exec.env-vars]
-PATH = '${HOME}/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
-
 [gaps]
 inner.horizontal = 5
 inner.vertical =   5
