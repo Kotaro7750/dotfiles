@@ -16,10 +16,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = [
-    pkgs.mise # for asdf managed projects
-  ];
-
   home.sessionVariables.DOTFILES = "$HOME/dotfiles";
 }
 
