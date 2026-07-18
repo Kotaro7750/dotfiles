@@ -1,9 +1,19 @@
 local map = vim.keymap.set
 
-map("n", "j", "gj", { silent = true })
-map("n", "k", "gk", { silent = true })
-map("n", "<Down>", "gj", { silent = true })
-map("n", "<Up>", "gk", { silent = true })
+-- Basically, up/downward operation should be done for diplayed line.
+-- But, it is intuitive for logical line when relative number is given.
+local up = function()
+  return vim.v.count == 0 and "gk" or "k"
+end
+
+local down = function()
+  return vim.v.count == 0 and "gj" or "j"
+end
+
+map("n", "j", down, { silent = true, expr = true })
+map("n", "k", up, { silent = true, expr = true })
+map("n", "<Down>", down, { silent = true, expr = true })
+map("n", "<Up>", up, { silent = true, expr = true })
 
 map("n", "<Esc>", "<Cmd>nohlsearch<CR>", { silent = true })
 
