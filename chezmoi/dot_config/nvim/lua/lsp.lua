@@ -13,6 +13,11 @@ vim.lsp.config("*", {
   root_markers = { ".git" },
 })
 
+local function open_telescope_quickfix(what)
+  vim.fn.setqflist({}, " ", what)
+  vim.cmd("Telescope quickfix")
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("dotfiles-lsp", { clear = true }),
   callback = function(event)
@@ -23,7 +28,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.format({ async = true })
     end, vim.tbl_extend("force", opts, { desc = "Format buffer" }))
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
-    vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
+    vim.keymap.set("n", "<leader>lR", function()
+      vim.lsp.buf.references(nil, { on_list = open_telescope_quickfix })
+    end, vim.tbl_extend("force", opts, { desc = "References" }))
     vim.keymap.set("n", "<leader>lk", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover" }))
     vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Definition" }))
     vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Declaration" }))
