@@ -1,0 +1,7 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- $config := dict -}}
+{{- if .chezmoi.stdin -}}
+{{-   $config = fromJson .chezmoi.stdin -}}
+{{- end -}}
+{{- $pluginDir := joinPath (output "brew" "--prefix" | trim) "lib/docker/cli-plugins" -}}
+{{ $config | setValueAtPath "cliPluginsExtraDirs" (list $pluginDir) | toPrettyJson -}}
