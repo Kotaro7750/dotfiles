@@ -83,6 +83,7 @@ vim.opt.termguicolors = true -- enable true color
 vim.filetype.add({
   extension = {
     astro = "astro",
+    tf = "terraform",
   },
   pattern = {
     [".*%.h"] = "c",
