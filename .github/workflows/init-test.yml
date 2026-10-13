@@ -50,6 +50,8 @@ jobs:
             apply
 
       - name: Install mise tools
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           HOME="$TEST_HOME" mise install -C "$TEST_HOME"
 
