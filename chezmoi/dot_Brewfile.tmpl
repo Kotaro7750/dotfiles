@@ -1,0 +1,43 @@
+{{- $profile := get . "profile" | default "personal" -}}
+{{- if not (has $profile (list "work" "personal")) -}}
+{{- fail "profile must be work or personal" -}}
+{{- end -}}
+# Profile: {{ $profile }}
+{{ if eq .chezmoi.os "darwin" }}
+tap "nikitabobko/tap", trusted: true
+cask "nikitabobko/tap/aerospace"
+tap "FelixKratz/formulae", trusted: true
+brew "sketchybar", restart_service: true
+cask "wezterm"
+brew "coreutils"
+{{ else if eq .chezmoi.os "linux" }}
+tap "wezterm/wezterm-linuxbrew", trusted: true
+brew "wezterm/wezterm-linuxbrew/wezterm"
+{{ end }}
+brew "chezmoi"
+brew "mise"
+
+# Shell
+brew "zsh"
+brew "sheldon"
+brew "starship"
+brew "fzf"
+
+# Neovim
+brew "neovim"
+brew "ripgrep"
+brew "fd"
+
+# Containers
+brew "colima"
+brew "docker"
+brew "docker-compose"
+brew "docker-buildx"
+{{ if eq .chezmoi.os "darwin" }}
+# GUI apps
+{{ if eq $profile "work" -}}
+{{ else -}}
+cask "discord"
+cask "slack"
+{{ end -}}
+{{ end -}}

@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'chezmoi/**'
+      - 'chezmoi.example.yaml'
       - '.github/workflows/init-test.yml'
   workflow_dispatch:
 
@@ -14,7 +15,7 @@ permissions:
 
 jobs:
   install:
-    name: install (${{ matrix.os }})
+    name: install (${{ matrix.os }}, ${{ matrix.profile }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
 
@@ -22,8 +23,11 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-24.04
+          - ubuntu-26.04
           - macos-15
+        profile:
+          - work
+          - personal
 
     steps:
       - uses: actions/checkout@v6
@@ -46,6 +50,7 @@ jobs:
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
             -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
+            --override-data '{"profile":"${{ matrix.profile }}"}' \
             --no-tty \
             apply
 
@@ -61,6 +66,7 @@ jobs:
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
             -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
+            --override-data '{"profile":"${{ matrix.profile }}"}' \
             --no-tty \
             apply
 
@@ -68,6 +74,7 @@ jobs:
             --source "$GITHUB_WORKSPACE/chezmoi" \
             --destination "$TEST_HOME" \
             -c "$GITHUB_WORKSPACE/chezmoi.example.yaml" \
+            --override-data '{"profile":"${{ matrix.profile }}"}' \
             verify
 
           zsh -n "$TEST_HOME/.zshrc"
