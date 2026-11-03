@@ -4,13 +4,21 @@
 {{- end -}}
 # Profile: {{ $profile }}
 {{ if eq .chezmoi.os "darwin" }}
+# aerospace
 tap "nikitabobko/tap", trusted: true
 cask "nikitabobko/tap/aerospace"
+
+# sketchybar
 tap "FelixKratz/formulae", trusted: true
 brew "sketchybar", restart_service: true
+
 cask "wezterm"
 brew "coreutils"
 cask "1password-cli"
+
+# cmux
+tap "manaflow-ai/cmux"
+cask "cmux"
 {{ else if eq .chezmoi.os "linux" }}
 tap "wezterm/wezterm-linuxbrew", trusted: true
 brew "wezterm/wezterm-linuxbrew/wezterm"

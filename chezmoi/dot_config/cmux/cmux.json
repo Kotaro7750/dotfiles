@@ -1,0 +1,164 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+  "app": {
+    "accentColor": "cmux",
+    "workspaceInheritWorkingDirectory": true,
+    "warnBeforeClosingTab": true,
+    "warnBeforeClosingWorkspace": true,
+    "confirmQuit": "always",
+    "reorderOnNotification": false,
+    "commandPaletteSearchesAllSurfaces": true,
+    "openMarkdownInCmuxViewer": true
+  },
+  "terminal": {
+    "showScrollBar": true,
+    "textBoxDefaultSubmitAction": "text-entry"
+  },
+  "sidebar": {
+    "showBranchDirectory": true,
+    "showPullRequests": true,
+    "watchGitStatus": true,
+    "showPorts": true,
+    "showProgress": true,
+    "showAgentActivity": true,
+    "showNotificationMessage": true
+  },
+  "notifications": {
+    "dockBadge": true,
+    "unreadPaneRing": true,
+    "sound": "none"
+  },
+  "automation": {
+    "socketControlMode": "cmuxOnly",
+    "codexIntegration": true,
+    "claudeCodeIntegration": true
+  },
+  "shortcuts": {
+    "showModifierHoldHints": true,
+    "bindings": {
+      "toggleTerminalCopyMode": [
+        "ctrl+b",
+        "["
+      ],
+      "increaseWorkspaceTerminalFontSize": [
+        "ctrl+b",
+        "shift+="
+      ],
+      "decreaseWorkspaceTerminalFontSize": [
+        "ctrl+b",
+        "-"
+      ],
+      "resetWorkspaceTerminalFontSize": [
+        "ctrl+b",
+        "0"
+      ],
+      "nextSidebarTab": [
+        "ctrl+b",
+        "w"
+      ],
+      "prevSidebarTab": [
+        "ctrl+b",
+        "shift+w"
+      ],
+      "closeWorkspace": [
+        "ctrl+b",
+        "shift+x"
+      ],
+      "toggleSplitZoom": [
+        "ctrl+b",
+        "z"
+      ],
+      "focusLeft": [
+        "ctrl+b",
+        "h"
+      ],
+      "focusDown": [
+        "ctrl+b",
+        "j"
+      ],
+      "focusUp": [
+        "ctrl+b",
+        "k"
+      ],
+      "focusRight": [
+        "ctrl+b",
+        "l"
+      ],
+      "closeTab": [
+        "ctrl+b",
+        "x"
+      ],
+      "resize-pane-left": [
+        "ctrl+b",
+        "shift+h"
+      ],
+      "resize-pane-down": [
+        "ctrl+b",
+        "shift+j"
+      ],
+      "resize-pane-up": [
+        "ctrl+b",
+        "shift+k"
+      ],
+      "resize-pane-right": [
+        "ctrl+b",
+        "shift+l"
+      ],
+      "splitRight": [
+        "ctrl+b",
+        "/"
+      ],
+      "splitDown": [
+        "ctrl+b",
+        "shift+-"
+      ],
+      "newTab": [
+        "ctrl+b",
+        "n"
+      ],
+      "jumpToUnread": [
+        "ctrl+b",
+        "u"
+      ],
+      "showNotifications": [
+        "ctrl+b",
+        "i"
+      ],
+      "toggleSidebar": [
+        "ctrl+b",
+        "b"
+      ],
+      "equalizeSplits": [
+        "ctrl+b",
+        "="
+      ],
+      "nextSurface": [
+        "ctrl+b",
+        "t"
+      ],
+      "prevSurface": [
+        "ctrl+b",
+        "shift+t"
+      ],
+      "commandPalette": "cmd+k",
+      "newSurface": [
+        "ctrl+b",
+        "c"
+      ],
+      "renameWorkspace": [
+        "ctrl+b",
+        "r"
+      ],
+      "goToWorkspace": [
+        "ctrl+b",
+        "s"
+      ],
+      "newWorkspaceGroup": [
+        "ctrl+b",
+        "g"
+      ]
+    }
+  },
+  "activePaneBorderColor": "#84A0C6"
+}

@@ -1,0 +1,18 @@
+# Terminal settings shared by cmux and standalone Ghostty.
+# Use the shared machine-specific terminal settings.
+font-family = {{ .terminal.font | quote }}
+font-size = {{ .terminal.font_size }}
+theme = Iceberg Dark
+background-opacity = {{ .terminal.background_opacity }}
+background-blur = 20
+unfocused-split-opacity = 1
+scrollback-limit = 100000000
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Ctrl+B chords belong to cmux.json: a cmux prefix takes precedence
+# over Ghostty sequences. Keep terminal-only bindings here.
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = super+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = super+v=paste_from_clipboard

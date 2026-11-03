@@ -199,17 +199,17 @@ return {
 
   audible_bell = "Disabled",
 
-  font = wezterm.font("{{ .wezterm.font }}"),
-  font_size = {{ .wezterm.font_size }},
+  font = wezterm.font("{{ .terminal.font }}"),
+  font_size = {{ .terminal.font_size }},
 
   color_scheme = color_scheme,
-  window_background_opacity = 0.8,
+  window_background_opacity = {{ .terminal.background_opacity }},
   text_background_opacity = 1.0,
 
   show_new_tab_button_in_tab_bar = false,
 
   window_frame = {
-    font = wezterm.font("{{ .wezterm.font }}"),
+    font = wezterm.font("{{ .terminal.font }}"),
     font_size = 14,
     inactive_titlebar_bg = color_palette.background,
     active_titlebar_bg = color_palette.background
